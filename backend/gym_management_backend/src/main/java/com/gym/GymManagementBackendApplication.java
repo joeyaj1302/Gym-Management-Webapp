@@ -9,5 +9,8 @@ public class GymManagementBackendApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(GymManagementBackendApplication.class, args);
 	}
+	
+	
+	//TODO GYM Management System
 
 }
