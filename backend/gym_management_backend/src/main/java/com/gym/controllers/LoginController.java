@@ -1,4 +1,4 @@
-package com.controllers;
+package com.gym.controllers;
 
 public class LoginController {
 
