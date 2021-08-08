@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,7 +35,7 @@ public class Members {
 	private String maddress;
 	@Column(name = "m_joindate")
 	private Date mjoindate;
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "u_id")
 	private Users user;
 	
@@ -141,7 +142,7 @@ public class Members {
 	public String toString() {
 		return "Members [mid=" + mid + ", mfname=" + mfname + ", mlname=" + mlname + ", memail=" + memail
 				+ ", mpassword=" + mpassword + ", mage=" + mage + ", mgender=" + mgender + ", maddress=" + maddress
-				+ ", mjoindate=" + mjoindate + ", user=" + user + "]";
+				+ ", mjoindate=" + mjoindate + "]";
 	}
 	
 	

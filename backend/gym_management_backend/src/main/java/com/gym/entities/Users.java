@@ -76,16 +76,16 @@ public class Users {
 	public void setUrole(String urole) {
 		this.urole = urole;
 	}
-	public Members getMember() {
-		return member;
-	}
-	public void setMember(Members member) {
-		this.member = member;
-	}
+//	public Members getMember() {
+//		return member;
+//	}
+//	public void setMember(Members member) {
+//		this.member = member;
+//	}
 	@Override
 	public String toString() {
 		return "Users [uid=" + uid + ", ufname=" + ufname + ", ulname=" + ulname + ", uemail=" + uemail + ", upassword="
-				+ upassword + ", urole=" + urole + ", member=" + member + "]";
+				+ upassword + ", urole=" + urole + "]";
 	}
 	
 	
