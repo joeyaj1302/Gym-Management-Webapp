@@ -9,6 +9,7 @@
 <body>
 	<h2>Online Gym Management</h2>
 	<form method="post" action="authenticate">
+		<h4>${message}</h4>
 		<table>
 			<tr>	
 				<td>Email:</td>

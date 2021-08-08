@@ -27,4 +27,10 @@ public class UsersServiceImpl implements UsersService {
 		return user.orElse(null);
 	}
 
+	@Override
+	public void save(Users user) {
+		userDao.save(user);
+		
+	}
+
 }
