@@ -26,8 +26,6 @@ public class LoginController {
 	
 	@RequestMapping("/login")
 	private String login() {
-		Users user = userService.findByUemail("jithil@gmail.com");
-		System.out.println(user.toString());
 		return "login";
 	}
 	

@@ -2,6 +2,7 @@ package com.gym.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,7 +26,7 @@ public class Users {
 	private String upassword;
 	@Column(name = "u_role")
 	private String urole;
-	@OneToOne(mappedBy = "user")
+	@OneToOne(mappedBy = "user" , fetch = FetchType.LAZY)
 	private Members member;
 	
 	public Users() {
@@ -82,6 +83,7 @@ public class Users {
 	public void setMember(Members member) {
 		this.member = member;
 	}
+	
 	@Override
 	public String toString() {
 		return "Users [uid=" + uid + ", ufname=" + ufname + ", ulname=" + ulname + ", uemail=" + uemail + ", upassword="

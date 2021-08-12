@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 @Entity
 @Table(name = "members")
 public class Members {
@@ -37,6 +39,7 @@ public class Members {
 	private Date mjoindate;
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "u_id")
+	@JsonIgnore
 	private Users user;
 	
 	public Members() {	
