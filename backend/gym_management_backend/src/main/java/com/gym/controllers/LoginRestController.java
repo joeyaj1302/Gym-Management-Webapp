@@ -43,6 +43,10 @@ public class LoginRestController {
 		
 		
 	}
+<<<<<<< HEAD
 	
 	
 }
+=======
+}
+>>>>>>> 0ad1c42171ac6684f8c4f901cb33d76269e91c91
