@@ -1,25 +1,36 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Link, Route, Switch , Redirect} from 'react-router-dom';
+//import Home from './Components/home';
 import '../App.css';
+import { useHistory } from "react-router-dom";
 
 const Login = () => {
     const[email,setEmail] = useState('');
     const[password,setPassword] = useState('');
-    const[member,setMember] = useState(undefined);
-    const url = "http://localhost:8080/authenticaterest"
+    const[member,setMember] = useState([])
+    const history = useHistory();
+    const url = "http://localhost:8080/authenticaterest";
+    const goLogin = () => history.push('/home');
     const authenticate = () => {
         const data = new FormData();
         console.log(email);
         console.log(password);
+        
         data.append("email",email);
         data.append("password",password);
         axios.post(url, data).then((response) => {
             const result = response.data;
             if(result.message === 'success') {
-                setMember(result.data);
-                alert("Successful Login!");
-                
+                const m = result.data;
+                setMember(m);
+                console.log("In login member = "+ member.mlname);
+                alert("Successful Login! welcome "+ m.mfname + " " + m.mlname);   
+                const goLogin = () => history.push('/home/?id=' + m.mid);
+                goLogin();   
+
+            
+               
             }
             else {
                 alert("Unsuccessful Login!");
@@ -47,6 +58,7 @@ const Login = () => {
 				<td colspan="2">
 					<br/>
                     <button onClick={authenticate} className="btn btn-success">Login</button>
+                    
 					
 				</td>
 			</tr>
