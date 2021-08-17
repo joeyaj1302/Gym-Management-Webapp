@@ -6,11 +6,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gym.entities.Members;
+import com.gym.entities.Trainers;
 import com.gym.entities.Users;
 import com.gym.models.Response;
 import com.gym.services.MembersService;
@@ -32,7 +34,8 @@ public class LoginRestController {
 			return Response.success(member);
 		}
 		else if (user != null && user.getUpassword().equals(password) && user.getUrole().equals("trainer")) {
-			return null;
+			Trainers trainer = user.getTrainer();
+			return Response.success(trainer);
 		}
 		else if (user != null && user.getUpassword().equals(password) && user.getUrole().equals("admin")) {
 			return null;
@@ -40,13 +43,34 @@ public class LoginRestController {
 		else {
 			return Response.error("Invalid Login Credentials");
 		}
-		
+	}
+	
+	@GetMapping("/getbyid")
+	private ResponseEntity<?> getByid(@RequestParam(name = "id") String id) {
+		int mid = Integer.parseInt(id);
+		Members member = memberService.findByMid(mid);
+		if (member != null ) {
+			return Response.success(member);
+		}
+		else {
+			return Response.error("Wrong id fool");
+		}
 		
 	}
-<<<<<<< HEAD
-	
-	
+	@PutMapping("/updatebyid")
+	private ResponseEntity<?> updatebyid(@RequestParam(name = "id") String id ,Members member)  {
+		int mid = Integer.parseInt(id);
+		System.out.println(member.toString());
+		memberService.update(member,mid);
+		Members member1 = memberService.findByMid(mid);
+		Users user = member1.getUser();
+		System.out.println(user.toString());
+		user.setUfname(member1.getMfname());
+		user.setUlname(member.getMlname());
+		user.setUpassword(member1.getMpassword());
+		user.setUemail(member1.getMemail());
+		userService.save(user);
+		return Response.success(member1);
+		
+	}
 }
-=======
-}
->>>>>>> 0ad1c42171ac6684f8c4f901cb33d76269e91c91

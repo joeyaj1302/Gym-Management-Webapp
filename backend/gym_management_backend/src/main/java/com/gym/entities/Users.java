@@ -28,11 +28,13 @@ public class Users {
 	private String urole;
 	@OneToOne(mappedBy = "user" , fetch = FetchType.LAZY)
 	private Members member;
+	@OneToOne(mappedBy = "user" , fetch = FetchType.LAZY)
+	private Trainers trainer;
 	
 	public Users() {
 	}
 	
-	public Users(int uid, String ufname, String ulname, String uemail, String upassword, String urole, Members member) {
+	public Users(int uid, String ufname, String ulname, String uemail, String upassword, String urole, Members member,Trainers trainer) {
 		this.uid = uid;
 		this.ufname = ufname;
 		this.ulname = ulname;
@@ -40,6 +42,7 @@ public class Users {
 		this.upassword = upassword;
 		this.urole = urole;
 		this.member = member;
+		this.trainer = trainer;
 	}
 	public int getUid() {
 		return uid;
@@ -83,7 +86,14 @@ public class Users {
 	public void setMember(Members member) {
 		this.member = member;
 	}
-	
+	public Trainers getTrainer() {
+		return trainer;
+	}
+
+	public void setTrainer(Trainers trainer) {
+		this.trainer = trainer;
+	}
+
 	@Override
 	public String toString() {
 		return "Users [uid=" + uid + ", ufname=" + ufname + ", ulname=" + ulname + ", uemail=" + uemail + ", upassword="
