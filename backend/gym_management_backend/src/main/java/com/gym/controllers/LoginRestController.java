@@ -43,13 +43,9 @@ public class LoginRestController {
 		else {
 			return Response.error("Invalid Login Credentials");
 		}
-<<<<<<< HEAD
 	}
 	
 	
-}
-=======
-	}
 	
 	@GetMapping("/getbyid")
 	private ResponseEntity<?> getByid(@RequestParam(name = "id") String id) {
@@ -80,4 +76,4 @@ public class LoginRestController {
 		
 	}
 }
->>>>>>> 0db838b23f176fa40da67bcae0b73ad6e79fd876
+

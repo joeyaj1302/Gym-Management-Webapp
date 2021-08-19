@@ -10,14 +10,19 @@ import {IconContext} from 'react-icons'
 function Navbar(props) {
     console.log("In navbar :");
     console.log(props.member);
-    const[mid,setMid] = useState();
+    console.log(props.member.mid);
+    const[mid,setMid] = useState(0);
+   
+    console.log(mid);
     const setUser = () => {
         setMid(props.member.mid);
-        console.log(props.member.mid);
+        console.log("Hello")
+        
     }
     useEffect(() => {
         setUser();
       }, [])
+
     const [sidebar, setSidebar] = useState(false)
     const showSidebar = () => setSidebar(!sidebar)
     return (
@@ -38,7 +43,9 @@ function Navbar(props) {
                 {SidebarDate.map((item, index) => {
                     return(
                         <li key={index} className={item.cName}>
-                            <Link to = { {pathname: item.path , aboutProps:{ name : mid} }  }>
+                            <Link to = 
+                                {{pathname: item.path , memberid : {mid} } 
+                                }>
                             {item.icon}
                             <span>{item.title}</span>
                            
