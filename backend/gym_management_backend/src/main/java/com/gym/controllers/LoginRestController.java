@@ -92,6 +92,10 @@ public class LoginRestController {
 	}
 	
 	
+<<<<<<< HEAD
+=======
+	
+>>>>>>> b643a4be7afe8e5b75e7526aa614250a1668857b
 	@GetMapping("/getbymid")
 	private ResponseEntity<?> getBymid(@RequestParam(name = "id") String id) {
 		int mid = Integer.parseInt(id);

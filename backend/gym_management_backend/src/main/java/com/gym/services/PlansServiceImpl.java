@@ -44,6 +44,7 @@ public class PlansServiceImpl implements PlansService{
 	}
 
 	@Override
+<<<<<<< HEAD
 	public boolean deleteById(int id) {
 		Plans plan = planDao.findByPid(id);
 		if (plan != null) {
@@ -54,6 +55,10 @@ public class PlansServiceImpl implements PlansService{
 			return false;
 		}
 		
+=======
+	public void deleteById(int id) {
+		planDao.deleteById(id);
+>>>>>>> b643a4be7afe8e5b75e7526aa614250a1668857b
 		
 	}
 
