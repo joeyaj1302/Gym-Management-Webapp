@@ -26,6 +26,8 @@ public class Users {
 	private String upassword;
 	@Column(name = "u_role")
 	private String urole;
+	@Column(name = "u_reset_token")
+	private String resetToken;
 	@OneToOne(mappedBy = "user" , fetch = FetchType.LAZY)
 	private Members member;
 	@OneToOne(mappedBy = "user" , fetch = FetchType.LAZY)
@@ -92,6 +94,14 @@ public class Users {
 
 	public void setTrainer(Trainers trainer) {
 		this.trainer = trainer;
+	}
+
+	public String getResetToken() {
+		return resetToken;
+	}
+
+	public void setResetToken(String resetToken) {
+		this.resetToken = resetToken;
 	}
 
 	@Override

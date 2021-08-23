@@ -7,4 +7,5 @@ import com.gym.entities.Users;
 public interface UserDao extends JpaRepository<Users, Integer> {
 	Users findByUemail(String email);
 	Users findByUid(int id);
+	Users findByResetToken(String token);
 }
