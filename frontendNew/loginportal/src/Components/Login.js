@@ -17,15 +17,33 @@ const Login = () => {
         const data = new FormData();
         data.append("email",email);
         data.append("password",password);
+
         axios.post(url,data).then((response) => {
             const result = response.data;
-            if (result.message === 'success') {
+            console.log(result.role);
+            if (result.message === 'success' && result.role === 'member') {
                 console.log(result);
                 const id = result.data.mid;
-                alert("Welcome!!");
+                alert("Welcome!! Member");
                 setLoggedIn(true);
                 //history.push("http://localhost:3000/home/?id=2");
                 window.location.href = "http://localhost:3000/?id="+id;
+            }
+            else if (result.message === 'success' && result.role === 'trainer') {
+                console.log(result);
+                const id = result.data.tid;
+                alert("Welcome!! Trainer");
+                setLoggedIn(true);
+                //history.push("http://localhost:3000/home/?id=2");
+                window.location.href = "http://localhost:3007/?id="+id;
+            }
+            else if (result.message === 'success' && result.role === 'admin') {
+                console.log(result);
+                const id = result.data.uid;
+                alert("Welcome!! Admin!");
+                setLoggedIn(true);
+                //history.push("http://localhost:3000/home/?id=2");
+                window.location.href = "http://localhost:3008/?id="+id;
             }
             else {
                 console.log(result);
@@ -35,9 +53,15 @@ const Login = () => {
 
     }
 
+    const reseturl =  "http://localhost:8080/forgot_password"; 
     const Reset = () => {
+        const data = new FormData();
+        data.append("resetemail",resetemail);
         console.log(resetemail);
-        //TODO: Create backend for reset password
+        axios.post(reseturl,data).then((response) =>{
+            alert("Check Your Email")
+        })
+        
     }
 
     
@@ -46,34 +70,34 @@ const Login = () => {
         <h1 Style= "color: white">Online Gym Management</h1>
         <br />
       <br />
-		<table className="centerStyle">
-			<tr>	
-				<td  Style= "color: white; font-size:large">Email</td>
+       <table className="centerStyle">
+           <tr>    
+               <td  Style= "color: white; font-size:large">Email</td>
                 <td> : </td>
-				<td><input onChange = {(e) =>{
+               <td><input onChange = {(e) =>{
                 setEmail(e.target.value);
             }} type = 'text' className="form-control"/></td>
-			</tr>
+           </tr>
             <td>
                 <br/>
             </td>
-			<tr>	
-				<td  Style= "color: white; font-size:large">Password </td>
+           <tr>    
+               <td  Style= "color: white; font-size:large">Password </td>
                 <td> : </td>
-				<td><input onChange = {(e) =>{
+               <td><input onChange = {(e) =>{
                 setPassword(e.target.value);
             }} type = 'password' className="form-control"/></td>
-			</tr>
-			<tr>	
-				<td colspan="3">
-					<br/><td >
+           </tr>
+           <tr>    
+               <td colspan="3">
+                   <br/><td >
                     <button onClick={authenticate} className="btn btn-success">Login</button></td>
 
                    <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Reset Password</button>
                 </td>
-				</td>
-			</tr>
-		</table>
+               </td>
+           </tr>
+       </table>
        
         
                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -90,7 +114,7 @@ const Login = () => {
                             <input onChange={ (e)=> {
                                 setResetEmail(e.target.value);
                             }} 
-                            type="email" class="form-control" id="email" placeholder="Enter email"></input>
+                            type="email" class="form-control" id="resetemail" placeholder="Enter email"></input>
                             
                         </div>
                         </form>
