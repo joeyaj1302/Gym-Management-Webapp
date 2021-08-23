@@ -9,13 +9,12 @@ import {IconContext} from 'react-icons'
 
 function Navbar(props) {
     console.log("In navbar :");
-    console.log(props.member);
-    console.log(props.member.mid);
-    const[mid,setMid] = useState(0);
+    console.log(props.uid);
+    const[uid,setUid] = useState(0);
    
-    console.log(mid);
+    console.log(uid);
     const setUser = () => {
-        setMid(props.member.mid);
+        setUid(props.uid);
         console.log("Hello")
         
     }
@@ -44,8 +43,8 @@ function Navbar(props) {
                     return(
                         <li key={index} className={item.cName}>
                             <Link to = 
-                                {{pathname: item.path , memberid : {mid} } 
-                                }>
+                                {`${item.path}/${props.uid}`} 
+                                >
                             {item.icon}
                             <span>{item.title}</span>
                            
@@ -60,7 +59,7 @@ function Navbar(props) {
     )
 }
 
-export default Navbar
+export default Navbar;
 
 /*<div className="icon">{item.icon}</div>
                             <div className = "title">{item.title}</div>*/

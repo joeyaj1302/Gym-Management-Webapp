@@ -15,23 +15,24 @@ export const SidebarDate = [
         cName : 'nav-text'
     },
     {
-        title : 'My Account',
-        path : '/account',
-        icon : <AccountCircleIcon/>,
-        cName : 'nav-text'
-    },
-    {
-        title : "Update Details",
-        icon : <EditOutlinedIcon/>,
-        path : "/update",
-        cName : 'nav-text'
-    },
-    {
         title : 'Members',
         path : '/members',
         icon : <IoIcons.IoMdPeople/>,
         cName : 'nav-text'
     },
+    {
+        title : 'Trainers',
+        path : '/trainers',
+        icon : <IoIcons.IoMdPeople/>,
+        cName : 'nav-text'
+    },
+    {
+        title : 'Plans',
+        path : '/plans',
+        icon : <IoIcons.IoMdPeople/>,
+        cName : 'nav-text'
+    },
+    
     {
         title : "Payment",
         icon : <PaymentIcon/>,
@@ -41,7 +42,7 @@ export const SidebarDate = [
     {
         title : "Logout",
         icon : <ExitToAppIcon/>,
-        path : "/home",
+        path : "/logout",
         cName : 'nav-text'
     }
     
