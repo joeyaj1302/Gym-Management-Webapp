@@ -41,7 +41,7 @@ export const SidebarDate = [
     {
         title : "Logout",
         icon : <ExitToAppIcon/>,
-        path : "/home",
+        path : "/logout",
         cName : 'nav-text'
     }
     
