@@ -1,5 +1,8 @@
 package com.gym.services;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +47,13 @@ public class MembersServiceImpl implements MembersService{
 		member1.setMage(m.getMage());
 		member1.setMaddress(m.getMaddress());
 		memberDao.save(member1);
+	}
+
+	@Override
+	public List<Members> findAllMembers() {
+		ArrayList<Members> memberList = new ArrayList<Members>();
+		memberList = (ArrayList<Members>) memberDao.findAll();
+		return memberList;
 	}
 
 

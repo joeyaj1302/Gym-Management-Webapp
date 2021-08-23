@@ -9,8 +9,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -35,12 +40,21 @@ public class Members {
 	private char mgender;
 	@Column(name = "m_address")
 	private String maddress;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "m_joindate")
 	private Date mjoindate;
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "u_id")
 	@JsonIgnore
 	private Users user;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "t_id")
+	private Trainers trainer;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "pl_id")
+	private Plans plan;
+	
 	
 	public Members() {	
 		
@@ -139,6 +153,22 @@ public class Members {
 
 	public void setUser(Users user) {
 		this.user = user;
+	}
+
+	public Trainers getTrainer() {
+		return trainer;
+	}
+
+	public void setTrainer(Trainers trainer) {
+		this.trainer = trainer;
+	}
+	
+	public Plans getPlan() {
+		return plan;
+	}
+
+	public void setPlan(Plans plan) {
+		this.plan = plan;
 	}
 
 	@Override

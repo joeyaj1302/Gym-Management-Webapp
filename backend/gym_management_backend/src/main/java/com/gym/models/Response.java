@@ -1,18 +1,30 @@
 package com.gym.models;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 public class Response {
-	public static ResponseEntity<?> success(Object data) {
+	public static ResponseEntity<?> success(Object data, String role) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("message", "success");
+		map.put("role",role);
 		if(data != null)
 			map.put("data", data);
 		return ResponseEntity.ok(map);
+	}
+	
+	public static ResponseEntity<?> successList(List<?> list){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("message", "success");
+		if (list!=null) {
+			map.put("List", list);
+		}
+		return ResponseEntity.ok(map);
+		
 	}
 	
 	public static ResponseEntity<?> error(Object err) {
