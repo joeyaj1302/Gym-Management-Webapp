@@ -9,11 +9,12 @@
 
 .account,
 .update,
-.dashboard{
+.dashboard,
+.payment{
   display: flex;
   height: 90vh;
   justify-content: center;
-  background-color :rgb(223, 238, 252);
+ 
 }
 
 .centerify{
@@ -30,4 +31,54 @@
   color: black;
   background-color: antiquewhite;
   border-radius:5px;
+}
+
+.login-reg-panel{
+  position: relative;
+  text-align:center;
+  width:70%;
+  right:0;
+  left:0;
+  margin:auto;
+  height:400px;
+  background-color: rgba(236, 48, 20, 0.9);
+}
+.white-panel{
+  background-color: rgba(255,255, 255, 1);
+  height:500px;
+  position:absolute;
+  top:-50px;
+  width:50%;
+  right:calc(30% - 50px);
+  transition:.3s ease-in-out;
+  z-index:0;
+  box-shadow: 0 0 15px 9px #00000096;
+}
+.row{
+  border: 1px solid rgb(241, 231, 139);
+  border-radius: 6px;
+  width: 80%;
+  box-shadow: 0 0 8px 5px #d1b3b396;
+  margin-left: 10%;
+  margin-bottom: 15px;
+  padding: 10px;
+  display: flex;
+ 
+}
+
+ .row #tags{
+  flex: 30%;
+  place-items: center;
+  font-size: bold;
+  text-align: left;
+}
+
+ .row #title{
+  flex: 70%;
+ 
+  text-align: left;
+  font-size: strong;
+}
+.updateForm{
+  margin-left: 20%;
 }

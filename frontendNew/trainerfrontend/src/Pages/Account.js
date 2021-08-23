@@ -2,89 +2,94 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useState, useEffect,useContext } from 'react';
+
+
 
 let counter =  1;
 let id ;
-const Account = ({match:{params:{tid}}}) =>{
-    const[fname,setFname] = useState('');
-    const[lname,setLname] = useState('');
-    const[email,setEmail] = useState('');
-    const[password,setPassword] = useState('');
-    const[age,setAge] = useState(0);
-    const[address,setAddress] = useState('');
-    id = mid;
-    //const id = window.localStorage.getItem('id');
-    const authResult = new URLSearchParams(window.location.search); 
-    let url = "http://localhost:8080/getbytid/?id=";
-    if (counter === 1) {
-        url = url + id;
-    }
-    else{
-        url = url + id;
-    }
-     
-    const setUser = () => {
-    axios.get(url).then((response) => {
-        console.log("Inside setUser");
-        const result = response.data;
-        if(result.message === "success") {
-            const t = result.data;
-            setFname(t.tfname);
-            setLname(t.tlname);
-            setEmail(t.temail);
-            setPassword(t.tpassword);
-            setAge(t.tage);
-            setAddress(t.taddress);
-
-            console.log("Member is :"  + fname);
-        }
-        else {
-        alert(result.message);
-        }
-    })
-    }
-    setUser();
-    // if (counter == 1) {
-    //     setUser();
-    //     console.log("Inside If : " + counter);
-    //     counter = counter + 1;
+const Account = () =>{
+    // const[fname,setFname] = useState('');
+    // const[lname,setLname] = useState('');
+    // const[email,setEmail] = useState('');
+    // const[password,setPassword] = useState('');
+    // const[age,setAge] = useState(0);
+    // const[address,setAddress] = useState('');
+    // id = mid;
+    // const ctx = useContext(AppContext);
+    // console.log("In app context :");
+    // console.log(ctx.fname +" " + ctx.lname);
+    // //const id = window.localStorage.getItem('id');
+    // const authResult = new URLSearchParams(window.location.search); 
+    // let url = "http://localhost:8080/getbymid/?id=";
+    // if (counter === 1) {
+    //     url = url + id;
     // }
+    // else{
+    //     url = url + mid;
+    // }
+     
+    // const setUser = () => {
+    
+    //     axios.get(url).then((response) => {
+    //         console.log("Inside setUser");
+    //         const result = response.data;
+    //         if(result.message === "success") {
+    //             const m = result.data;
+    //             setFname(m.mfname);
+    //             setLname(m.mlname);
+    //             setEmail(m.memail);
+    //             setPassword(m.mpassword);
+    //             setAge(m.mage);
+    //             setAddress(m.maddress);
+    
+    //             console.log("Member is :"  + fname);
+    //         }
+    //         else {
+    //         alert(result.message);
+    //         }
+    //     })
+    
+    // }
+
+    // if(id!== null) {
+    //     setUser();
+    // }
+
+
+    // // if (counter == 1) {
+    // //     setUser();
+    // //     console.log("Inside If : " + counter);
+    // //     counter = counter + 1;
+    // // }
     
 
 
-    console.log(mid); 
+    // console.log(mid); 
 
     return (
-        <div className="container centerify" >
-            <div className="row" Style= {"padding:10px"}>
-            <br/>
-            <br/>
-                <div className="col-md-4"> <h4 className="nametags">Id  </h4> </div>
-                <div className="col-md-4"> <h4 Style= {"color: black"}> {tid}  </h4> </div>
-            </div>
-            <div className="row" Style= {"padding:10px"}>
-                <div className="col-md-4"> <h4 Style= {"color: black;background-color:cyan"}>Name </h4> </div>
-                <div className="col-md-4">  <h4 Style= {"color: black"}> {fname}  {lname} </h4></div>
-            </div>
-            <div className="row" Style= {"padding:10px"}>
-                <div className="col-md-4"> <h4 Style= {"color: black;background-color:cyan"}>Email </h4> </div>
-                <div className="col-md-4">  <h4 Style= {"color: black"}> {email} </h4></div>
-            </div>
-            <div className="row" Style= {"padding:10px"}>
-                <div className="col-md-4"> <h4 Style= {"color: black;background-color:cyan"}>Address </h4> </div>
-                <div className="col-md-4">  <h4 Style= {"color: black"}> {address} </h4></div>
-            </div>
-            {/* 
-            <h4 Style= {"color: black"}>Email : {email}</h4>
-            <h4 Style= {"color: black"}>Address : {address}</h4> */}
 
-            {/* <button onClick={getMember} className="btn btn-primary"> Get details</button>
-            <br/>
-            <br/>
-            <button onClick={editDetails} className="btn btn-success"> edit details</button> */}
+        <div className="update">
+            <div className="login-reg-panel">
+               
+
+            <div className ="white-panel"><h1>My Account</h1>
+            <div className="row"><div id ="tags">Id :</div> <div id="title"><span>{sessionStorage.getItem('id')}</span></div></div>
+            <div className="row"><div id ="tags">Name :</div> <div id="title"><span>{sessionStorage.getItem('fname')} {sessionStorage.getItem('lname')}</span></div></div>
+            <div className="row"><div id ="tags">Email Id:</div> <div id="title"><span>{sessionStorage.getItem('email')}</span></div></div>
+            <div className="row"> <div id ="tags">Address :</div> <div id="title"><span>{sessionStorage.getItem('address')} </span></div></div>
+            <div className="row"> <div id ="tags">Join Date :</div> <div id="title"><span>{sessionStorage.getItem('joindate')} </span></div></div>
+            <div className="row"> <div id ="tags">Age :</div> <div id="title"><span>{sessionStorage.getItem('age')} </span></div></div>
+          
+             <div> </div> 
             
-        </div>
+            
+            </div>
+        </div></div>
+
+
+
+        
     )
 }
 

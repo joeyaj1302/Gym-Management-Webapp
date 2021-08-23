@@ -53,7 +53,7 @@ function App() {
     
   },[])
   
-  if(id!=null){
+  if(tid!=null){
     window.sessionStorage.setItem('id',tid);
     window.sessionStorage.setItem('fname',fname);
     window.sessionStorage.setItem('lname',lname);
