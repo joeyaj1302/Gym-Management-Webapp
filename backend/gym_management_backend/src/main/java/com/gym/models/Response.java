@@ -7,9 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 public class Response {
-	public static ResponseEntity<?> success(Object data) {
+	public static ResponseEntity<?> success(Object data, String role) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("message", "success");
+		map.put("role",role);
 		if(data != null)
 			map.put("data", data);
 		return ResponseEntity.ok(map);

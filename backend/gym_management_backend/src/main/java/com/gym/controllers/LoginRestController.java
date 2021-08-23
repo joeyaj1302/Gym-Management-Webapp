@@ -31,14 +31,14 @@ public class LoginRestController {
 		Users user = userService.findByUemail(email);
 		if (user != null && user.getUpassword().equals(password) && user.getUrole().equals("member")) {
 			Members member = user.getMember();
-			return Response.success(member);
+			return Response.success(member,"member");
 		}
 		else if (user != null && user.getUpassword().equals(password) && user.getUrole().equals("trainer")) {
 			Trainers trainer = user.getTrainer();
-			return Response.success(trainer);
+			return Response.success(trainer,"trainer");
 		}
 		else if (user != null && user.getUpassword().equals(password) && user.getUrole().equals("admin")) {
-			return null;
+			return Response.success(user,"admin");
 		}
 		else {
 			return Response.error("Invalid Login Credentials");
@@ -47,20 +47,21 @@ public class LoginRestController {
 	
 	
 	
-	@GetMapping("/getbyid")
-	private ResponseEntity<?> getByid(@RequestParam(name = "id") String id) {
+	
+	@GetMapping("/getbymid")
+	private ResponseEntity<?> getBymid(@RequestParam(name = "id") String id) {
 		int mid = Integer.parseInt(id);
 		Members member = memberService.findByMid(mid);
 		if (member != null ) {
-			return Response.success(member);
+			return Response.success(member,"member");
 		}
 		else {
-			return Response.error("Wrong id fool");
+			return Response.error("Member not found");
 		}
 		
 	}
-	@PutMapping("/updatebyid")
-	private ResponseEntity<?> updatebyid(@RequestParam(name = "id") String id ,Members member)  {
+	@PutMapping("/updatebymid")
+	private ResponseEntity<?> updatebymid(@RequestParam(name = "id") String id ,Members member)  {
 		int mid = Integer.parseInt(id);
 		System.out.println(member.toString());
 		memberService.update(member,mid);
@@ -72,7 +73,7 @@ public class LoginRestController {
 		user.setUpassword(member1.getMpassword());
 		user.setUemail(member1.getMemail());
 		userService.save(user);
-		return Response.success(member1);
+		return Response.success(member1,"member");
 		
 	}
 }
