@@ -50,7 +50,6 @@ public class Members {
 	private Users user;
 	@ManyToOne
 	@JoinColumn(name = "t_id")
-	@JsonIgnore
 	private Trainers trainer;
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "pl_id")
