@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gym.daos.MemberDao;
+import com.gym.daos.TrainerDao;
 import com.gym.entities.Members;
+import com.gym.entities.Trainers;
 import com.gym.entities.Users;
 
 @Transactional
@@ -17,8 +19,8 @@ import com.gym.entities.Users;
 public class MembersServiceImpl implements MembersService{
 	@Autowired
 	private MemberDao memberDao;
-
-	
+	@Autowired
+	private TrainerDao trainerDao;
 	@Override
 	public Members findByMid(int id) {
 		Members member = memberDao.findByMid(id);
@@ -53,6 +55,13 @@ public class MembersServiceImpl implements MembersService{
 	public List<Members> findAllMembers() {
 		ArrayList<Members> memberList = new ArrayList<Members>();
 		memberList = (ArrayList<Members>) memberDao.findAll();
+		return memberList;
+	}
+
+	@Override
+	public List<Members> findByTrainer(int id) {
+		Trainers trainer = trainerDao.findByTid(id);
+		List<Members> memberList = memberDao.findByTrainer(trainer);
 		return memberList;
 	}
 

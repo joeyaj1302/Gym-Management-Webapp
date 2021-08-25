@@ -132,6 +132,7 @@ public class LoginRestController {
 		}
 		
 	}
+	
 	@PutMapping("/updatebytid")
 	private ResponseEntity<?> updatebytid(@RequestParam(name = "id") String id ,Trainers trainer)  {
 		int mid = Integer.parseInt(id);
@@ -146,6 +147,13 @@ public class LoginRestController {
 		user.setUemail(trainer1.gettemail());
 		userService.save(user);
 		return Response.success(trainer1,"trainer");
+		
+	}
+	@GetMapping("/getmemberbytid")
+	private ResponseEntity<?> getmembersbytid(@RequestParam(name = "id") String id) {
+		int tid = Integer.parseInt(id);
+		List<Members> memberList = memberService.findByTrainer(tid);
+		return Response.successList(memberList);
 		
 	}
 	

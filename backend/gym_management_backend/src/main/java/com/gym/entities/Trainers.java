@@ -1,8 +1,10 @@
 package com.gym.entities;
 
 
+import java.util.ArrayList;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,8 +18,8 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
 
-import antlr.collections.List;
 @Entity
 @Table(name = "trainers")
 public class Trainers {
@@ -43,8 +45,11 @@ public class Trainers {
 	@JoinColumn(name = "u_id")
 	@JsonIgnore
 	private Users user;
+	@OneToMany(mappedBy = "trainer", cascade = CascadeType.ALL)
+	private List<Members> memberlist;
+	
 	public Trainers() {	
-		
+		this.memberlist = new ArrayList<Members>();
 	}
 
 	public Trainers(int tid, String tfname, String tlname, String temail, String tpassword, int tage, char tgender,
@@ -59,6 +64,7 @@ public class Trainers {
 		this.tgender = tgender;
 		this.taddress = taddress;
 		this.user = user;
+		this.memberlist = new ArrayList<Members>();
 	}
 
 	public int gettid() {
@@ -131,6 +137,15 @@ public class Trainers {
 
 	public void setUser(Users user) {
 		this.user = user;
+	}
+	
+	
+	public List<Members> getMemberlist() {
+		return memberlist;
+	}
+
+	public void setMemberlist(List<Members> memberlist) {
+		this.memberlist = memberlist;
 	}
 
 	@Override

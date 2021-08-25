@@ -48,8 +48,9 @@ public class Members {
 	@JoinColumn(name = "u_id")
 	@JsonIgnore
 	private Users user;
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name = "t_id")
+	@JsonIgnore
 	private Trainers trainer;
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "pl_id")
@@ -57,7 +58,8 @@ public class Members {
 	
 	
 	public Members() {	
-		
+		this.trainer = new Trainers();
+		this.user = new Users();
 	}
 
 	public Members(int mid, String mfname, String mlname, String memail, String mpassword, int mage, char mgender,

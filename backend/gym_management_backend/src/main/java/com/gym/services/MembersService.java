@@ -10,4 +10,5 @@ public interface MembersService {
 	void save(Members m);
 	void update(Members m, int id);
 	List<Members> findAllMembers();
+	List<Members> findByTrainer(int id);
 }
