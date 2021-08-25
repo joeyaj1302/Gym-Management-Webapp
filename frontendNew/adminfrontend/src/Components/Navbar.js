@@ -6,15 +6,12 @@ import {SidebarDate} from './SidebarData'
 import './Navbar.css';
 import {IconContext} from 'react-icons'
 
-
+let id;
 function Navbar(props) {
     console.log("In navbar :");
     console.log(props.uid);
-    const[uid,setUid] = useState(0);
-   
-    console.log(uid);
+    id = sessionStorage.getItem('uid');
     const setUser = () => {
-        setUid(props.uid);
         console.log("Hello")
         
     }
@@ -43,7 +40,7 @@ function Navbar(props) {
                     return(
                         <li key={index} className={item.cName}>
                             <Link to = 
-                                {`${item.path}/${props.uid}`} 
+                                {`${item.path}/${id}`} 
                                 >
                             {item.icon}
                             <span>{item.title}</span>

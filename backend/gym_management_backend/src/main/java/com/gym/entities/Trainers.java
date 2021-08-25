@@ -10,11 +10,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import antlr.collections.List;
 @Entity
 @Table(name = "trainers")
 public class Trainers {
@@ -40,7 +43,6 @@ public class Trainers {
 	@JoinColumn(name = "u_id")
 	@JsonIgnore
 	private Users user;
-	
 	public Trainers() {	
 		
 	}
