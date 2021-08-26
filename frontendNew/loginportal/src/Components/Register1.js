@@ -15,7 +15,7 @@ import {
 import { Redirect } from "react-router";
 import '../css/loginCSS.css';
 
-const ViewPlans = () => {
+const Register1 = () => {
     const [fname, setFname] = useState("");
     const [lname, setLname] = useState("");
     const [email, setEmail] = useState("");
@@ -60,13 +60,18 @@ const ViewPlans = () => {
       <CardBody>
         <form>
         <FormGroup >
-        <div class="card" Style="width: 18rem;">
-            <img src="images/third-trainer.jpg" class="card-img-top" alt="..."/>
-            <div class="card-body">
-                <p class="card-text">Select this plan please!!</p>
-                <Link to="/payments" className="btn btn-success">Go to Payments</Link>
-            </div>
-        </div>
+            <Label for="examplePassword">First Name</Label>
+            <Input
+              type="text"
+              name="fname"
+              className="form-control"
+              id="fname"
+              placeholder="ex. John"
+              autoComplete="off"
+              onChange={(e) => { 
+                  setFname(e.target.value);
+              }}
+            />
           </FormGroup>
           <FormGroup>
             <Label for="examplePassword">Last name</Label>
@@ -110,16 +115,87 @@ const ViewPlans = () => {
             }}
             />
           </FormGroup>
-          
+          <FormGroup>
+            <Label for="examplePassword">Mobile Number</Label>
+            <Input
+              type="text"
+              name="mobile"
+              className="form-control"
+              id="mobile"
+              placeholder="ex. 1245678765"
+              autoComplete="off"
+              onChange={(e) => { 
+                setMobile(e.target.value);
+            }}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label for="examplePassword">Address</Label>
+            <Input
+              type="text"
+              name="address"
+              className="form-control"
+              id="address"
+              placeholder="ex. 201 Baker Street, London, Maharashtra, India"
+              autoComplete="off"
+              onChange={(e) => { 
+                setAddress(e.target.value);
+            }}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label for="exampleEmail">Email address</Label>
+            <Input
+              type="email"
+              name="email"
+              className="form-control"
+              id="email"
+              placeholder="ex. example@gmail.com"
+              onChange={(e) => { 
+                setEmail(e.target.value);
+            }}
+            />
+            <FormText color="muted">
+              We'll never share your email with anyone else.
+            </FormText>
+          </FormGroup>
+          <FormGroup>
+            <Label for="examplePassword">Password</Label>
+            <Input
+              type="password"
+              name="password"
+              className="form-control"
+              id="password"
+              placeholder="*****"
+              autoComplete="off"
+              onChange={(e) => { 
+                setPassword(e.target.value);
+            }}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label for="examplePassword">Join Date</Label>
+            <Input
+              type="date"
+              name="joindate"
+              className="form-control"
+              id="password"
+              placeholder=""
+              autoComplete="off"
+              onChange={(e) => { 
+                setJoindate(e.target.value);
+            }}
+            />
+          </FormGroup>
 
           <FormGroup check>
           </FormGroup>
           {/* <Button color="primary" onClick = {RegisterUser}>
             Submit
           </Button> */}
-          <Link to="/register" class="btn btn-primary">Prev</Link>
-          <Link to="/viewplans" className = "btn btn-success">Make Payment</Link>
-          <Link to="/register" class="btn btn-primary">Next</Link>
+
+          {/* <Link to="/viewplans" className = "btn btn-success">View Plans</Link> */}
+          <Link to="/viewplans" class="btn btn-success">Next</Link>
         </form>
       </CardBody>
     </Card>
@@ -127,4 +203,4 @@ const ViewPlans = () => {
   );
 };
 
-export default ViewPlans;
+export default Register1;

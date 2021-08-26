@@ -45,6 +45,9 @@ public class Trainers {
 	@JoinColumn(name = "u_id")
 	@JsonIgnore
 	private Users user;
+	@OneToOne(mappedBy = "trainer" , cascade = CascadeType.ALL)
+	@JsonIgnore
+	private Plans plan;
 //	@OneToMany(mappedBy = "trainer", cascade = CascadeType.ALL)
 //	private List<Members> memberlist;
 	
@@ -147,6 +150,14 @@ public class Trainers {
 //	public void setMemberlist(List<Members> memberlist) {
 //		this.memberlist = memberlist;
 //	}
+
+	public Plans getPlan() {
+		return plan;
+	}
+
+	public void setPlan(Plans plan) {
+		this.plan = plan;
+	}
 
 	@Override
 	public String toString() {

@@ -2,9 +2,12 @@ package com.gym.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,10 +25,11 @@ public class Plans {
 	private int pduration;
 	@Column(name = "pl_cost")
 	private double pcost;
-	
+	@OneToOne( fetch = FetchType.EAGER )
+	@JoinColumn(name = "t_id")
+	private Trainers trainer;
 	
 	public Plans() {
-		
 	}
 	
 	public Plans(int pid, String pname, String pdesc, int pduration, double pcost) {
@@ -67,6 +71,14 @@ public class Plans {
 		this.pcost = pcost;
 	}
 	
+	public Trainers getTrainer() {
+		return trainer;
+	}
+
+	public void setTrainer(Trainers trainer) {
+		this.trainer = trainer;
+	}
+
 	@Override
 	public String toString() {
 		return "Plans [pid=" + pid + ", pname=" + pname + ", pdesc=" + pdesc + ", pduration=" + pduration + ", pcost="

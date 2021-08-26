@@ -81,8 +81,9 @@ margin-left: 4px;
 }
 
 .transparent{
+    display: flex;
     position: absolute;
-    left: 25%;
-    width: 50%;
+    left: 10%;
+    width: 85%;
     justify-content: center;
 }
