@@ -41,6 +41,8 @@ public class Trainers {
 	private char tgender;
 	@Column(name = "t_address")
 	private String taddress;
+	@Column(name = "t_image")
+	private String timage;
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "u_id")
 	@JsonIgnore
@@ -157,6 +159,14 @@ public class Trainers {
 
 	public void setPlan(Plans plan) {
 		this.plan = plan;
+	}
+
+	public String getTimage() {
+		return timage;
+	}
+
+	public void setTimage(String timage) {
+		this.timage = timage;
 	}
 
 	@Override

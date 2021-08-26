@@ -7,13 +7,6 @@ const { response } = require('express')
 const utils = require('../utils/utils')
 console.log(db.eventNames);
 
-router.get('/getallsongs',(request, response) =>{
-    const query = 'SELECT * FROM song';
-    console.log(query);
-    db.query(query,(error,data)=>{
-        response.send(utils.CreateResult(error,data));
-    })
-})
 
 router.post('/upload',upload.single('thumbnail'),(request, response) =>{
     const {title,artistId,albumId,duration,newtitle} = request.body;

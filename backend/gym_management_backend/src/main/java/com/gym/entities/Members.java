@@ -44,6 +44,8 @@ public class Members {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "m_joindate")
 	private Date mjoindate;
+	@Column(name = "m_image")
+	private String mimage;
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "u_id")
 	@JsonIgnore
@@ -170,6 +172,14 @@ public class Members {
 
 	public void setPlan(Plans plan) {
 		this.plan = plan;
+	}
+	
+	public String getMimage() {
+		return mimage;
+	}
+
+	public void setMimage(String mimage) {
+		this.mimage = mimage;
 	}
 
 	@Override

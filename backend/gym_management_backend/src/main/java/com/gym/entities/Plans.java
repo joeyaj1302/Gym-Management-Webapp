@@ -25,6 +25,8 @@ public class Plans {
 	private int pduration;
 	@Column(name = "pl_cost")
 	private double pcost;
+	@Column(name = "pl_image")
+	private String plimage;
 	@OneToOne( fetch = FetchType.EAGER )
 	@JoinColumn(name = "t_id")
 	private Trainers trainer;
@@ -77,6 +79,14 @@ public class Plans {
 
 	public void setTrainer(Trainers trainer) {
 		this.trainer = trainer;
+	}
+	
+	public String getPlimage() {
+		return plimage;
+	}
+
+	public void setPlimage(String plimage) {
+		this.plimage = plimage;
 	}
 
 	@Override

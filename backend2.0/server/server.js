@@ -7,10 +7,14 @@ app.use(cors('*'))
 app.use(express.json());
 
 const routerImages = require('./routes/images');
-
-
+const PlanImages = require('./routes/PlanImages');
+const MemberImages = require('./routes/MemberImages');
+const TrainerImages = require('./routes/TrainerImages');
 
 app.use('/images',routerImages);
+app.use('/planimages',PlanImages);
+app.use('/trainerimages',TrainerImages);
+app.use('/memberimages',MemberImages);
 
 // static routing
 // any file in uploads directory does not require any route
