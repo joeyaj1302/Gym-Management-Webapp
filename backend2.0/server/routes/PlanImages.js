@@ -8,7 +8,7 @@ const utils = require('../utils/utils')
 console.log(db.eventNames);
 
 
-router.post('/upload/:id', upload.single('memberimage'), (request, response) => {
+router.post('/upload/:id', upload.single('planimage'), (request, response) => {
     const id = request.params.id;
     const filename = request.file.filename;
     const query = `UPDATE plans SET pl_image = ('${filename}') where pl_id = ${id}` ;

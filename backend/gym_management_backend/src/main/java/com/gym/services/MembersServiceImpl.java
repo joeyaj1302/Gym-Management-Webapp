@@ -29,8 +29,8 @@ public class MembersServiceImpl implements MembersService{
 
 	@Override
 	public Members findByMemail(String email) {
-		// TODO Auto-generated method stub
-		return null;
+		Members member = memberDao.findByMemail(email);
+		return member;
 	}
 
 	@Override

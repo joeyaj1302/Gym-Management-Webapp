@@ -46,15 +46,16 @@ public class Trainers {
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "u_id")
 	@JsonIgnore
-	private Users user;
-	@OneToOne(mappedBy = "trainer" , cascade = CascadeType.ALL)
+	private Users user; 
+	@OneToMany(mappedBy = "trainer" , cascade = CascadeType.ALL)
 	@JsonIgnore
-	private Plans plan;
+	private List<Plans> planList;
 //	@OneToMany(mappedBy = "trainer", cascade = CascadeType.ALL)
 //	private List<Members> memberlist;
 	
 	public Trainers() {	
 //		this.memberlist = new ArrayList<Members>();
+		this.planList = new ArrayList<Plans>();
 	}
 
 	public Trainers(int tid, String tfname, String tlname, String temail, String tpassword, int tage, char tgender,
@@ -70,6 +71,7 @@ public class Trainers {
 		this.taddress = taddress;
 		this.user = user;
 //		this.memberlist = new ArrayList<Members>();
+		this.planList = new ArrayList<Plans>();
 	}
 
 	public int gettid() {
@@ -153,20 +155,20 @@ public class Trainers {
 //		this.memberlist = memberlist;
 //	}
 
-	public Plans getPlan() {
-		return plan;
-	}
-
-	public void setPlan(Plans plan) {
-		this.plan = plan;
-	}
-
 	public String getTimage() {
 		return timage;
 	}
 
 	public void setTimage(String timage) {
 		this.timage = timage;
+	}
+	
+	public List<Plans> getPlanList() {
+		return planList;
+	}
+
+	public void setPlanList(List<Plans> planList) {
+		this.planList = planList;
 	}
 
 	@Override

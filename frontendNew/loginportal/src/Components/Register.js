@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useEffect  } from 'react';
 import axios from 'axios';
-import { useLocation } from 'react-router';
 import { useHistory } from "react-router-dom";
 import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
 import {
@@ -16,7 +15,7 @@ import {
 import { Redirect } from "react-router";
 import '../css/loginCSS.css';
 
-const Register1 = () => {
+const Register = () => {
     const [fname, setFname] = useState("");
     const [lname, setLname] = useState("");
     const [email, setEmail] = useState("");
@@ -26,23 +25,33 @@ const Register1 = () => {
     const[mobile, setMobile] = useState("");
     const[gender,setGender] = useState("");
     const history = useHistory();
-    const[joindate, setJoindate] = useState(new Date());
+    const[joindate, setJoindate] = useState({varOne:new Date()});
     const RegisterUser = () => {
-      const goPlans = () => {history.push('/viewplans',{
-        "mfname" : fname,
-        "mlname" : lname,
-        "memail" : email,
-        "mpassword" : password,
-        "mage" : age,
-        "maddress" : address,
-        "mmobile" : mobile,
-        "mgender" : gender,
-        "mjoindate" : joindate
-      })
+        const data = new FormData();
+        data.append("mfname",fname);
+        data.append("mlname",lname);
+        data.append("memail",email);
+        data.append("mpassword",password);
+        data.append("mage",age);
+        data.append("maddress",address);
+        data.append("mage",age);
+        data.append("mmobile",mobile);
+        data.append("mgender",gender);
+        data.append("mjoindate",joindate);
+        console.log(fname);
+        console.log(email);
+        const addurl = "http://localhost:8080/addnewuser";
+        axios.post(addurl,data).then((response) => {
+            const result = response.data;
+            if (result.message === 'success') {
+                alert(result.log);
+                const goLogin = () => history.push('/home')
+                goLogin();
+                
+            }
+        })
     }
-    console.log(joindate);
-      goPlans();
-}
+
 
   return (
     <div className="container" >
@@ -186,7 +195,7 @@ const Register1 = () => {
           </Button> */}
 
           {/* <Link to="/viewplans" className = "btn btn-success">View Plans</Link> */}
-          <Button onClick={RegisterUser} className="btn btn-success" >Next</Button>
+          <Link to="/viewplans" class="btn btn-success">Next</Link>
         </form>
       </CardBody>
     </Card>
@@ -194,4 +203,4 @@ const Register1 = () => {
   );
 };
 
-export default Register1;
+export default Register;

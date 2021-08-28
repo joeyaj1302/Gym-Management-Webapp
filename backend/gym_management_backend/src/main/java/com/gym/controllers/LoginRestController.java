@@ -15,11 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gym.entities.Equipments;
 import com.gym.entities.Members;
 import com.gym.entities.Plans;
 import com.gym.entities.Trainers;
 import com.gym.entities.Users;
 import com.gym.models.Response;
+import com.gym.services.EquipmentsService;
 import com.gym.services.MembersService;
 import com.gym.services.PlansService;
 import com.gym.services.TrainerService;
@@ -36,6 +38,8 @@ public class LoginRestController {
 	private TrainerService trainerService;
 	@Autowired
 	private PlansService planService;
+	@Autowired
+	private EquipmentsService equipmentsService;
 	
 	@PostMapping("/authenticaterest")
 	private ResponseEntity<?> authenticate(@RequestParam(name = "email") String email,@RequestParam(name = "password") String password) {
@@ -91,6 +95,15 @@ public class LoginRestController {
 		}
 	}
 	
+	@GetMapping("/getallequipments")
+	private ResponseEntity<?> getallequipments() {
+		List<Equipments> eqList = equipmentsService.findAllEquipments();
+		if(eqList!=null) {
+			return Response.successList(eqList);
+		}
+		return Response.error("Empty Equippment list!!");
+		
+	}
 	
 	@GetMapping("/getbymid")
 	private ResponseEntity<?> getBymid(@RequestParam(name = "id") String id) {
@@ -102,8 +115,23 @@ public class LoginRestController {
 		else {
 			return Response.error("Member not found");
 		}
-		
 	}
+	@PostMapping("/addnewuser")
+	private ResponseEntity<?> addnewuser(Members member){
+		System.out.println(member.toString());
+		memberService.save(member);
+		return Response.success(member, "member");
+	}
+	
+	@GetMapping("/getbymemail")
+	private ResponseEntity<?> getbymemail(@RequestParam(name = "email") String email) {
+		Members member = memberService.findByMemail(email);
+		if(member != null) {
+			return Response.success(member, "member");
+		}
+		return Response.error("Member not found!");
+	}
+	
 	@PutMapping("/updatebymid")
 	private ResponseEntity<?> updatebymid(@RequestParam(name = "id") String id ,Members member)  {
 		int mid = Integer.parseInt(id);
@@ -169,6 +197,7 @@ public class LoginRestController {
 		}
 		
 	}
+	
 	
 	
 }
