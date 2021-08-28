@@ -9,12 +9,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gym.dtos.MemberDto;
 import com.gym.entities.Equipments;
 import com.gym.entities.Members;
 import com.gym.entities.Plans;
@@ -116,9 +118,22 @@ public class LoginRestController {
 			return Response.error("Member not found");
 		}
 	}
+
 	@PostMapping("/addnewuser")
-	private ResponseEntity<?> addnewuser(Members member){
+	private ResponseEntity<?> addnewuser(Members member,@RequestParam(name = "pid") String id){
+		int pid = Integer.parseInt(id);
 		System.out.println(member.toString());
+		Plans plan = planService.findByPlid(pid);
+		Users user = member.getUser();
+		user.setUfname(member.getMfname());
+		user.setUlname(member.getMlname());
+		user.setUpassword(member.getMpassword());
+		user.setUemail(member.getMemail());
+		user.setUrole("member");
+		userService.save(user);
+		Trainers trainer = plan.getTrainer();
+		member.setTrainer(trainer);
+		member.setPlan(plan);
 		memberService.save(member);
 		return Response.success(member, "member");
 	}

@@ -2,6 +2,7 @@ package com.gym.entities;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -50,7 +51,7 @@ public class Members {
 	@JoinColumn(name = "u_id")
 	@JsonIgnore
 	private Users user;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "t_id")
 	private Trainers trainer;
 	@ManyToOne(fetch = FetchType.EAGER)

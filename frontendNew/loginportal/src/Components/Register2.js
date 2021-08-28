@@ -35,6 +35,7 @@ const Register2 = () => {
     const maddress = location.state.maddress;
     const mjoindate = location.state.mjoindate;
     const mmobile = location.state.mmobile;
+    const image = location.state.image;
     console.log("In Register 2");
     console.log(mjoindate);
     const url = "http://localhost:4001";
@@ -86,7 +87,8 @@ const Register2 = () => {
                         "mmobile" : mmobile,
                         "mgender" : mgender,
                         "mjoindate" : mjoindate,
-                        "pid": plan.pid
+                        "pid": plan.pid,
+                        "image" : image
                       })
                     }}  className="btn btn-success">Go to Payment</Button>
                     </div>

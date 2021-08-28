@@ -16,6 +16,7 @@ import {
 import { Redirect } from "react-router";
 import '../css/loginCSS.css';
 
+let mid;
 const Register3 = () => {
     const location = useLocation();
     const history = useHistory();
@@ -26,12 +27,13 @@ const Register3 = () => {
     const mage = location.state.mage;
     const mgender = location.state.mgender;
     const maddress = location.state.maddress;
-    const mjoindate = location.state.joindate;
+    const mjoindate = location.state.mjoindate;
     const mmobile = location.state.mmobile;
     const pid = location.state.pid;
-    console.log(location.state)
-    let mid;
-    const[joindate, setJoindate] = useState({varOne:new Date()});
+    const memberimage = location.state.image;
+    //console.log(location.state)
+    console.log(mjoindate);
+
     const ConfirmPayment = () => {
       console.log(location.state);
     }
@@ -46,6 +48,7 @@ const Register3 = () => {
         "mmobile" : mmobile,
         "mgender" : mgender,
         "mjoindate" : mjoindate,
+        "image" : memberimage
       })
     }
     const RegisterUser = () => {
@@ -60,9 +63,12 @@ const Register3 = () => {
         data.append("mmobile",mmobile);
         data.append("mgender",mgender);
         data.append("mjoindate",mjoindate);
-        data.append("pid",pid);
+        // data.append("pid",pid);
         console.log(mjoindate);
-        const addurl = "http://localhost:8080/addnewuser";
+        console.log("In register User");
+        console.log(mfname);
+        console.log(mjoindate);
+        const addurl = "http://localhost:8080/addnewuser?pid="+pid;
         const geturl = "http://localhost:8080/getbymemail/?email="+memail;
         axios.post(addurl,data).then((response) => {
             const result = response.data;
@@ -70,19 +76,26 @@ const Register3 = () => {
             console.log(result);
             if (result.message === 'success') {
                 alert(result.log);
+                mid = result.data.mid;
+                goGet();
                 // const goLogin = () => history.push('/home')
                 // goLogin();
                 
             }
         })
-        axios.get(geturl).then((response) => {
-          const result = response.data;
-          console.log(result);
-         // console.log(mid);
-        })
+        const goGet = () => {
+          axios.get(geturl).then((response) => {
+            const result = response.data;
+            console.log(result);
+            const uploadimgurl = "http://localhost:4001/memberimages/upload/"+mid;
+            const data = new FormData();
+            data.append("memberimage",memberimage);
+            axios.post(uploadimgurl,data).then((response) => {})
+           // console.log(mid);
+          })
+  
+        }
 
-        // const uploadimgurl = "http://localhost:4000/memberimages/upload/"+mid;
-        // axios.post(uploadimgurl).then((response) => {})
 
     }
 

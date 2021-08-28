@@ -1,9 +1,21 @@
 import React from "react";
 import { useState, useEffect  } from 'react';
 import axios from 'axios';
-import { useLocation } from 'react-router';
 import { useHistory } from "react-router-dom";
 import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
+import { Redirect } from "react-router";
+import '../css/loginCSS.css';
+import WcIcon from '@material-ui/icons/Wc';
+import PhoneAndroidIcon from '@material-ui/icons/PhoneAndroid';
+import HomeIcon from '@material-ui/icons/Home';
+import EmailIcon from '@material-ui/icons/Email';
+import VpnKeyIcon from '@material-ui/icons/VpnKey';
+import DateRangeIcon from '@material-ui/icons/DateRange';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import PersonIcon from '@material-ui/icons/Person';
+import '../css/registerform.css';
+import ImageIcon from '@material-ui/icons/Image';
+
 import {
   FormGroup,
   Label,
@@ -13,184 +25,158 @@ import {
   Card,
   CardBody
 } from "reactstrap";
-import { Redirect } from "react-router";
-import '../css/loginCSS.css';
 
 const Register1 = () => {
-    const [fname, setFname] = useState("");
-    const [lname, setLname] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [age, setAge] = useState(0);
-    const [address, setAddress] = useState("");
-    const[mobile, setMobile] = useState("");
-    const[gender,setGender] = useState("");
-    const history = useHistory();
-    const[joindate, setJoindate] = useState(new Date());
-    const RegisterUser = () => {
-      const goPlans = () => {history.push('/viewplans',{
-        "mfname" : fname,
-        "mlname" : lname,
-        "memail" : email,
-        "mpassword" : password,
-        "mage" : age,
-        "maddress" : address,
-        "mmobile" : mobile,
-        "mgender" : gender,
-        "mjoindate" : joindate
-      })
-    }
-    console.log(joindate);
-      goPlans();
+  const [fname, setFname] = useState("");
+  const [lname, setLname] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [age, setAge] = useState(0);
+  const [address, setAddress] = useState("");
+  const[mobile, setMobile] = useState("");
+  const[gender,setGender] = useState("");
+  const history = useHistory();
+  const[joindate, setJoindate] = useState(new Date());
+  const[image,setImage] = useState(null);
+  const RegisterUser = () => {
+    const goPlans = () => {history.push('/viewplans',{
+      "mfname" : fname,
+      "mlname" : lname,
+      "memail" : email,
+      "mpassword" : password,
+      "mage" : age,
+      "maddress" : address,
+      "mmobile" : mobile,
+      "mgender" : gender,
+      "mjoindate" : joindate,
+      "image" : image
+    })
+  }
+  console.log(joindate);
+    goPlans();
 }
 
-  return (
+
+return (
     <div className="container" >
-      <h2>This is Part 1</h2>
-    <Card className="form form-group transparent">
-      <CardBody>
-        <form>
-        <FormGroup >
-            <Label for="examplePassword">First Name</Label>
-            <Input
-              type="text"
-              name="fname"
-              className="form-control"
-              id="fname"
-              placeholder="ex. John"
+      <h2>Form Part 1</h2>
+      <Card className="form form-group transparent" Style="background-color:transparent">
+      <div className="content-bottom">
+				<form action="#" method="post">
+
+        <div className="field-group">
+						<span aria-hidden="true"><AccountCircleIcon></AccountCircleIcon></span>
+						<div className="wthree-field">
+							<input type="text" name="fname"  placeholder="First Name" required   id="fname"
               autoComplete="off"
               onChange={(e) => { 
                   setFname(e.target.value);
-              }}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="examplePassword">Last name</Label>
-            <Input
-              type="text"
-              name="lname"
-              className="form-control"
-              id="lname"
-              placeholder="ex. Krasinki"
+              }}/>
+						</div>
+					</div>
+
+          <div className="field-group">
+						<span aria-hidden="true"><AccountCircleIcon></AccountCircleIcon></span>
+						<div className="wthree-field">
+							<input type="text" name="lname" placeholder="Last Name" required   id="lname"
               autoComplete="off"
               onChange={(e) => { 
-                setLname(e.target.value);
-            }}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="examplePassword">Age</Label>
-            <Input
-              type="number"
-              name="age"
-              className="form-control"
-              id="age"
-              placeholder="ex. 0"
+                  setLname(e.target.value);
+              }}/>
+						</div>
+					</div>
+
+          <div className="field-group">
+						<span aria-hidden="true"><PersonIcon></PersonIcon></span>
+						<div className="wthree-field">
+							<input type="number" name="age" placeholder="Age" required   id="age" 
               autoComplete="off"
               onChange={(e) => { 
                 setAge(e.target.value);
-            }}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="examplePassword">Gender</Label>
-            <Input
-              type="text"
-              name="gender"
-              className="form-control"
-              id="gender"
-              placeholder="ex. M or F"
+            }}/>
+						</div>
+					</div>
+
+					<div className="field-group">
+						<span aria-hidden="true"><WcIcon></WcIcon></span>
+						<div className="wthree-field">
+							<input type="text" name="gender" placeholder="Gender" id="gender"
               autoComplete="off"
               onChange={(e) => { 
                 setGender(e.target.value);
-            }}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="examplePassword">Mobile Number</Label>
-            <Input
-              type="text"
-              name="mobile"
-              className="form-control"
-              id="mobile"
-              placeholder="ex. 1245678765"
+            }}/>
+						</div>
+					</div>
+
+          <div className="field-group">
+						<span  aria-hidden="true"><PhoneAndroidIcon></PhoneAndroidIcon></span>
+						<div className="wthree-field">
+							<input type="text" name="mobile" placeholder="Mobile Number"  id="mobile"
               autoComplete="off"
               onChange={(e) => { 
                 setMobile(e.target.value);
-            }}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="examplePassword">Address</Label>
-            <Input
-              type="text"
-              name="address"
-              className="form-control"
-              id="address"
-              placeholder="ex. 201 Baker Street, London, Maharashtra, India"
+            }}/>
+						</div>
+					</div>
+
+          <div className="field-group">
+						<span aria-hidden="true"><HomeIcon></HomeIcon></span>
+						<div className="wthree-field">
+							<input type="text" name="address" placeholder="Address"  id="mobile"
               autoComplete="off"
               onChange={(e) => { 
                 setAddress(e.target.value);
-            }}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="exampleEmail">Email address</Label>
-            <Input
-              type="email"
-              name="email"
-              className="form-control"
-              id="email"
-              placeholder="ex. example@gmail.com"
+            }}/>
+						</div>
+					</div>
+
+          <div className="field-group">
+						<span aria-hidden="true"><EmailIcon></EmailIcon></span>
+						<div className="wthree-field">
+							<input type="email" name="email" placeholder="Email Id"  id="email"
               onChange={(e) => { 
                 setEmail(e.target.value);
-            }}
-            />
-            <FormText color="muted">
-              We'll never share your email with anyone else.
-            </FormText>
-          </FormGroup>
-          <FormGroup>
-            <Label for="examplePassword">Password</Label>
-            <Input
-              type="password"
-              name="password"
-              className="form-control"
-              id="password"
-              placeholder="*****"
-              autoComplete="off"
-              onChange={(e) => { 
-                setPassword(e.target.value);
-            }}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="examplePassword">Join Date</Label>
-            <Input
-              type="date"
-              name="joindate"
-              className="form-control"
-              id="password"
-              placeholder=""
-              autoComplete="off"
-              onChange={(e) => { 
-                setJoindate(e.target.value);
-            }}
-            />
-          </FormGroup>
+            }}/>
+						</div>
+					</div>
 
-          <FormGroup check>
-          </FormGroup>
-          {/* <Button color="primary" onClick = {RegisterUser}>
-            Submit
-          </Button> */}
+          <div className="field-group">
+						<span aria-hidden="true"><VpnKeyIcon></VpnKeyIcon></span>
+						<div className="wthree-field">
+							<input type="password" name="password" placeholder="Password"  id="email"
+               autoComplete="off"
+               onChange={(e) => { 
+                 setPassword(e.target.value);
+             }}/>
+						</div>
+					</div>
 
-          {/* <Link to="/viewplans" className = "btn btn-success">View Plans</Link> */}
-          <Button onClick={RegisterUser} className="btn btn-success" >Next</Button>
-        </form>
-      </CardBody>
-    </Card>
-    </div>
+          <div className="field-group">
+						<span aria-hidden="true"><DateRangeIcon></DateRangeIcon></span>
+						<div className="wthree-field">
+							<input type="date" name="joindate" placeholder="Join Date"  id="date"
+               autoComplete="off"
+               onChange={(e) => { 
+                 setJoindate(e.target.value);
+             }}/>
+						</div>
+					</div>
+
+          <div className="field-group">
+						<span aria-hidden="true"><ImageIcon></ImageIcon></span>
+						<div className="wthree-field">
+							<input type="file" name="image" placeholder="Upload Your Image"  id="date"
+               autoComplete="off"
+               onChange={(e) => { 
+                 setImage(e.target.files[0]);
+             }}/>
+						</div>
+					</div>
+          
+					<div className="wthree-field">
+					<Button onClick={RegisterUser} className="btn" >Next</Button>
+					</div>
+					</form></div></Card></div>
   );
 };
 
