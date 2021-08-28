@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -56,6 +57,7 @@ public class LoginRestController {
 			return Response.success(trainer,"trainer");
 		}
 		else if (user != null && user.getUpassword().equals(password) && user.getUrole().equals("admin")) {
+			System.out.println("Inside Admin backend");
 			return Response.success(user,"admin");
 		}
 		else {
@@ -85,6 +87,7 @@ public class LoginRestController {
 			return Response.error("Empty List");
 		}
 	}
+	@CrossOrigin(origins = "http://localhost:8080")
 	@GetMapping("/getallplans")
 	private ResponseEntity<?> getallPlans() {
 		List<Plans> planList = new ArrayList<Plans>();
@@ -199,8 +202,9 @@ public class LoginRestController {
 		return Response.successList(memberList);
 		
 	}
-	
-	@DeleteMapping("/deletebypid")
+
+	//@DeleteMapping("/deletebypid/{id}")
+	@RequestMapping(value="/deletebypid", method=RequestMethod.DELETE)
 	private ResponseEntity<?> deletebypid(@RequestParam(name = "id") String id) {
 		int pid = Integer.parseInt(id);
 		boolean deleted = planService.deleteById(pid); 

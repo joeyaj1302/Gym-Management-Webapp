@@ -12,7 +12,6 @@ import Navbar from './Components/Navbar';
 import { BrowserRouter , Switch, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-
 function App() {
   const authResult = new URLSearchParams(window.location.search); 
   const id = authResult.get('id');
@@ -26,12 +25,13 @@ function App() {
     <BrowserRouter>
     <Navbar id={uid} />
     <Switch>
+      <Route path='/dashboard' component={Dashboard} />
       <Route path='/account/:uid' component={Account} />
       <Route path='/update/:uid' component={Update} />
       <Route path='/members' component={Members} />
       <Route path='/trainers' component={Trainers} />
       <Route path='/plans' component={Plans} />
-      <Route path='/dashbaord' component={Dashboard} />
+      {/* <Route path='/dashbaord' component={Dashboard} /> */}
       <Route path='/logout' component={Logout} />
     </Switch>
   </BrowserRouter>

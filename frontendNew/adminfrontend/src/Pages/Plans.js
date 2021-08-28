@@ -13,18 +13,6 @@ const Plans = () => {
         })
     }
 
-    const deleteplan = (id) => {
-        const deleteurl = "http://localhost:8080/deletebypid?id="+id;
-        axios.delete(url).then((response) => {
-            const result = response.data;
-            if (result.message === 'success') {
-                alert("Plan deleted successfully");
-            }
-            else{
-                alert("Plan not deleted");
-            }
-        })
-    }
 
     useEffect(()=>{
         getplans()
@@ -54,7 +42,18 @@ const Plans = () => {
                         <td>{plan.pdesc}</td>
                         <td>{plan.pduration}</td>
                         <td>{plan.pcost}</td>
-                        <td> <button type="button" className = "btn btn-danger" onClick = {deleteplan(plan.pid)}>Delete</button> </td>
+                        <td> <button type="button" className = "btn btn-danger" onClick = {()=> {
+                                const deleteurl = "http://localhost:8080/deletebypid?id="+plan.pid;
+                                axios.delete(deleteurl).then((response) => {
+                                    const result = response.data;
+                                    if (result.message === 'success') {
+                                        alert("Plan deleted successfully");
+                                    }
+                                    else{
+                                        alert("Plan not deleted");
+                                    }
+                                })
+                        }}>Delete</button> </td>
                         </tr>
                         )
                     })}

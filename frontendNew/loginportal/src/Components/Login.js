@@ -22,7 +22,7 @@ const Login = () => {
         const data = new FormData();
         data.append("email",email);
         data.append("password",password);
-
+        console.log("Inside authenticate");
         axios.post(url,data).then((response) => {
             const result = response.data;
             console.log(result.role);
