@@ -31,7 +31,7 @@ public class Plans {
 	private double pcost;
 	@Column(name = "pl_image")
 	private String plimage;
-	@ManyToOne( fetch = FetchType.EAGER )
+	@ManyToOne( fetch = FetchType.EAGER,cascade = CascadeType.ALL )
 	@JoinColumn(name = "t_id")
 	private Trainers trainer;
 	

@@ -47,16 +47,17 @@ public class Members {
 	private Date mjoindate;
 	@Column(name = "m_image")
 	private String mimage;
-	@OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "u_id")
 	@JsonIgnore
 	private Users user;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "t_id")
 	private Trainers trainer;
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "pl_id")
 	private Plans plan;
+	
 	
 	
 	public Members() {	
