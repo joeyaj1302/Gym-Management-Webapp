@@ -137,6 +137,19 @@ public class LoginRestController {
 		memberService.save(member);
 		return Response.success(member, "member");
 	}
+	@PostMapping("/addplan")
+	private ResponseEntity<?> addnewplan(Plans plan,@RequestParam(name = "tid") String id){
+		int tid = Integer.parseInt(id);
+		Trainers trainer = trainerService.findByTid(tid);
+		plan.setTrainer(trainer);
+		planService.save(plan);
+		return Response.success(plan, "plan");
+	}
+	@PostMapping("/findplanbyname")
+	private ResponseEntity<?> findplan(@RequestParam(name = "pname") String name){
+		Plans plan = planService.findByPname(name);
+		return Response.success(plan, "plan");
+	}
 	
 	@GetMapping("/getbymemail")
 	private ResponseEntity<?> getbymemail(@RequestParam(name = "email") String email) {

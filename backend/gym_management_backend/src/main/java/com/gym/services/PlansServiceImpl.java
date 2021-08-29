@@ -63,4 +63,10 @@ public class PlansServiceImpl implements PlansService{
 		return planList;
 	}
 
+	@Override
+	public Plans findByPname(String name) {
+		Plans plan = planDao.findByPname(name);
+		return plan;
+	}
+
 }

@@ -11,5 +11,6 @@ public interface PlanDao extends JpaRepository<Plans, Integer>{
 	Plans findByPid(int id);
 	List<Plans> findAll();
 	void deleteByPid(int id);
+	Plans findByPname(String name);
 	
 }

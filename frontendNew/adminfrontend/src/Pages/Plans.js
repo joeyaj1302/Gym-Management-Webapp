@@ -1,11 +1,38 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Modal, Button,  Card } from "react-bootstrap";
+import '../css/loginCSS.css';
 
+import PersonIcon from '@material-ui/icons/Person';
+import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
+import DescriptionIcon from '@material-ui/icons/Description';
+import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
+import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
+import InsertPhotoIcon from '@material-ui/icons/InsertPhoto';
+import '../css/registerform.css';
+import { useHistory } from "react-router-dom";
+
+let pid;
 const Plans = () => {
-    const[planList,setPlanList] = useState([]);
+
+    const [pname, setPname] = useState("");
+    const [pdesc, setPdesc] = useState("");
+    const [pduration, setPduration] = useState(0);
+    const[pcost,setPcost] = useState(0);
+    const[planimage,setImage] = useState(null);
+    const[tid,setTid] = useState(0);
+    const history = useHistory();
+    const[trainerList,setTrainerList] = useState([]);
+  
+
+const[planList,setPlanList] = useState([]);
     
+  const [lgShow, setLgShow] = useState(false);
     const url = "http://localhost:8080/getallplans";
+    const geturl = "http://localhost:8080/findplanbyname";
+   
+
     const getplans = () => {
         axios.get(url).then((response) =>{
             console.log(response.data);
@@ -13,10 +40,54 @@ const Plans = () => {
         })
     }
 
+    const trainerurl = "http://localhost:8080/getalltrainers";
+    const gettrainers = () => {
+        axios.get(trainerurl).then((response) =>{
+            console.log(response.data.List);
+            setTrainerList(response.data.List);
+        
+        })
+    }
+
+    const addPlan = () => {
+        console.log("inside addpalan  " +tid);
+        const addurl = "http://localhost:8080/addplan?tid="+tid;
+        const data = new FormData();
+        data.append("pname",pname);
+        data.append("pdesc",pdesc);
+        data.append("pduration",pduration);
+        data.append("pcost",pcost);
+      
+        axios.post(addurl,data).then((response) => {
+            const result = response.data;
+            console.log("In axios.post");
+            console.log(result.data);
+            if (result.message === 'success') {
+                pid = result.data.pid;
+                alert("Plan Added Successfully !");
+                goGet();
+            }
+        })
+        const goGet = () => {
+          
+            const uploadimgurl = "http://localhost:4001/planimages/upload/"+pid;
+            const data = new FormData();
+            data.append("planimage",planimage);
+            axios.post(uploadimgurl,data).then((response) => {})
+             getplans();
+             setLgShow(false);
+        }
+      }
+    
 
     useEffect(()=>{
         getplans()
+        gettrainers();
     },[])
+
+    const setTrainerId =(e) =>{
+        setTid(e.target.value)
+    }
 
     return (
         <div className="container">        
@@ -42,9 +113,10 @@ const Plans = () => {
                         <td>{plan.pdesc}</td>
                         <td>{plan.pduration}</td>
                         <td>{plan.pcost}</td>
-                        <td> <button type="button" className = "btn btn-danger" onClick = {()=> {
+                        <td> <button type="button" className = "btn btn-danger" onClick = {
+                                () => {
                                 const deleteurl = "http://localhost:8080/deletebypid?id="+plan.pid;
-                                axios.delete(deleteurl).then((response) => {
+                                axios.delete(url).then((response) => {
                                     const result = response.data;
                                     if (result.message === 'success') {
                                         alert("Plan deleted successfully");
@@ -53,14 +125,111 @@ const Plans = () => {
                                         alert("Plan not deleted");
                                     }
                                 })
-                        }}>Delete</button> </td>
+                            }
+                        }>Delete</button> </td>
                         </tr>
                         )
                     })}
                     
                 </tbody>
             </table>
-            
+          
+      <Button onClick={() => setLgShow(true)}>Add Plan</Button>
+      
+      <Modal 
+        size="lg"
+        show={lgShow}
+        onHide={() => setLgShow(false)}
+        aria-labelledby="example-modal-sizes-title-lg"
+      >
+        <Modal.Header Style="background-color:black" closeButton>
+          <Modal.Title  id="example-modal-sizes-title-lg" Style="color: #7fc919; ">
+            Add Plan
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body Style="background-color:black">
+
+      <Card className="form form-group " Style="background-color:black">
+      <div className="content-bottom">
+				<form action="#" method="post">
+
+        <div className="field-group">
+						<span aria-hidden="true"><FitnessCenterIcon></FitnessCenterIcon></span>
+						<div className="wthree-field">
+							<input type="text" name="pname"  placeholder="Plan Name" required 
+              autoComplete="off"
+              onChange={(e) => { 
+                  setPname(e.target.value);
+              }}/>
+						</div>
+					</div>
+
+          <div className="field-group">
+						<span aria-hidden="true"><DescriptionIcon></DescriptionIcon></span>
+						<div className="wthree-field">
+							<input type="text" name="pdesc" placeholder="Plan Description" required  
+              autoComplete="off"
+              onChange={(e) => { 
+                  setPdesc(e.target.value);
+              }}/>
+						</div>
+					</div>
+
+          <div className="field-group">
+						<span aria-hidden="true"><HourglassEmptyIcon></HourglassEmptyIcon></span>
+						<div className="wthree-field">
+							<input type="number" name="pduration" placeholder="Duration" required   id="duration" 
+              autoComplete="off"
+              onChange={(e) => { 
+                setPduration(e.target.value);
+            }}/>
+						</div>
+					</div>
+
+					<div className="field-group">
+						<span aria-hidden="true"><MonetizationOnIcon></MonetizationOnIcon></span>
+						<div className="wthree-field">
+							<input type="number" name="pcost" placeholder="Cost" id="cost"
+              autoComplete="off"
+              onChange={(e) => { 
+                setPcost(e.target.value);
+            }}/>
+						</div>
+					</div>
+
+
+          <div className="field-group">
+						<span aria-hidden="true"><PersonIcon></PersonIcon></span>
+						<div className="wthree-field">
+                       <select name="Trainer" onChange={setTrainerId}>
+
+                            {trainerList.map((trainer)=>{
+                        return ( <option value = {trainer.tid}> {trainer.tfname}
+                        
+                           </option> 
+                        )
+                        })}
+                    </select>
+						</div>
+					</div>
+
+
+          <div className="field-group">
+						<span aria-hidden="true"><InsertPhotoIcon></InsertPhotoIcon></span>
+						<div className="wthree-field">
+							<input type="file" name="planimage" placeholder="Upload Your Image" 
+               onChange={(e) => { 
+                 setImage(e.target.files[0]);
+             }}/>
+						</div>
+					</div>
+          
+					<div className="wthree-field">
+					<Button onClick={addPlan} className="btn" >Add</Button>
+					</div>
+					</form></div></Card>
+        </Modal.Body>
+      </Modal>
 
         </div>
     )

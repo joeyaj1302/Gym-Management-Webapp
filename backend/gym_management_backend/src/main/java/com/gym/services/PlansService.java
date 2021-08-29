@@ -11,4 +11,5 @@ public interface PlansService {
 	Plans findByPlid(int id);
 	boolean deleteById(int id);
 	List<Plans> findAllPlans();
+	Plans findByPname(String name);
 }
