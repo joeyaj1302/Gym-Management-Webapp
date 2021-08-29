@@ -63,22 +63,41 @@ function App() {
     window.sessionStorage.setItem('address',address);
     window.sessionStorage.setItem('joindate', joindate);
     window.sessionStorage.setItem('gender',gender);
+    window.sessionStorage.setItem('isLoggedin',true);
+  }
+  else if (id == null) {
+    window.sessionStorage.setItem('isLoggedin',false);
+  }
+  const goLogin = () => {
+    window.location.href = 'http://localhost:3006/login';
   }
 
-  return (
+  if (sessionStorage.getItem('isLoggedin')=='true') {
+    return (
     
-    <Router>
-      <Navbar id={tid} />
-      <Switch>
-        <Route path='/account/:mid' component={Account} />
-        <Route path='/update/:mid' component={Update} />
-        <Route path='/logout' component={Logout} />
-        <Route path='/payment' component={Payment} />
-        <Route path='/dashboard' component={Dashboard} />
-      </Switch>
-    </Router>
-  
-  );
+      <Router>
+        <Navbar id={tid} />
+        <Switch>
+          <Route path='/account/:mid' component={Account} />
+          <Route path='/update/:mid' component={Update} />
+          <Route path='/logout' component={Logout} />
+          <Route path='/payment' component={Payment} />
+          <Route path='/dashboard' component={Dashboard} />
+        </Switch>
+      </Router>
+    
+    );
+  }
+  else if (sessionStorage.getItem('isLoggedin')=='false') {
+    return(
+      <div>
+        <h1>Login First</h1>
+        <button onClick={goLogin}>Login</button>
+      </div>
+    )
+   
+  }
+
 }
 
 export default App;

@@ -19,23 +19,44 @@ function App() {
   console.log(uid);
   if (id!=null) {
     sessionStorage.setItem('uid',id);
+    sessionStorage.setItem('isLoggedin',true);
+  }
+  else if (id == null) {
+    sessionStorage.setItem('isLoggedin',false);
+  }
+  const goLogin = () => {
+    window.location.href = 'http://localhost:3006/login';
   }
 
-  return (
-    <BrowserRouter>
-    <Navbar id={uid} />
-    <Switch>
-      <Route path='/dashboard' component={Dashboard} />
-      <Route path='/account/:uid' component={Account} />
-      <Route path='/update/:uid' component={Update} />
-      <Route path='/members' component={Members} />
-      <Route path='/trainers' component={Trainers} />
-      <Route path='/plans' component={Plans} />
-      {/* <Route path='/dashbaord' component={Dashboard} /> */}
-      <Route path='/logout' component={Logout} />
-    </Switch>
-  </BrowserRouter>
-  );
+  if (sessionStorage.getItem('isLoggedin')=='true') {
+    return (
+    
+      <BrowserRouter>
+      <Navbar id={uid} />
+      <Switch>
+        <Route path='/dashboard' component={Dashboard} />
+        <Route path='/account/:uid' component={Account} />
+        <Route path='/update/:uid' component={Update} />
+        <Route path='/members' component={Members} />
+        <Route path='/trainers' component={Trainers} />
+        <Route path='/plans' component={Plans} />
+        {/* <Route path='/dashbaord' component={Dashboard} /> */}
+        <Route path='/logout' component={Logout} />
+      </Switch>
+    </BrowserRouter>
+    );
+  }
+  else if (sessionStorage.getItem('isLoggedin')=='false') {
+    return(
+      <div>
+        <h1>Login First</h1>
+        <button onClick={goLogin}>Login</button>
+      </div>
+    )
+   
+  }
+
+  
 }
 
 export default App;

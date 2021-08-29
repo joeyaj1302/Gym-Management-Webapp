@@ -80,23 +80,42 @@ function App() {
     window.sessionStorage.setItem('tlname', tlname);
     window.sessionStorage.setItem('taddress', taddress);
     window.sessionStorage.setItem('temail', temail);
+    window.sessionStorage.setItem('isLoggedin',true);
+  }
+  else if (id == null) {
+    window.sessionStorage.setItem('isLoggedin',false);
+  }
+  const goLogin = () => {
+    window.location.href = 'http://localhost:3006/login';
+  }
+  
+  if (sessionStorage.getItem('isLoggedin')=='true') {
+    return (
+    
+      <Router>
+        <Navbar id={mid} />
+        <Switch>
+     
+          <Route path='/account/:mid' component={Account} />
+          <Route path='/update/:mid' component={Update} />
+          <Route path='/yourtrainer' component={Yourtrainer}/>
+          <Route path='/payment' component={Payment}/>
+          <Route path='/logout' component={Logout}/>
+        </Switch>
+      </Router>
+    
+    );
+  }
+  else if (sessionStorage.getItem('isLoggedin')=='false') {
+    return(
+      <div>
+        <h1>Login First</h1>
+        <button onClick={goLogin}>Login</button>
+      </div>
+    )
+   
   }
 
-  return (
-    
-    <Router>
-      <Navbar id={mid} />
-      <Switch>
-   
-        <Route path='/account/:mid' component={Account} />
-        <Route path='/update/:mid' component={Update} />
-        <Route path='/yourtrainer' component={Yourtrainer}/>
-        <Route path='/payment' component={Payment}/>
-        <Route path='/logout' component={Logout}/>
-      </Switch>
-    </Router>
-  
-  );
 }
 
 export default App;
