@@ -11,4 +11,5 @@ public interface TrainerService {
 	void save(Trainers user);
 	void update(Trainers m, int id);
 	List<Trainers> findAllTrainers();
+	boolean deleteById(int tid);
 }

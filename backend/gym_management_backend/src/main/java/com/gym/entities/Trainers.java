@@ -43,11 +43,11 @@ public class Trainers {
 	private String taddress;
 	@Column(name = "t_image")
 	private String timage;
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	@JoinColumn(name = "u_id")
 	@JsonIgnore
 	private Users user; 
-	@OneToMany(mappedBy = "trainer" , cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "trainer")
 	@JsonIgnore
 	private List<Plans> planList;
 //	@OneToMany(mappedBy = "trainer", cascade = CascadeType.ALL)

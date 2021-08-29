@@ -145,6 +145,13 @@ public class LoginRestController {
 		planService.save(plan);
 		return Response.success(plan, "plan");
 	}
+	
+	@PostMapping("/addequipment")
+	private ResponseEntity<?> addnewplan(Equipments equipment){
+		equipmentsService.save(equipment);
+		return Response.success(equipment, "equipment");
+	}
+	
 	@PostMapping("/findplanbyname")
 	private ResponseEntity<?> findplan(@RequestParam(name = "pname") String name){
 		Plans plan = planService.findByPname(name);
@@ -212,7 +219,21 @@ public class LoginRestController {
 		return Response.successList(memberList);
 		
 	}
-	
+	@DeleteMapping("/deletebymid")
+	private ResponseEntity<?> deletebymid(@RequestParam(name = "id") String id) {
+		System.out.println("Hellow");
+		int mid = Integer.parseInt(id);
+		
+		System.out.println(mid);
+		boolean deleted = memberService.deleteById(mid); 
+		if (deleted ) {
+			return Response.success("member","member is deleted");
+		}
+		else {
+			return Response.error("plan not found");
+		}
+		
+	}
 	@DeleteMapping("/deletebypid")
 	private ResponseEntity<?> deletebypid(@RequestParam(name = "id") String id) {
 		int pid = Integer.parseInt(id);
@@ -226,6 +247,28 @@ public class LoginRestController {
 		
 	}
 	
+	@DeleteMapping("/deletebytid")
+	private ResponseEntity<?> deletebytid(@RequestParam(name = "id") String id) {
+		int tid = Integer.parseInt(id);
+		boolean deleted = trainerService.deleteById(tid); 
+		if (deleted ) {
+			return Response.success("trainer","trainer deleted successfully");
+		}
+		else {
+			return Response.error("trainer not found");
+		}
+	}
+	
+	@GetMapping("/findsortedmembers")
+	private ResponseEntity<?> findsortedmembers(){
+		List<Members> sortedMembers = memberService.findAllSortedMembers();
+		return  Response.successList(sortedMembers);
+	}
+	@GetMapping("/sortmembersbyjoindate")
+	private ResponseEntity<?> sortMembersByJoindate(){
+		List<Members> sortedMembers = memberService.sortMembersByJoindate();
+		return  Response.successList(sortedMembers);
+	}
 	
 	
 }

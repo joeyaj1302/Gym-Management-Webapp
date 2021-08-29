@@ -49,4 +49,13 @@ public class TrainerServiceImpl implements TrainerService {
 		List<Trainers> trainerList = trainerDao.findAll();
 		return trainerList;
 	}
+
+	@Override
+	public boolean deleteById(int tid) {
+		trainerDao.deleteById(tid);
+		if (trainerDao.findByTid(tid) == null) { 
+			return true;
+		}
+		return false;
+	}
 }

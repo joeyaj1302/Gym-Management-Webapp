@@ -6,6 +6,7 @@ import PaymentIcon from '@material-ui/icons/Payment';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
 
 export const SidebarDate = [
     {
@@ -32,7 +33,12 @@ export const SidebarDate = [
         icon : <IoIcons.IoMdPeople/>,
         cName : 'nav-text'
     },
-    
+    {
+        title : 'Equipments',
+        icon : <FitnessCenterIcon/>,
+        path : '/equipments',
+        cName : 'nav-text'
+    },
     {
         title : "Payment",
         icon : <PaymentIcon/>,

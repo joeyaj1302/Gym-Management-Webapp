@@ -11,6 +11,7 @@ import Logout from './Pages/Logout'
 import Navbar from './Components/Navbar';
 import { BrowserRouter , Switch, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import Equipments from './Pages/Equipments';
 
 function App() {
   const authResult = new URLSearchParams(window.location.search); 
@@ -20,9 +21,6 @@ function App() {
   if (id!=null) {
     sessionStorage.setItem('uid',id);
     sessionStorage.setItem('isLoggedin',true);
-  }
-  else if (id == null) {
-    sessionStorage.setItem('isLoggedin',false);
   }
   const goLogin = () => {
     window.location.href = 'http://localhost:3006/login';
@@ -40,13 +38,14 @@ function App() {
         <Route path='/members' component={Members} />
         <Route path='/trainers' component={Trainers} />
         <Route path='/plans' component={Plans} />
+        <Route path='/equipments' component={Equipments}/>
         {/* <Route path='/dashbaord' component={Dashboard} /> */}
         <Route path='/logout' component={Logout} />
       </Switch>
     </BrowserRouter>
     );
   }
-  else if (sessionStorage.getItem('isLoggedin')=='false') {
+  else {
     return(
       <div>
         <h1>Login First</h1>

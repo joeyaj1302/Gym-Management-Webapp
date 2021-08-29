@@ -116,10 +116,11 @@ const[planList,setPlanList] = useState([]);
                         <td> <button type="button" className = "btn btn-danger" onClick = {
                                 () => {
                                 const deleteurl = "http://localhost:8080/deletebypid?id="+plan.pid;
-                                axios.delete(url).then((response) => {
+                                axios.delete(deleteurl).then((response) => {
                                     const result = response.data;
                                     if (result.message === 'success') {
                                         alert("Plan deleted successfully");
+                                        getplans();
                                     }
                                     else{
                                         alert("Plan not deleted");

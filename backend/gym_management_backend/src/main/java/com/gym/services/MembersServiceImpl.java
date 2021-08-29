@@ -65,6 +65,26 @@ public class MembersServiceImpl implements MembersService{
 		return memberList;
 	}
 
+	@Override
+	public boolean deleteById(int id) {
+		memberDao.deleteById(id);
+		if (memberDao.findByMid(id)==null) {;
+			return true;
+		}
+		return false;
+		
+	}
+
+	@Override
+	public List<Members> findAllSortedMembers() {
+		return memberDao.findAllSortedMembers();
+	}
+
+	@Override
+	public List<Members> sortMembersByJoindate() {
+		return memberDao.sortMembersByJoindate();
+	}
+
 
 
 

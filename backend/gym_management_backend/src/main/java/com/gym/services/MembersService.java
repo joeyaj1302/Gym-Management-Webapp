@@ -2,6 +2,8 @@ package com.gym.services;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Query;
+
 import com.gym.entities.Members;
 
 public interface MembersService {
@@ -11,4 +13,7 @@ public interface MembersService {
 	void update(Members m, int id);
 	List<Members> findAllMembers();
 	List<Members> findByTrainer(int id);
+	boolean deleteById(int id);
+    List<Members> findAllSortedMembers();
+    List<Members> sortMembersByJoindate();
 }
