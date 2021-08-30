@@ -17,14 +17,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gym.dtos.MemberDto;
+import com.gym.entities.Enquiry;
 import com.gym.entities.Equipments;
 import com.gym.entities.Members;
+import com.gym.entities.Payments;
 import com.gym.entities.Plans;
 import com.gym.entities.Trainers;
 import com.gym.entities.Users;
 import com.gym.models.Response;
+import com.gym.services.EnquiryService;
 import com.gym.services.EquipmentsService;
 import com.gym.services.MembersService;
+import com.gym.services.PaymentService;
 import com.gym.services.PlansService;
 import com.gym.services.TrainerService;
 import com.gym.services.UsersService;
@@ -42,7 +46,10 @@ public class LoginRestController {
 	private PlansService planService;
 	@Autowired
 	private EquipmentsService equipmentsService;
-	
+	@Autowired
+	private  PaymentService paymentService;
+	@Autowired
+	private EnquiryService enquiryService;
 	@PostMapping("/authenticaterest")
 	private ResponseEntity<?> authenticate(@RequestParam(name = "email") String email,@RequestParam(name = "password") String password) {
 		Users user = userService.findByUemail(email);
@@ -106,6 +113,11 @@ public class LoginRestController {
 		return Response.error("Empty Equippment list!!");
 		
 	}
+	@GetMapping("/getallpayments")
+	private ResponseEntity<?> getallpayments(){
+		List<Payments> planList = paymentService.findAllPayments();
+		return Response.successList(planList);
+	}
 	
 	@GetMapping("/getbymid")
 	private ResponseEntity<?> getBymid(@RequestParam(name = "id") String id) {
@@ -151,13 +163,40 @@ public class LoginRestController {
 		equipmentsService.save(equipment);
 		return Response.success(equipment, "equipment");
 	}
-	
+	@PostMapping("/addenquiry")
+	private ResponseEntity<?> addenquiry(Enquiry enquiry){
+		 enquiryService.save(enquiry);
+		return  Response.success(enquiry, "enquiry");
+	}
+	@PostMapping("/addnewtrainer")
+	private ResponseEntity<?> addnewtrainer(Trainers trainer,@RequestParam(name = "pid") String name){
+		//int pid = Integer.parseInt(id);
+		System.out.println(trainer.toString());
+		Plans plan = planService.findByPname(name);
+		List<Plans> planList = new ArrayList<Plans>();
+		planList.add(plan);
+		Users user = trainer.getUser();
+		user.setUfname(trainer.gettfname());
+		user.setUlname(trainer.gettlname());
+		user.setUpassword(trainer.gettpassword());
+		user.setUemail(trainer.gettemail());
+		user.setUrole("trainer");
+		userService.save(user);
+		trainer.setPlanList(planList);
+		
+		trainerService.save(trainer);
+		return Response.success(trainer, "trainer");
+	}
 	@PostMapping("/findplanbyname")
 	private ResponseEntity<?> findplan(@RequestParam(name = "pname") String name){
 		Plans plan = planService.findByPname(name);
 		return Response.success(plan, "plan");
 	}
-	
+	@GetMapping("findtotmembersinplan") 
+	private ResponseEntity<?> findtotmembersinplan() {
+		return null;
+		
+	}
 	@GetMapping("/getbymemail")
 	private ResponseEntity<?> getbymemail(@RequestParam(name = "email") String email) {
 		Members member = memberService.findByMemail(email);
@@ -219,11 +258,17 @@ public class LoginRestController {
 		return Response.successList(memberList);
 		
 	}
+	@GetMapping("/getpaymentsbymid")
+	private ResponseEntity<?> getpaymentsbymid(@RequestParam(name = "id") String id) {
+		int mid = Integer.parseInt(id);
+		List<Payments> paymentList = paymentService.findByMember(mid);
+		return Response.successList(paymentList);
+		
+	}
 	@DeleteMapping("/deletebymid")
 	private ResponseEntity<?> deletebymid(@RequestParam(name = "id") String id) {
 		System.out.println("Hellow");
 		int mid = Integer.parseInt(id);
-		
 		System.out.println(mid);
 		boolean deleted = memberService.deleteById(mid); 
 		if (deleted ) {

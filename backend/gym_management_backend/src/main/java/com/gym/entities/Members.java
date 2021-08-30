@@ -47,7 +47,7 @@ public class Members {
 	private Date mjoindate;
 	@Column(name = "m_image")
 	private String mimage;
-	@OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	@JoinColumn(name = "u_id")
 	@JsonIgnore
 	private Users user;

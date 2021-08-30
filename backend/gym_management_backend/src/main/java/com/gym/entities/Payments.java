@@ -4,9 +4,12 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,10 +25,12 @@ public class Payments {
 	private double pamount;
 	@Column(name = "p_date")
 	private Date pdate;
-	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "m_id")
+	private Members member;
 	
 	public Payments() {
-		
+		this.member = new Members();
 	}
 
 
@@ -75,6 +80,16 @@ public class Payments {
 
 	public void setPdate(Date pdate) {
 		this.pdate = pdate;
+	}
+	
+
+	public Members getMember() {
+		return member;
+	}
+
+
+	public void setMember(Members member) {
+		this.member = member;
 	}
 
 

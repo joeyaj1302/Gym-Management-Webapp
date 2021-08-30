@@ -2,8 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Modal, Button,  Card } from "react-bootstrap";
-import '../css/loginCSS.css';
-
+import '../css/loginCSS.css'; 
 import PersonIcon from '@material-ui/icons/Person';
 import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
 import DescriptionIcon from '@material-ui/icons/Description';
@@ -12,6 +11,11 @@ import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
 import InsertPhotoIcon from '@material-ui/icons/InsertPhoto';
 import '../css/registerform.css';
 import { useHistory } from "react-router-dom";
+import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded';
+import SettingsIcon from '@material-ui/icons/Settings';
+import { BrowserRouter, Link, Route, Switch, Redirect } from "react-router-dom";
+
+
 
 let pid;
 const Plans = () => {
@@ -51,7 +55,7 @@ const[planList,setPlanList] = useState([]);
 
     const addPlan = () => {
         console.log("inside addpalan  " +tid);
-        const addurl = "http://localhost:8080/addplan?tid="+tid;
+        const addurl = "http://localhost:8080/addplan?pid=" + pid;
         const data = new FormData();
         data.append("pname",pname);
         data.append("pdesc",pdesc);
@@ -77,6 +81,9 @@ const[planList,setPlanList] = useState([]);
              getplans();
              setLgShow(false);
         }
+        const findtotmembers = () => {
+
+        }
       }
     
 
@@ -91,16 +98,18 @@ const[planList,setPlanList] = useState([]);
 
     return (
         <div className="container">        
-            <h2>Plans List</h2>
+            <br />
+            <h2 Style = "text-shadow: 2px 2px 5px grey">Plans List</h2>
+            <br />
             {/* <button onClick={getplans} className="btn btn-primary">Get plans </button> */}
-            <table className="table table-dark table-hover table-bordered" >
+            <table className="table table-hover table-bordered shadowify" >
             <thead className="thead-dark" Style = "background-color:black">
                 <tr Style={"color :white"}>
                         <th>ID</th>
                         <th>Name</th>
                         <th>Description</th>
-                        <th>Duration</th>
                         <th>Cost</th>
+                        <th>Member Count</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -111,31 +120,44 @@ const[planList,setPlanList] = useState([]);
                         <td>{plan.pid}</td>
                         <td>{plan.pname}</td>
                         <td>{plan.pdesc}</td>
-                        <td>{plan.pduration}</td>
                         <td>{plan.pcost}</td>
-                        <td> <button type="button" className = "btn btn-danger" onClick = {
-                                () => {
-                                const deleteurl = "http://localhost:8080/deletebypid?id="+plan.pid;
-                                axios.delete(deleteurl).then((response) => {
-                                    const result = response.data;
-                                    if (result.message === 'success') {
-                                        alert("Plan deleted successfully");
-                                        getplans();
-                                    }
-                                    else{
-                                        alert("Plan not deleted");
-                                    }
-                                })
-                            }
-                        }>Delete</button> </td>
+                        <td > <Button 
+                            className="shadowify"
+                            onClick={()=>{
+                             const deleteurl = "http://localhost:8080/deletebypid/?id="+plan.pid;
+                             axios.delete(deleteurl).then((response)=>{
+                                const result = response.data;
+                                if(result.message === 'success') {
+                                    alert("Member Deleted Successfully !");
+                                    getplans();
+                                }
+                                else {
+                                    alert("Some error occurred!");
+                                }
+                             })
+                             
+                        }} Style = "background-color : white; color:red" > <DeleteRoundedIcon></DeleteRoundedIcon></Button>
+                       {' '}
+                       <Link to="/updatemember">  
+                       <Button className="shadowify"
+                       onClick={ ()=> { 
+                           return(
+                               sessionStorage.setItem("pid",plan.pid)
+                           )
+                       }
+                       } Style = "background-color : white; color:black" > <SettingsIcon></SettingsIcon></Button>
+                       </Link>
+                         </td>
                         </tr>
                         )
                     })}
                     
                 </tbody>
             </table>
-     
-      <button onClick={() => setLgShow(true)} Style = {" background-color : #598a19; width : 150px; height :30px; border-radius : 30px; color:white;box-shadow: 2px 2px 2px black;"}>Add Plan</button>
+            <br />
+      <Button className = "centerify shadowify" onClick={() => setLgShow(true)} Style={
+                        " background-color : black;height:50px; width : 200px; border-radius : 12px"
+                      }>Add Plan</Button>
                
       <Modal 
         size="lg"

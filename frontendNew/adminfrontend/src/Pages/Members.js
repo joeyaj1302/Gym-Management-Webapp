@@ -7,6 +7,8 @@ import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { BrowserRouter, Link, Route, Switch, Redirect } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import '../css/loginCSS.css';
+
 let updateurl;
 const Members = () => {
     const[memberList,setMemberList] = useState([]);
@@ -44,7 +46,7 @@ const Members = () => {
     },[])
 
     return (
-        <div className="container" >  
+        <div className="container " >  
             <br />    
              <h2 Style = "text-shadow: 2px 2px 5px grey">Members List:</h2>
              <br />  
@@ -52,6 +54,7 @@ const Members = () => {
             <tr>
                 <td>
                 <Button onClick={sortByName} 
+                     className="shadowify"
                     Style={
                         " background-color : black;height:50px; width : 200px; border-radius : 12px"
                       }
@@ -60,6 +63,7 @@ const Members = () => {
                 <td></td><td></td><td></td>
                 <td>
                 <Button onClick={sortByName} 
+                     className="shadowify"
                     Style={
                         " background-color : black;height:50px; width : 200px; border-radius : 12px"
                       }
@@ -69,7 +73,7 @@ const Members = () => {
             </table>
             <br/>
             {/* <button onClick={getMembers} className="btn btn-primary">Get Members </button> */}
-            <table className="table table-hover table-bordered" >
+            <table className="table table-hover table-bordered shadowify" >
             <thead className="thead-dark" Style = "background-color:black">
                 <tr Style={"color :white"}>
                         <th>#</th>
@@ -97,7 +101,9 @@ const Members = () => {
                         <td>{member.maddress}</td>
                         <td> Paid </td>
                         <td>{member.mjoindate}</td>
-                        <td > <Button onClick={()=>{
+                        <td > <Button 
+                            className="shadowify"
+                            onClick={()=>{
                              const deleteurl = "http://localhost:8080/deletebymid/?id="+member.mid;
                              axios.delete(deleteurl).then((response)=>{
                                 const result = response.data;
@@ -112,8 +118,9 @@ const Members = () => {
                              
                         }} Style = "background-color : white; color:red" > <DeleteRoundedIcon></DeleteRoundedIcon></Button>
                        {' '}
-                       <Link to="/updatemember">
-                       <Button onClick={ ()=> { 
+                       <Link to="/updatemember">  
+                       <Button className="shadowify"
+                       onClick={ ()=> { 
                            return(
                                sessionStorage.setItem("mid",member.mid)
                            )

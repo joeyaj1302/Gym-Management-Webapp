@@ -31,7 +31,6 @@ public class PlansServiceImpl implements PlansService{
 		plan1.setPname(p.getPname());
 		plan1.setPdesc(p.getPdesc());
 		plan1.setPdesc(p.getPdesc());
-		plan1.setPduration(p.getPduration());
 		plan1.setPcost(p.getPcost());
 		planDao.save(plan1);
 		

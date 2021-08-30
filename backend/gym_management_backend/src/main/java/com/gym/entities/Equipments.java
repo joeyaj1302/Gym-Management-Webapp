@@ -32,6 +32,8 @@ public class Equipments  {
 	private Date epurchasedate;
 	@Column(name = "e_qty")
 	private int eqty;
+	@Column(name = "e_vendor")
+	private String vendorname;
 	
 	
 	public Equipments() {
@@ -107,6 +109,16 @@ public class Equipments  {
 
 	public void setEqty(int eqty) {
 		this.eqty = eqty;
+	}
+
+	
+	public String getVendorname() {
+		return vendorname;
+	}
+
+
+	public void setVendorname(String vendorname) {
+		this.vendorname = vendorname;
 	}
 
 

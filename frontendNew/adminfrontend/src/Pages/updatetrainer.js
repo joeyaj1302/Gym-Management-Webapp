@@ -14,10 +14,8 @@ import { useHistory } from "react-router-dom";
 import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
 import { Redirect } from "react-router";
 import { useLocation } from 'react-router';
-import { Modal, Button,  Card } from "react-bootstrap";
-import '../css/loginCSS.css';
 
-const UpdateMember = (props) =>{
+const UpdateTrainer = (props) =>{
     const [fname, setFname] = useState("");
     const [lname, setLname] = useState("");
     const [email, setEmail] = useState("");
@@ -43,7 +41,7 @@ const UpdateMember = (props) =>{
             console.log(result);
             if(result.message === 'success') {
                 setFname(result.data.mfname);
-                setLname(result.data.mname);
+                setLname(result.data.mfname);
                 setEmail(result.data.memail);
                 setAge(result.data.mage);
                 setPassword(result.data.mpassword);
@@ -68,27 +66,15 @@ const UpdateMember = (props) =>{
         data.append("maddress",address);
         data.append("mgender",gender);
         data.append("mjoindate",joindate);
+        data.append("mimage",image);
         const updateurl = "http://localhost:8080/updatebymid/?id=" + mid;
         alert(updateurl);
         axios.put(updateurl,data).then((response) => {
             const result = response.data;
             if(result.message === 'success') {
-                goGet();
-                // window.location.href = "http://localhost:3008/members";
+                window.location.href = "http://localhost:3008/members";
             }
         });
-        const goGet = () => {
-          const uploadimgurl = "http://localhost:4001/memberimages/upload/" + mid;
-          const data = new FormData();
-          data.append("memberimage", image);
-          axios.post(uploadimgurl, data).then((response) => {
-            const result = response.data;
-            if(result.message === 'success') {
-              sessionStorage.removeItem("mid");
-              window.location.href = "http://localhost:3008/members"
-            }
-          });
-        };
     }
 
     useEffect(() => {
@@ -183,7 +169,7 @@ const UpdateMember = (props) =>{
                   <img
                     className="userUpdateImg"
                     src={imgurl+image}
-                    alt={imgurl+image}
+                    alt=""
                   />
                   <label htmlFor="file">
                     <Publish className="userUpdateIcon" />
@@ -193,19 +179,13 @@ const UpdateMember = (props) =>{
                       setImage(e.target.files[0])
                   }} />
                 </div>
-                <Link to="/members">
-                <Button  className="shadowify"
-                    Style={
-                        " background-color : black;height:50px; width : 200px; border-radius : 12px"
-                      }
-                 className="userUpdateButton" onClick={UpdateMember}>Update</Button>
-                </Link>
+                <button className="userUpdateButton" onClick={UpdateMember}>Update</button>
               </div>
-            </form> 
+            </form>
           </div>
         </div>
       </div>
     );
   }
 
-  export default UpdateMember;
+  export default UpdateTrainer;

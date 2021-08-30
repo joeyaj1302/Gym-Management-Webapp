@@ -9,6 +9,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Payment from './Pages/Payment';
 import Logout from './Pages/Logout';
+import Feedback from './Pages/Feedback';
 
 let mid ;
 function App() {
@@ -33,7 +34,7 @@ function App() {
   console.log("Inside app.js");
   console.log(mid); 
   //window.localStorage.setItem('id',mid);
-  let url = "http://localhost:8080/getbymid/?id="+id;
+  let url = "http://localhost:8080/getbymid/?id=" + id;
   const setUser = () => {
     axios.get(url).then((response) => {
       console.log("Inside setUser");
@@ -86,7 +87,7 @@ function App() {
     window.sessionStorage.setItem('isLoggedin',false);
   }
   const goLogin = () => {
-    window.location.href = 'http://localhost:3006/login';
+    window.location.href = 'http://localhost:3006';
   }
   
   if (sessionStorage.getItem('isLoggedin')=='true') {
@@ -101,6 +102,7 @@ function App() {
           <Route path='/yourtrainer' component={Yourtrainer}/>
           <Route path='/payment' component={Payment}/>
           <Route path='/logout' component={Logout}/>
+          <Route path='/feedback' component={Feedback}/>
         </Switch>
       </Router>
     

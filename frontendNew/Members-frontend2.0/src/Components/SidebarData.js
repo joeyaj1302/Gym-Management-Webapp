@@ -40,6 +40,12 @@ export const SidebarDate = [
         cName : 'nav-text'
     },
     {
+        title : "Feedback",
+        icon : <PaymentIcon/>,
+        path : "/feedback",
+        cName : 'nav-text'
+    },
+    {
         title : "Logout",
         icon : <ExitToAppIcon/>,
         path : "/logout",

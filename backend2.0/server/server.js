@@ -10,12 +10,13 @@ const routerImages = require('./routes/images');
 const PlanImages = require('./routes/PlanImages');
 const MemberImages = require('./routes/MemberImages');
 const TrainerImages = require('./routes/TrainerImages');
+const UtilityQueries = require('./routes/UtilityQueries');
 
 app.use('/images',routerImages);
 app.use('/planimages',PlanImages);
 app.use('/trainerimages',TrainerImages);
 app.use('/memberimages',MemberImages);
-
+app.use('/utilityqueries',UtilityQueries);
 // static routing
 // any file in uploads directory does not require any route
 // express will simply return any file from uploads directory

@@ -56,6 +56,7 @@ public class Trainers {
 	public Trainers() {	
 //		this.memberlist = new ArrayList<Members>();
 		this.planList = new ArrayList<Plans>();
+		this.user = new Users();
 	}
 
 	public Trainers(int tid, String tfname, String tlname, String temail, String tpassword, int tage, char tgender,
@@ -173,7 +174,7 @@ public class Trainers {
 
 	@Override
 	public String toString() {
-		return "Members [tid=" + tid + ", tfname=" + tfname + ", tlname=" + tlname + ", temail=" + temail
+		return "Trainers [tid=" + tid + ", tfname=" + tfname + ", tlname=" + tlname + ", temail=" + temail
 				+ ", tpassword=" + tpassword + ", tage=" + tage + ", tgender=" + tgender + ", taddress=" + taddress
 				+ ", mjoindate="  + "]";
 	}

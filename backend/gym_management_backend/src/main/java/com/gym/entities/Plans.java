@@ -1,5 +1,8 @@
 package com.gym.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,10 +12,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.ManyToAny;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "plans")
@@ -32,8 +38,12 @@ public class Plans {
 	@ManyToOne( fetch = FetchType.EAGER)
 	@JoinColumn(name = "t_id")
 	private Trainers trainer;
-	
+	@OneToMany(mappedBy = "plan")
+	@JsonIgnore
+	private List<Members> memberList;
 	public Plans() {
+		this.trainer = new Trainers();
+		this.memberList = new ArrayList<Members>();
 	}
 	
 	public Plans(int pid, String pname, String pdesc, int pduration, double pcost) {
@@ -83,6 +93,16 @@ public class Plans {
 
 	public void setPlimage(String plimage) {
 		this.plimage = plimage;
+	}
+	
+	
+
+	public List<Members> getMemberList() {
+		return memberList;
+	}
+
+	public void setMemberList(List<Members> memberList) {
+		this.memberList = memberList;
 	}
 
 	@Override

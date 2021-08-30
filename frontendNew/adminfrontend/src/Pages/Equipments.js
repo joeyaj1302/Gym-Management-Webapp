@@ -2,13 +2,13 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Modal, Button,  Card } from "react-bootstrap";
-import '../css/loginCSS.css';
+import "../css/loginCSS.css";
 import '../css/registerform.css';
 import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
 import DescriptionIcon from '@material-ui/icons/Description';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
-
+import LaunchRoundedIcon from '@material-ui/icons/LaunchRounded';
 
 
 const Equipments = () => {
@@ -54,18 +54,22 @@ const Equipments = () => {
     },[])
 
     return (
-        <div className="container" >        
-            <h2>Equipments List</h2>
+        <div className="container" > 
+            <br/>       
+            <h2 Style = "text-shadow: 2px 2px 5px grey">Equipments List :</h2>
+            <br/>
             {/* <button onClick={gettrainers} className="btn btn-primary">Get trainers </button> */}
-            <table className="table table-dark table-hover table-bordered" >
-            <thead className="thead-dark" Style = "background-color:black">
-                <tr Style={"color :white"}>
-                        <th>ID</th>
+            <table className="table table-hover table-bordered shadowify">
+            <thead className="thead-dark" Style="background-color:black">
+            <tr Style={"color :white"}>
+                        <th>#</th>
                         <th>Name</th>
                         <th>Description</th>
                         <th>Cost</th>
                         <th>Purchase Date</th>
                         <th>Quantity</th>
+                        <th>Vendor's Name</th>
+                        <th>Vendor's Site</th>
                        
                     </tr>
                 </thead>
@@ -79,14 +83,27 @@ const Equipments = () => {
                         <td>{equipment.ecost}</td>
                         <td>{equipment.epurchasedate}</td>
                         <td>{equipment.eqty}</td>
+                        <td>{equipment.vendorname} {' '} 
+                        
+                        </td>
+                        <td>
+                        <Button className="btn btn-success shadowify" Style = "background-color : black; color:red">
+                            <a  href="https://www.amazon.in/s?k=gym+equipment&crid=W59XH0G95Y24&sprefix=gym+eq%2Caps%2C275&ref=nb_sb_ss_ts-doa-p_3_6">
+                            <LaunchRoundedIcon ></LaunchRoundedIcon>
+                            </a>
+                        </Button>
+                        </td>
                         
                         </tr>
                         )
                     })}
                     </tbody>
             </table>
-            <div >
-            <Button onClick={() => setLgShow(true) } Style = {" background-color : black; width : 200px; border-radius : 30px"} >Add Equipment</Button>
+            <br />
+            <div className="centerify">
+            <Button className ="shadowify" onClick={() => setLgShow(true) } Style={
+                        " background-color : black;height:50px; width : 200px; border-radius : 12px"
+                      }>Add Equipment</Button>
             </div>
 					
 					
@@ -152,8 +169,10 @@ const Equipments = () => {
                     
 
           
-					<div className="wthree-field">
-					<Button onClick={addEquipment} className="btn" >Add</Button>
+					<div className="centerify">
+					<Button onClick={addEquipment}  Style={
+                        " background-color : black;height:50px; width : 200px; border-radius : 12px"
+                      }>Add</Button>
 					</div>
 					</form></div></Card>
         </Modal.Body>

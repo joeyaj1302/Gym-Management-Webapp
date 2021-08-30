@@ -59,6 +59,7 @@ const Register3 = () => {
         data.append("mpassword",mpassword);
         data.append("mage",mage);
         data.append("maddress",maddress);
+        data.append("mage",mage);
         data.append("mmobile",mmobile);
         data.append("mgender",mgender);
         data.append("mjoindate",mjoindate);

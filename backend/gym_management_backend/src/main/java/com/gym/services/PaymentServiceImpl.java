@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gym.daos.PaymentDao;
+import com.gym.entities.Members;
 import com.gym.entities.Payments;
 
 
@@ -17,7 +18,8 @@ import com.gym.entities.Payments;
 public class PaymentServiceImpl implements PaymentService{
 	@Autowired
 	private PaymentDao paymentDao;
-
+	@Autowired
+	private MembersService memberService;
 	@Override
 	public void save(Payments p) {
 		paymentDao.save(p);
@@ -61,6 +63,13 @@ public class PaymentServiceImpl implements PaymentService{
 	public List<Payments> findAllPayments() {
 		List<Payments> paymentList =paymentDao.findAll();
 		return paymentList;
+	}
+
+	@Override
+	public List<Payments> findByMember(int id) {
+		Members member = memberService.findByMid(id);
+		List<Payments> planList = paymentDao.findByMember(member);
+		return planList;
 	}
 
 

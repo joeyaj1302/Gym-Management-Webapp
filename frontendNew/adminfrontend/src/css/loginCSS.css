@@ -92,9 +92,13 @@ margin-left: 4px;
 .centerify{
     position: relative;
     left:550px;
+    
 
 }
 
+.shadowify{
+    box-shadow: 10px 10px 20px -10px black
+}
 .thumbnail{
     height: 60px;
     width: 60px;

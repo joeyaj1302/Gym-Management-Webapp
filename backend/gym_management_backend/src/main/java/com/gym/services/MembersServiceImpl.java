@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gym.daos.MemberDao;
+import com.gym.daos.PlanDao;
 import com.gym.daos.TrainerDao;
 import com.gym.entities.Members;
+import com.gym.entities.Plans;
 import com.gym.entities.Trainers;
 import com.gym.entities.Users;
 
@@ -21,6 +23,9 @@ public class MembersServiceImpl implements MembersService{
 	private MemberDao memberDao;
 	@Autowired
 	private TrainerDao trainerDao;
+	@Autowired
+	private PlanDao planDao;
+	
 	@Override
 	public Members findByMid(int id) {
 		Members member = memberDao.findByMid(id);
@@ -85,9 +90,10 @@ public class MembersServiceImpl implements MembersService{
 		return memberDao.sortMembersByJoindate();
 	}
 
-
-
-
+	@Override
+	public List<Members> findByPlan(Plans plan) {
+		return memberDao.findByPlan(plan);
+	}
 
 
 }
