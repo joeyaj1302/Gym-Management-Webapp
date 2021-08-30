@@ -40,9 +40,9 @@ export const SidebarDate = [
         cName : 'nav-text'
     },
     {
-        title : "Payment",
+        title : "Payments",
         icon : <PaymentIcon/>,
-        path : "/payment",
+        path : "/payments",
         cName : 'nav-text'
     },
     {

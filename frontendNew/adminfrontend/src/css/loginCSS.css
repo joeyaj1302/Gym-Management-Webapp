@@ -88,3 +88,20 @@ margin-left: 4px;
     justify-content: center;
     
 }
+
+.centerify{
+    position: relative;
+    left:550px;
+
+}
+
+.thumbnail{
+    height: 60px;
+    width: 60px;
+    border-radius:10px;
+    transition: all .3s ease-in-out;
+}
+
+.thumbnail:hover {
+    transform: scale(1.4); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  }

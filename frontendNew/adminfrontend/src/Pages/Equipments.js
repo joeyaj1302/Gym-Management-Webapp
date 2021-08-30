@@ -54,12 +54,12 @@ const Equipments = () => {
     },[])
 
     return (
-        <div className="container">        
+        <div className="container" >        
             <h2>Equipments List</h2>
             {/* <button onClick={gettrainers} className="btn btn-primary">Get trainers </button> */}
-            <table className="table table-striped table-hover">
-                <thead>
-                    <tr>
+            <table className="table table-dark table-hover table-bordered" >
+            <thead className="thead-dark" Style = "background-color:black">
+                <tr Style={"color :white"}>
                         <th>ID</th>
                         <th>Name</th>
                         <th>Description</th>
@@ -85,9 +85,12 @@ const Equipments = () => {
                     })}
                     </tbody>
             </table>
-                    
-            <Button onClick={() => setLgShow(true)}>Add Equipment</Button>
-      
+            <div >
+            <Button onClick={() => setLgShow(true) } Style = {" background-color : black; width : 200px; border-radius : 30px"} >Add Equipment</Button>
+            </div>
+					
+					
+					
             <Modal 
                 size="lg"
                 show={lgShow}

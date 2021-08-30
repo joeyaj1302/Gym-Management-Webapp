@@ -25,8 +25,6 @@ public class Plans {
 	private String pname;
 	@Column(name = "pl_desc")
 	private String pdesc;
-	@Column(name = "pl_duration")
-	private int pduration;
 	@Column(name = "pl_cost")
 	private double pcost;
 	@Column(name = "pl_image")
@@ -43,7 +41,6 @@ public class Plans {
 		this.pid = pid;
 		this.pname = pname;
 		this.pdesc = pdesc;
-		this.pduration = pduration;
 		this.pcost = pcost;
 	}
 	public int getPid() {
@@ -64,12 +61,7 @@ public class Plans {
 	public void setPdesc(String pdesc) {
 		this.pdesc = pdesc;
 	}
-	public int getPduration() {
-		return pduration;
-	}
-	public void setPduration(int pduration) {
-		this.pduration = pduration;
-	}
+
 	public double getPcost() {
 		return pcost;
 	}
@@ -95,7 +87,7 @@ public class Plans {
 
 	@Override
 	public String toString() {
-		return "Plans [pid=" + pid + ", pname=" + pname + ", pdesc=" + pdesc + ", pduration=" + pduration + ", pcost="
+		return "Plans [pid=" + pid + ", pname=" + pname + ", pdesc=" + pdesc + ", pduration=" + ", pcost="
 				+ pcost + "]";
 	}
 }

@@ -270,6 +270,11 @@ public class LoginRestController {
 		return  Response.successList(sortedMembers);
 	}
 	
-	
+	@PostMapping("/trial")
+	private ResponseEntity<?> trial(Members member){
+		Members member1 = memberService.findByMemail(member.getMemail());
+		MemberDto dto = MemberDto.fromEntity(member1);
+		return  Response.success(dto, "dto");
+	}
 }
 

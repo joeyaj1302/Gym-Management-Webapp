@@ -93,9 +93,9 @@ const[planList,setPlanList] = useState([]);
         <div className="container">        
             <h2>Plans List</h2>
             {/* <button onClick={getplans} className="btn btn-primary">Get plans </button> */}
-            <table className="table table-striped table-hover">
-                <thead>
-                    <tr>
+            <table className="table table-dark table-hover table-bordered" >
+            <thead className="thead-dark" Style = "background-color:black">
+                <tr Style={"color :white"}>
                         <th>ID</th>
                         <th>Name</th>
                         <th>Description</th>
@@ -134,9 +134,9 @@ const[planList,setPlanList] = useState([]);
                     
                 </tbody>
             </table>
-          
-      <Button onClick={() => setLgShow(true)}>Add Plan</Button>
-      
+     
+      <button onClick={() => setLgShow(true)} Style = {" background-color : #598a19; width : 150px; height :30px; border-radius : 30px; color:white;box-shadow: 2px 2px 2px black;"}>Add Plan</button>
+               
       <Modal 
         size="lg"
         show={lgShow}

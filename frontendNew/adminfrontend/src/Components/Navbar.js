@@ -5,7 +5,8 @@ import * as AiIcons from 'react-icons/ai';
 import {SidebarDate} from './SidebarData'
 import './Navbar.css';
 import {IconContext} from 'react-icons'
-
+import PersonIcon from '@material-ui/icons/Person';
+import CancelIcon from '@material-ui/icons/Cancel';
 let id;
 function Navbar(props) {
     console.log("In navbar :");
@@ -34,7 +35,7 @@ function Navbar(props) {
             <ul className = 'nav-menu-items' onClick = {showSidebar}>
                 <li className = 'navbar-toggle'>
                     <Link to= "#" className = 'menu-bars'></Link>
-                    <AiIcons.AiOutlineClose />     
+                  <PersonIcon/><span> Admin</span> 
                 </li>
                 {SidebarDate.map((item, index) => {
                     return(

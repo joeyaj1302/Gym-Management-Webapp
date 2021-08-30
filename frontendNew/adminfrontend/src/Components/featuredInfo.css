@@ -2,6 +2,8 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+  position: relative;
+  left: 65px;
 }
 
 .featuredItem {

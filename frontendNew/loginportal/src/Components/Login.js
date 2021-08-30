@@ -10,47 +10,57 @@ import PersonIcon from "@material-ui/icons/Person";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import InstagramIcon from "@material-ui/icons/Instagram";
 
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [member, setMember] = useState({});
   const [resetemail, setResetEmail] = useState("");
-  const [loggedIn, setLoggedIn] = useState(false);
+  axios.defaults.headers.common = {
+    "Content-Type": "application/json"
+  }
   const url = "http://localhost:8080/authenticaterest";
   const history = useHistory();
   console.log("Inside Login");
+  let config = {
+    headers: {
+       'Content-Type': 'application/x-www-form-urlencoded',
+    } 
+}
   const authenticate = () => {
     const data = new FormData();
     data.append("email", email);
     data.append("password", password);
     console.log("Inside authenticate");
-    axios.post(url, data).then((response) => {
+    debugger;
+    axios.post(url,data,config).then((response) => {
       const result = response.data;
       console.log(result.role);
+      debugger;
       if (result.message === "success" && result.role === "member") {
         console.log(result);
         const id = result.data.mid;
         alert("Welcome!! Member");
-        setLoggedIn(true);
+        debugger;
         //history.push("http://localhost:3000/home/?id=2");
         window.location.href = "http://localhost:3009/?id=" + id;
       } else if (result.message === "success" && result.role === "trainer") {
         console.log(result);
         const id = result.data.tid;
         alert("Welcome!! Trainer");
-        setLoggedIn(true);
+        debugger;
         //history.push("http://localhost:3000/home/?id=2");
         window.location.href = "http://localhost:3007/?id=" + id;
       } else if (result.message === "success" && result.role === "admin") {
         console.log(result);
         const id = result.data.uid;
         alert("Welcome!! Admin!");
-        setLoggedIn(true);
+        debugger;
         //history.push("http://localhost:3000/home/?id=2");
         window.location.href = "http://localhost:3008/?id=" + id;
       } else {
         console.log(result);
         alert("Login again!");
+        debugger;
       }
     });
   };
