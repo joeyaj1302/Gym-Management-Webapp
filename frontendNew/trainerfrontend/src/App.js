@@ -8,6 +8,7 @@ import Update from './Pages/Update';
 import Logout from './Pages/Logout';
 import Dashboard from './Pages/Dashboard';
 import Payment from './Pages/Salary';
+import Members from './Pages/Members';
 
 let tid ;
 function App() {
@@ -64,15 +65,13 @@ function App() {
     window.sessionStorage.setItem('joindate', joindate);
     window.sessionStorage.setItem('gender',gender);
     window.sessionStorage.setItem('isLoggedin',true);
+    
   }
   else if (id == null) {
     window.sessionStorage.setItem('isLoggedin',false);
   }
-  const goLogin = () => {
-    window.location.href = 'http://localhost:3006/login';
-  }
 
-  if (sessionStorage.getItem('isLoggedin')=='true') {
+
     return (
     
       <Router>
@@ -82,21 +81,12 @@ function App() {
           <Route path='/update/:mid' component={Update} />
           <Route path='/logout' component={Logout} />
           <Route path='/payment' component={Payment} />
-          <Route path='/dashboard' component={Dashboard} />
+          <Route path='/members' component={Members} />
+
         </Switch>
       </Router>
     
     );
-  }
-  else if (sessionStorage.getItem('isLoggedin')=='false') {
-    return(
-      <div>
-        <h1>Login First</h1>
-        <button onClick={goLogin}>Login</button>
-      </div>
-    )
-   
-  }
 
 }
 

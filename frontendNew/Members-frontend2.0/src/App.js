@@ -3,13 +3,13 @@ import Navbar from './Components/Navbar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Account from './Pages/Account';
 import Update from './Pages/Update';
-import Dashboard from './Pages/Dashboard';
 import Yourtrainer from './Pages/Yourtrainer';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Payment from './Pages/Payment';
 import Logout from './Pages/Logout';
 import Feedback from './Pages/Feedback';
+
 
 let mid ;
 function App() {
@@ -67,7 +67,7 @@ function App() {
   },[])
   
   if(id!=null){
-    window.sessionStorage.setItem('id',mid);
+    window.sessionStorage.setItem('mid',mid);
     window.sessionStorage.setItem('fname',fname);
     window.sessionStorage.setItem('lname',lname);
     window.sessionStorage.setItem('email',email);
@@ -82,10 +82,9 @@ function App() {
     window.sessionStorage.setItem('taddress', taddress);
     window.sessionStorage.setItem('temail', temail);
     window.sessionStorage.setItem('isLoggedin',true);
+    
   }
-  else if (id == null) {
-    window.sessionStorage.setItem('isLoggedin',false);
-  }
+
   const goLogin = () => {
     window.location.href = 'http://localhost:3006';
   }
@@ -96,9 +95,8 @@ function App() {
       <Router>
         <Navbar id={mid} />
         <Switch>
-     
-          <Route path='/account/:mid' component={Account} />
-          <Route path='/update/:mid' component={Update} />
+          <Route path='/account' component={Account} />
+          <Route path='/update' component={Update} />
           <Route path='/yourtrainer' component={Yourtrainer}/>
           <Route path='/payment' component={Payment}/>
           <Route path='/logout' component={Logout}/>
@@ -108,7 +106,7 @@ function App() {
     
     );
   }
-  else if (sessionStorage.getItem('isLoggedin')=='false') {
+  else  {
     return(
       <div>
         <h1>Login First</h1>

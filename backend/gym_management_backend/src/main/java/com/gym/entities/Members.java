@@ -47,6 +47,9 @@ public class Members {
 	private Date mjoindate;
 	@Column(name = "m_image")
 	private String mimage;
+	@Column(name = "m_membershiptype")
+	@JsonIgnore
+	private int membershiptype;
 	@OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	@JoinColumn(name = "u_id")
 	@JsonIgnore
@@ -182,6 +185,14 @@ public class Members {
 
 	public void setMimage(String mimage) {
 		this.mimage = mimage;
+	}
+	
+	public int getMembershiptype() {
+		return membershiptype;
+	}
+
+	public void setMembershiptype(int membershiptype) {
+		this.membershiptype = membershiptype;
 	}
 
 	@Override

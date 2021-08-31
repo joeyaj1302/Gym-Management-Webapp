@@ -1,9 +1,14 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
-import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
-import axios from 'axios';
-import { useState, useEffect,useContext } from 'react';
-import AppContext from './../Context/app-context';
+
+import {
+    CalendarToday,
+    LocationSearching,
+    MailOutline,
+    Pertidentity,
+    PhoneAndroid,
+    Publish,
+  } from "@material-ui/icons";
+  import "./user.css";
 
 
 let counter =  1;
@@ -12,21 +17,58 @@ const Yourtrainer = ({match:{params:{mid}}}) =>{
     
     return (
 
-        <div className="account">
-            <div className="login-reg-panel">
+        <div className="user" Style="margin-left:90px">
+        
+<div className="userTitleContainer" >
+          <h1 className="userTitle">Trainer Details</h1>
+        </div>
+         
+          <div className="userUpdate" Style=" width : 600px">
+            
+            <form className="userUpdateForm">
+              <div className="userUpdateLeft">
+              <span className="userShowTitle">Name </span>
+              <div className="userShowInfo">
+                <LocationSearching className="userShowIcon" />
+                <span className="userShowInfoTitle">{sessionStorage.getItem('tfname')} {' '} {sessionStorage.getItem('tlname')}</span>
+              </div>
+
+              <span className="userShowTitle">Contact Details</span>
+              <div className="userShowInfo">
+                <PhoneAndroid className="userShowIcon" />
+                <span className="userShowInfoTitle">{sessionStorage.getItem('temail')}</span>
+              </div>
+              
+              <span className="userShowTitle">Address</span>
+              <div className="userShowInfo">
+                <LocationSearching className="userShowIcon" />
+                <span className="userShowInfoTitle">{sessionStorage.getItem('taddress')}</span>
+              </div>
                
+              <span className="userShowTitle">Age</span>
+              <div className="userShowInfo">
+                <PhoneAndroid className="userShowIcon" />
+                <span className="userShowInfoTitle">24</span>
+              </div>
+              
+              </div>
+
+              <div className="userUpdateRight" Style = "margin-left: auto">
+              <div className="userUpdateUpload">
+                  <img
+                    className="userUpdateImg thumbnailbig"
+                    src = "https://media.istockphoto.com/photos/portrait-of-a-beautiful-woman-at-the-gym-picture-id856797530?k=20&m=856797530&s=612x612&w=0&h=kFFhoXpDoF6jCmerJe-cZzOMKRvpl2orilNip2t3McU="
+                  />
+               
+                </div>
+
+                
+                  
+              </div>
             
-            <div className ="white-panel"><br></br><h1>Your Trainer Details</h1>
-                <br/><br></br>
-            <div className="row"><div id ="tags">Trainer Id :</div> <div id="title"><span>{sessionStorage.getItem('tid')}</span></div></div>
-            <div className="row"><div id ="tags">Name :</div> <div id="title"><span>{sessionStorage.getItem('tfname')} {sessionStorage.getItem('tlname')}</span></div></div>
-            <div className="row"><div id ="tags">Email Id:</div> <div id="title"><span>{sessionStorage.getItem('temail')}</span></div></div>
-            <div className="row"> <div id ="tags">Address :</div> <div id="title"><span>{sessionStorage.getItem('taddress')} </span></div></div>
-            <div> </div> 
-            
-            
-            </div>
-        </div></div>
+            </form>
+          </div>
+        </div>
 
 
 

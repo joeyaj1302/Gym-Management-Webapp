@@ -3,7 +3,7 @@ import {
     CalendarToday,
     LocationSearching,
     MailOutline,
-    PermIdentity,
+    Pertidentity,
     PhoneAndroid,
     Publish,
   } from "@material-ui/icons";
@@ -14,6 +14,8 @@ import { useHistory } from "react-router-dom";
 import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
 import { Redirect } from "react-router";
 import { useLocation } from 'react-router';
+import '../css/loginCSS.css';
+import { Modal, Button,  Card } from "react-bootstrap";
 
 const UpdateTrainer = (props) =>{
     const [fname, setFname] = useState("");
@@ -27,12 +29,12 @@ const UpdateTrainer = (props) =>{
     const location = useLocation();
     const[joindate, setJoindate] = useState(new Date());
     const[image,setImage] = useState(null);
-    const mid = sessionStorage.getItem("mid")
-    if(mid!=null) {
+    const tid = sessionStorage.getItem("tid")
+    if(tid!=null) {
 
     }
-    console.log(mid);
-    const geturl = "http://127.0.0.1:8080/getbymid/?id=" + mid;
+    console.log(tid);
+    const geturl = "http://127.0.0.1:8080/getbytid/?id=" + tid;
     const imgurl = "http://127.0.0.1:4001/"
     console.log(geturl);
     const getMember = () => {
@@ -40,41 +42,49 @@ const UpdateTrainer = (props) =>{
             const result = response.data;
             console.log(result);
             if(result.message === 'success') {
-                setFname(result.data.mfname);
-                setLname(result.data.mfname);
-                setEmail(result.data.memail);
-                setAge(result.data.mage);
-                setPassword(result.data.mpassword);
-                setGender(result.data.mgender);
-                setAddress(result.data.maddress);
-                setJoindate(result.data.mjoindate);
-                setImage(result.data.mimage);
-
+                setFname(result.data.tfname);
+                setLname(result.data.tlname);
+                setEmail(result.data.temail);
+                setAge(result.data.tage);
+                setPassword(result.data.tpassword);
+                setGender(result.data.tgender);
+                setAddress(result.data.taddress);
+                setImage(result.data.timage);
                 console.log(fname,lname,email,age,gender,joindate);
         
             }
         })
     }
 
-    const UpdateMember = () => {
+    const UpdateTrainer = () => {
         const data = new FormData();
-        data.append("mfname",fname);
-        data.append("mlname",lname);
-        data.append("memail",email);
-        data.append("mpassword",password);
-        data.append("mage",age);
-        data.append("maddress",address);
-        data.append("mgender",gender);
-        data.append("mjoindate",joindate);
-        data.append("mimage",image);
-        const updateurl = "http://localhost:8080/updatebymid/?id=" + mid;
+        data.append("tfname",fname);
+        data.append("tlname",lname);
+        data.append("temail",email);
+        data.append("tpassword",password);
+        data.append("tage",age);
+        data.append("taddress",address);
+        data.append("tgender",gender);
+        const updateurl = "http://localhost:8080/updatebytid/?id=" + tid;
         alert(updateurl);
         axios.put(updateurl,data).then((response) => {
             const result = response.data;
             if(result.message === 'success') {
-                window.location.href = "http://localhost:3008/members";
+                goGet();
             }
         });
+        const goGet = () => {
+          const uploadimgurl = "http://localhost:4001/trainerimages/upload/" + tid;
+          const data = new FormData();
+          data.append("trainerimage", image);
+          axios.post(uploadimgurl, data).then((response) => {
+            const result = response.data;
+            if(result.message === 'success') {
+              sessionStorage.removeItem("mid");
+              window.location.href = "http://localhost:3008/trainers"
+            }
+          });
+        };
     }
 
     useEffect(() => {
@@ -83,7 +93,7 @@ const UpdateTrainer = (props) =>{
     return (
       <div className="user">
         <div className="userTitleContainer">
-          <h1 className="userTitle">Edit Member</h1>
+          <h1 className="userTitle">Edit Trainer</h1>
         </div>
         <div className="userContainer">
           <div className="userShow">
@@ -102,7 +112,7 @@ const UpdateTrainer = (props) =>{
               <span className="userShowTitle">Account Details</span>
               <div className="userShowInfo">
                 <CalendarToday className="userShowIcon" />
-                <span className="userShowInfoTitle">{joindate.toISOString}</span>
+                <span className="userShowInfoTitle">Trainer Account</span>
               </div>
               <span className="userShowTitle">Contact Details</span>
               <div className="userShowInfo">
@@ -123,7 +133,7 @@ const UpdateTrainer = (props) =>{
                   <label>First Name</label>
                   <input
                     type="text"
-                    placeholder="Anna "
+                    placeholder="Harry"
                     className="userUpdateInput"
                     onChange={(e) => {
                         setFname(e.target.value);
@@ -134,7 +144,7 @@ const UpdateTrainer = (props) =>{
                   <label>Last Name</label>
                   <input
                     type="text"
-                    placeholder="Becker"
+                    placeholder="Potter"
                     className="userUpdateInput"
                     onChange={(e) => {
                         setLname(e.target.value);
@@ -145,7 +155,7 @@ const UpdateTrainer = (props) =>{
                   <label>Email</label>
                   <input
                     type="email"
-                    placeholder="annabeck99@gmail.com"
+                    placeholder="masteroogway99@gmail.com"
                     className="userUpdateInput"
                     onChange={(e) => {
                         setEmail(e.target.value);
@@ -156,20 +166,31 @@ const UpdateTrainer = (props) =>{
                   <label>Address</label>
                   <input
                     type="text"
-                    placeholder="New York | USA"
+                    placeholder="ex. New York | Mumbai"
                     className="userUpdateInput"
                     onChange={(e) => {
                         setAddress(e.target.value);
                     }}
                   />
                 </div>
+                <div className="userUpdateItem">
+                  <label>Age</label>
+                  <input
+                    type="number"
+                    placeholder="ex. 25"
+                    className="userUpdateInput"
+                    onChange={(e) => {
+                        setAge(e.target.value);
+                    }}
+                  />
+                </div>
               </div>
               <div className="userUpdateRight">
-                <div className="userUpdateUpload">
+              <div className="userUpdateUpload">
                   <img
                     className="userUpdateImg"
                     src={imgurl+image}
-                    alt=""
+                    alt={imgurl+image}
                   />
                   <label htmlFor="file">
                     <Publish className="userUpdateIcon" />
@@ -179,7 +200,17 @@ const UpdateTrainer = (props) =>{
                       setImage(e.target.files[0])
                   }} />
                 </div>
-                <button className="userUpdateButton" onClick={UpdateMember}>Update</button>
+
+                <Button  Style={
+                        " background-color : black;height:50px; width : 200px; border-radius : 12px"
+                      } className="shadowify" onClick={UpdateTrainer}>Update</Button>
+                <br />
+                  <Link to="/trainers" > 
+                    <Button Style={
+                        " background-color : blue;height:50px; width : 200px; border-radius : 12px"
+                      } className="shadowify">Go back
+                      </Button>
+                      </Link>
               </div>
             </form>
           </div>

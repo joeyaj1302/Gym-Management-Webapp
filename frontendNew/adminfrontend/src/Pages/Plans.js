@@ -28,19 +28,20 @@ const Plans = () => {
     const[tid,setTid] = useState(0);
     const history = useHistory();
     const[trainerList,setTrainerList] = useState([]);
-  
 
 const[planList,setPlanList] = useState([]);
     
   const [lgShow, setLgShow] = useState(false);
-    const url = "http://localhost:8080/getallplans";
+    const url = "http://127.0.0.1:4001/utilityqueries/totmembersinplan";
     const geturl = "http://localhost:8080/findplanbyname";
    
 
     const getplans = () => {
         axios.get(url).then((response) =>{
             console.log(response.data);
-            setPlanList(response.data.List);
+            setPlanList(response.data.data);
+            console.log(planList)
+
         })
     }
 
@@ -49,6 +50,7 @@ const[planList,setPlanList] = useState([]);
         axios.get(trainerurl).then((response) =>{
             console.log(response.data.List);
             setTrainerList(response.data.List);
+            
         
         })
     }
@@ -121,6 +123,7 @@ const[planList,setPlanList] = useState([]);
                         <td>{plan.pname}</td>
                         <td>{plan.pdesc}</td>
                         <td>{plan.pcost}</td>
+                        <td>{plan.count}</td>
                         <td > <Button 
                             className="shadowify"
                             onClick={()=>{
@@ -138,7 +141,7 @@ const[planList,setPlanList] = useState([]);
                              
                         }} Style = "background-color : white; color:red" > <DeleteRoundedIcon></DeleteRoundedIcon></Button>
                        {' '}
-                       <Link to="/updatemember">  
+                       <Link to="/updateplan">  
                        <Button className="shadowify"
                        onClick={ ()=> { 
                            return(

@@ -193,13 +193,19 @@ const UpdateMember = (props) =>{
                       setImage(e.target.files[0])
                   }} />
                 </div>
-                <Link to="/members">
+
                 <Button  className="shadowify"
                     Style={
                         " background-color : black;height:50px; width : 200px; border-radius : 12px"
                       }
                  className="userUpdateButton" onClick={UpdateMember}>Update</Button>
-                </Link>
+
+                <Link to="/members" > 
+                    <Button Style={
+                        " background-color : blue;height:50px; width : 200px; border-radius : 12px"
+                      } className="shadowify">Go back
+                      </Button>
+                      </Link>
               </div>
             </form> 
           </div>

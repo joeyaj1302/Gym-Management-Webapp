@@ -3,91 +3,118 @@ import { useParams } from 'react-router-dom';
 import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import axios from 'axios';
 import { useState, useEffect,useContext } from 'react';
+import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
+import {
+    CalendarToday,
+    LocationSearching,
+    MailOutline,
+    Pertidentity,
+    PhoneAndroid,
+    Publish,
+  } from "@material-ui/icons";
+  import "./user.css";
 
-
-
+  
 let counter =  1;
 let id ;
 const Account = () =>{
-    // const[fname,setFname] = useState('');
-    // const[lname,setLname] = useState('');
-    // const[email,setEmail] = useState('');
-    // const[password,setPassword] = useState('');
-    // const[age,setAge] = useState(0);
-    // const[address,setAddress] = useState('');
-    // id = mid;
-    // const ctx = useContext(AppContext);
-    // console.log("In app context :");
-    // console.log(ctx.fname +" " + ctx.lname);
-    // //const id = window.localStorage.getItem('id');
-    // const authResult = new URLSearchParams(window.location.search); 
-    // let url = "http://localhost:8080/getbymid/?id=";
-    // if (counter === 1) {
-    //     url = url + id;
-    // }
-    // else{
-    //     url = url + mid;
-    // }
-     
-    // const setUser = () => {
+    const [fname, setFname] = useState("");
+    const [lname, setLname] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [age, setAge] = useState(0);
+    const [address, setAddress] = useState("");
+    const[gender,setGender] = useState("");
+    const[joindate, setJoindate] = useState(new Date());
+    const[image,setImage] = useState(null);
+    const tid = sessionStorage.getItem("id")
+  
+    console.log(tid);
+    const geturl = "http://127.0.0.1:8080/getbytid/?id=" + tid;
+    const imgurl = "http://127.0.0.1:4001/"
+    console.log(geturl);
+    const getTrainer = () => {
+        axios.get(geturl).then((response) => {
+            const result = response.data;
+            console.log(result);
+            if(result.message === 'success') {
+                setFname(result.data.tfname);
+                setLname(result.data.tlname);
+                setEmail(result.data.temail);
+                setAge(result.data.tage);
+                setPassword(result.data.tpassword);
+                setGender(result.data.tgender);
+                setAddress(result.data.taddress);
+                setImage(result.data.timage);
+                setJoindate(result.data.tjoindate);
+                console.log(fname,lname,email,age,gender,joindate);
+        
+            }
+        })
+    }
+    useEffect(() => {
+        getTrainer()
+    },[])
     
-    //     axios.get(url).then((response) => {
-    //         console.log("Inside setUser");
-    //         const result = response.data;
-    //         if(result.message === "success") {
-    //             const m = result.data;
-    //             setFname(m.mfname);
-    //             setLname(m.mlname);
-    //             setEmail(m.memail);
-    //             setPassword(m.mpassword);
-    //             setAge(m.mage);
-    //             setAddress(m.maddress);
-    
-    //             console.log("Member is :"  + fname);
-    //         }
-    //         else {
-    //         alert(result.message);
-    //         }
-    //     })
-    
-    // }
-
-    // if(id!== null) {
-    //     setUser();
-    // }
-
-
-    // // if (counter == 1) {
-    // //     setUser();
-    // //     console.log("Inside If : " + counter);
-    // //     counter = counter + 1;
-    // // }
-    
-
-
-    // console.log(mid); 
-
     return (
 
-        <div className="update">
-            <div className="login-reg-panel">
+        
+<div className="user" Style="margin-left:90px">
+        
+<div className="userTitleContainer" >
+          <h1 className="userTitle">Personal Details</h1>
+        </div>
+         
+          <div className="userUpdate" Style=" width : 600px">
+            
+            <form className="userUpdateForm">
+              <div className="userUpdateLeft">
+              <span className="userShowTitle">Name </span>
+              <div className="userShowInfo">
+                <LocationSearching className="userShowIcon" />
+                <span className="userShowInfoTitle">{fname} {' '} {lname}</span>
+              </div>
+
+              <span className="userShowTitle">Contact Details</span>
+              <div className="userShowInfo">
+                <PhoneAndroid className="userShowIcon" />
+                <span className="userShowInfoTitle">{email}</span>
+              </div>
+              
+              <span className="userShowTitle">Address</span>
+              <div className="userShowInfo">
+                <LocationSearching className="userShowIcon" />
+                <span className="userShowInfoTitle">{address}</span>
+              </div>
                
+              <span className="userShowTitle">Age</span>
+              <div className="userShowInfo">
+                <PhoneAndroid className="userShowIcon" />
+                <span className="userShowInfoTitle">{age}</span>
+              </div>
 
-            <div className ="white-panel"><h1>My Account</h1>
-            <div className="row"><div id ="tags">Id :</div> <div id="title"><span>{sessionStorage.getItem('id')}</span></div></div>
-            <div className="row"><div id ="tags">Name :</div> <div id="title"><span>{sessionStorage.getItem('fname')} {sessionStorage.getItem('lname')}</span></div></div>
-            <div className="row"><div id ="tags">Email Id:</div> <div id="title"><span>{sessionStorage.getItem('email')}</span></div></div>
-            <div className="row"> <div id ="tags">Address :</div> <div id="title"><span>{sessionStorage.getItem('address')} </span></div></div>
-            <div className="row"> <div id ="tags">Join Date :</div> <div id="title"><span>{sessionStorage.getItem('joindate')} </span></div></div>
-            <div className="row"> <div id ="tags">Age :</div> <div id="title"><span>{sessionStorage.getItem('age')} </span></div></div>
-          
-             <div> </div> 
-            
-            
-            </div>
-        </div></div>
-
-
+                
+              </div>
+              <div className="userUpdateRight" Style = "margin-left: auto">
+              <div className="userUpdateUpload">
+                  <img
+                    className="userUpdateImg thumbnail"
+                    src={imgurl+image}
+                    alt={imgurl+image}
+                  />
+               
+                </div>
+                <Link to= "/update/:${tid}" >
+                <Button  Style={
+                        " background-color : black;height:50px; width : 200px; border-radius : 12px"
+                      } className="shadowify" >Update</Button>
+                </Link>
+                <br />
+                  
+              </div>
+            </form>
+          </div>
+        </div>
 
         
     )

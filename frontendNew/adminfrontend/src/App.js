@@ -8,12 +8,16 @@ import Trainers from './Pages/Trainers';
 import Plans from './Pages/Plans';
 import Dashboard from './Pages/Dashboard';
 import Logout from './Pages/Logout'
+import UpdateTrainer from './Pages/UpdateTrainer';
 import Navbar from './Components/Navbar';
 import { BrowserRouter , Switch, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Equipments from './Pages/Equipments';
 import Payments from './Pages/Payment';
 import UpdateMember from './Pages/UpdateMember';
+import  UpdatePlan from './Pages/UpdatePlan';
+import Enquiry from './Pages/Enquiry';
+
 
 function App() {
   const authResult = new URLSearchParams(window.location.search); 
@@ -43,6 +47,9 @@ function App() {
         <Route path='/equipments' component={Equipments}/>
         <Route path='/payments' component={Payments}/>
         <Route path='/updatemember' component={UpdateMember} />
+        <Route path='/updatetrainer' component={UpdateTrainer} />
+        <Route path='/updateplan' component={UpdatePlan} />
+        <Route path='/enquiry' component={Enquiry} />
         {/* <Route path='/dashbaord' component={Dashboard} /> */}
         <Route path='/logout' component={Logout} />
       </Switch>

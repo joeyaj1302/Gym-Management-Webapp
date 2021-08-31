@@ -2,6 +2,7 @@ package com.gym.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gym.dtos.MemberDto;
+import com.gym.dtos.PaymentDto;
 import com.gym.entities.Enquiry;
 import com.gym.entities.Equipments;
 import com.gym.entities.Members;
@@ -116,9 +118,14 @@ public class LoginRestController {
 	@GetMapping("/getallpayments")
 	private ResponseEntity<?> getallpayments(){
 		List<Payments> planList = paymentService.findAllPayments();
-		return Response.successList(planList);
+		Stream<PaymentDto> result = planList.stream().map(payment -> PaymentDto.fromEntity(payment));
+		return Response.successList2(result);
 	}
-	
+	@GetMapping("/getallenquiries")
+	private ResponseEntity<?> getallenquiries(){
+		List<Enquiry> enquiryList = enquiryService.findAll();
+		return  Response.successList(enquiryList);
+	}
 	@GetMapping("/getbymid")
 	private ResponseEntity<?> getBymid(@RequestParam(name = "id") String id) {
 		int mid = Integer.parseInt(id);
@@ -130,7 +137,17 @@ public class LoginRestController {
 			return Response.error("Member not found");
 		}
 	}
-
+	@GetMapping("/getbypid")
+	private ResponseEntity<?> getBypid(@RequestParam(name = "id") String id) {
+		int pid = Integer.parseInt(id);
+		Plans plan = planService.findByPlid(pid);
+		if (plan != null ) {
+			return Response.success(plan,"plan");
+		}
+		else {
+			return Response.error("plan not found");
+		}
+	}
 	@PostMapping("/addnewuser")
 	private ResponseEntity<?> addnewuser(Members member,@RequestParam(name = "pid") String id){
 		int pid = Integer.parseInt(id);

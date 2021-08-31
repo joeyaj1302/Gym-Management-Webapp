@@ -34,7 +34,7 @@ function Navbar(props) {
                 {SidebarDate.map((item, index) => {
                     return(   //{`/about/${name}`}
                         <li key={index} className={item.cName}>
-                            <Link to = {`${item.path}/${id}`} >
+                            <Link to = {`${item.path}/${sessionStorage.getItem('mid')}`} >
                             {item.icon}
                             <span>{item.title}</span>
                            

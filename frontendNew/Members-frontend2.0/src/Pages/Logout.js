@@ -12,7 +12,7 @@ const Logout = () => {
     const DoLogout = () => {
         console.log("In DoLogout")
         sessionStorage.clear();
-        window.location.href = "http://localhost:3006";
+        window.location.href = "http://localhost:3006/login";
     }
 
     return (

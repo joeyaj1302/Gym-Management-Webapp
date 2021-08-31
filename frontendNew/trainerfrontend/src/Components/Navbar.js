@@ -15,7 +15,7 @@ function Navbar(props) {
     const showSidebar = () => {
         setSidebar(!sidebar);
     }
-    id = tid;
+    id = sessionStorage.getItem('id');
     return (
         <>
         <IconContext.Provider value={{ color: '#fff' }}>

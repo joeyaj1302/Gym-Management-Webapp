@@ -1,4 +1,5 @@
-package com.gym.entities;
+package com.gym.dtos;
+
 
 import java.util.Date;
 import java.time.LocalDate;
@@ -16,33 +17,32 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.format.annotation.DateTimeFormat;
 
-@Entity
-@Table(name = "payments")
-public class Payments {
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Id
-	@Column(name = "p_id")
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.gym.entities.Members;
+import com.gym.entities.Payments;
+
+
+public class PaymentDto {
 	private int pid;
-	@Column(name = "p_status")
 	private boolean pstatus;
-	@Column(name = "p_amount")
 	private double pamount;
-	@Column(name = "p_date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date pdate;
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "m_id")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date duedate;
 	private Members member;
-
-	public Payments() {
+	
+	public PaymentDto() {
 		this.member = new Members();
 
+		
 	}
 
 
-	public Payments(int pid, boolean pstatus, double pamount, Date pdate) {
+	public PaymentDto(int pid, boolean pstatus, double pamount, Date pdate) {
 		
 		this.pid = pid;
 		this.pstatus = pstatus;
@@ -100,9 +100,39 @@ public class Payments {
 		this.member = member;
 	}
 
+	
+	public Date getDuedate() {
+		return duedate;
+	}
+
+
+	public void setDuedate(Date duedate) {
+//		LocalDate joindate = member.getMjoindate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+//		LocalDate ddate = joindate.plusDays(member.getMembershiptype()*30);
+//		ZoneId defaultZoneId = ZoneId.systemDefault();
+//		Date date = Date.from(ddate.atStartOfDay(defaultZoneId).toInstant());
+//		System.out.println(date);
+		this.duedate = duedate;
+	}
+	
+	public static PaymentDto fromEntity(Payments entity) {
+		PaymentDto dto = new PaymentDto();
+		BeanUtils.copyProperties(entity, dto);
+		int d = entity.getMember().getMembershiptype() - 2;
+		System.out.println("membership type is :" +d);
+		Date e = entity.getMember().getMjoindate();
+		e.setMonth(d);
+		dto.setDuedate(e);
+		System.out.println(dto.toString());
+		return dto;
+		
+	}
+
+
+
 	@Override
 	public String toString() {
-		return "Payments [pid=" + pid + ", pstatus=" + pstatus + ", pamount=" + pamount + ", pdate=" + pdate + "]";
+		return "PaymentDto [pid=" + pid + ", pstatus=" + pstatus + ", pamount=" + pamount + ", pdate=" + pdate + "]";
 	}
 
 

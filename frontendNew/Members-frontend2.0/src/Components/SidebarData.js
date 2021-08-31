@@ -10,12 +10,6 @@ import FitnessCenterIcon from '@material-ui/icons/FitnessCenter';
 import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
 export const SidebarDate = [
     {
-        title : 'Dashboard',
-        path : '/dashboard',
-        icon : <DashboardIcon/>,
-        cName : 'nav-text'
-    },
-    {
         title : 'My Account',
         path : '/account',
         icon : <AccountCircleIcon/>,

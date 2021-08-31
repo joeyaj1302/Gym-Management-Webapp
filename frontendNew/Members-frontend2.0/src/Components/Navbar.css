@@ -4,7 +4,6 @@
   display: flex;
   justify-content: start;
   align-items: center;
-  border-radius: 10px;
 }
 
 .menu-bars {
@@ -14,7 +13,7 @@
 }
 
 .nav-menu {
-  background-color :darkcyan;
+  background-color :black;
   width: 250px;
   height: 100vh;
   display: flex;
@@ -76,7 +75,7 @@
   flex: 70%;
 }
 .nav-text a:hover {
-  background-color: rgb(6, 49, 49);
+  background-color: rgb(118, 139, 139);
   margin-right: 10px;
   /*transform: scale(1.10);*/
 }
@@ -86,13 +85,15 @@
 }
 
 .navbar-toggle {
-  background-color : rgb(8, 87, 87);
+  background-color : black;
   width: 100%;
   height: 80px;
   display: flex;
   justify-content: start;
   align-items: center;
   padding-left: -2rem;
+  color:white;
+
 }
 
 span {

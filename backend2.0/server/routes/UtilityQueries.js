@@ -35,8 +35,19 @@ router.get('/newjoinings/', (request, response) =>{
 
 
 router.get('/totmembersinplan/', (request, response) =>{
-    const query = `select p.pl_id, p.pl_name, p.pl_desc, p.pl_cost, p.pl_image, p.t_id, COUNT(m.m_id) from plans p 
+    const query = `select p.pl_id as pid, p.pl_name as pname, p.pl_desc as pdesc, p.pl_cost as pcost,
+                     p.pl_image as pimage, p.t_id , COUNT(m.m_id) as count from plans p 
                     left outer join members m on p.pl_id = m.pl_id GROUP BY p.pl_id;`
+    console.log(query);
+    db.query(query, (err,data) => {
+        response.send(utils.CreateResult(err, data));
+    })
+})
+
+
+router.get('/gethealthdata/:id', (request, response) =>{
+    const {id} = request.params;
+    const query = `select * from hdata where m_id = ${id};`
     console.log(query);
     db.query(query, (err,data) => {
         response.send(utils.CreateResult(err, data));

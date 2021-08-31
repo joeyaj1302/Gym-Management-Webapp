@@ -8,12 +8,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 export const SidebarDate = [
-    {
-        title : 'Dashboard',
-        path : '/dashboard',
-        icon : <DashboardIcon/>,
-        cName : 'nav-text'
-    },
+
     {
         title : 'My Account',
         path : '/account',

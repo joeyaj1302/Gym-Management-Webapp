@@ -2,18 +2,26 @@ import React from "react";
 
 import "../CSS/style.css";
 import "../CSS/demo.css";
+import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
+import { Modal, Button, Card } from "react-bootstrap";
+import '../CSS/loginCSS.css';
+import '../CSS/registerform.css';
 
 const Feedback = () => {
+  const doAlert = () => {
+    alert('Thank you for your feedback!');
+  }
   return (
-    <div className="feedback">
-      <p>
+    <div className="feedback shadowify">
+      <h5 >
         Dear Customer,
         <br />
         Thank you for working out in our gym. We would like to know how we
         performed. Please spare some moments to give us your valuable feedback
         as it will help us in improving our service.
-      </p>
-      <h4>Please rate your service experience for the following parameters</h4>
+      </h5>
+      <br />
+      <h4>Please rate your service experience for the following parameters :</h4>
 
       <form method="post" action="#action-url">
         <label>1. Your overall experience with us ?</label>
@@ -185,11 +193,13 @@ const Feedback = () => {
         <br />
         <br />
         <div className="clear"></div>
-        <input
-          Style="background:#43a7d5;color:#fff;padding:12px;border:0"
-          type="submit"
-          value="Submit your review"
-        />
+        <Link to= "/account" >
+          <Button onClick={doAlert} className="centerifya"  Style={
+            " background-color : black;height:50px; width : 200px; border-radius : 30px"
+          }>
+                   Send Feebback 
+          </Button>
+        </Link>
       </form>
     </div>
   );

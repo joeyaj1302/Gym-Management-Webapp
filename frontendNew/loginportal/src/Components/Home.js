@@ -1,5 +1,11 @@
 import React from 'react';
 import ReactPlayer from 'react-player';
+import { BrowserRouter, Link, Route, Switch , Redirect} from 'react-router-dom';
+import FacebookIcon from '@material-ui/icons/Facebook';
+import InstagramIcon from '@material-ui/icons/Instagram';
+import TwitterIcon from '@material-ui/icons/Twitter';
+import YouTubeIcon from '@material-ui/icons/YouTube';
+import EmailIcon from '@material-ui/icons/Email';
 import  '../css/bootstrap.min.css';
 import '../css/font-awesome.css';
 import '../css/templatemo-training-studio.css' ;
@@ -26,7 +32,7 @@ const Home = () => {
                 <h6>work harder, get stronger</h6>
                 <h2>easy with our <em>gym</em></h2>
                 <div class="main-button scroll-to-section">
-                    <a href="#features">Become a member</a>
+                <Link to = "/register" > Become A Member</Link>
                 </div>
             </div>
         </div>
@@ -50,7 +56,7 @@ const Home = () => {
                                     </div>
                                     <div class="right-content">
                                         <h4>Basic Fitness</h4>
-                                        <p>Please do not re-distribute this template ZIP file on any template collection website. This is not allowed.</p>
+                                        <p> Whether you're a beginner or a pro, a fitness boss or a yoga addict.Fitness is must</p>
                                         <a href="#" class="text-button">Discover More</a>
                                     </div>
                                 </li>
@@ -60,7 +66,7 @@ const Home = () => {
                                     </div>
                                     <div class="right-content">
                                         <h4>New Gym Training</h4>
-                                        <p>If you wish to support TemplateMo website via PayPal, please feel free to contact us. We appreciate it a lot.</p>
+                                        <p>We are planing more workout sessions for you to explore your potentials. Come join us!!</p>
                                         <a href="#" class="text-button">Discover More</a>
                                     </div>
                                 </li>
@@ -70,7 +76,7 @@ const Home = () => {
                                     </div>
                                     <div class="right-content">
                                         <h4>Basic Muscle Course</h4>
-                                        <p>Credit goes to <a rel="nofollow" href="https://www.pexels.com" target="_blank">Pexels website</a> for images and video background used in this HTML template.</p>
+                                        <p>This fast-track workout plan will help you drastically improve your physique and fitness levels.</p>
                                         <a href="#" class="text-button">Discover More</a>
                                     </div>
                                 </li>
@@ -84,7 +90,7 @@ const Home = () => {
                                     </div>
                                     <div class="right-content">
                                         <h4>Advanced Muscle Course</h4>
-                                        <p>You may want to browse through <a rel="nofollow" href="https://templatemo.com/tag/digital-marketing" target="_parent">Digital Marketing</a> or <a href="https://templatemo.com/tag/corporate">Corporate</a> HTML CSS templates on our website.</p>
+                                        <p>Advanced bodybuilder workout for best of lifting experience.Step up your training and re-ignite big gains!</p>
                                         <a href="#" class="text-button">Discover More</a>
                                     </div>
                                 </li>
@@ -94,7 +100,7 @@ const Home = () => {
                                     </div>
                                     <div class="right-content">
                                         <h4>Yoga Training</h4>
-                                        <p>This template is built on Bootstrap v4.3.1 framework. It is easy to adapt the columns and sections.</p>
+                                        <p>Yoga offers health, which is physical, psychological, social wellbeing which makes body strong & efficient. </p>
                                         <a href="#" class="text-button">Discover More</a>
                                     </div>
                                 </li>
@@ -104,7 +110,7 @@ const Home = () => {
                                     </div>
                                     <div class="right-content">
                                         <h4>Body Building Course</h4>
-                                        <p>Suspendisse fringilla et nisi et mattis. Curabitur sed finibus nisi. Integer nibh sapien, vehicula et auctor.</p>
+                                        <p> Students are trained to teach and guide, exercise enthusiasts in the gyms.</p>
                                         <a href="#" class="text-button">Discover More</a>
                                     </div>
                                 </li>
@@ -117,7 +123,40 @@ const Home = () => {
             <h2> <em>Locate US </em></h2>
             </div>
             <iframe width="600" height="450" style={{ border: 0 }} loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJH_BFA327wjsRR2-gR8YgjG4&key=AIzaSyC_MXOOC_-_6Ke8T7TblsGjgmdt8jXXY0w"></iframe>
-        
+        <div>
+        <br></br>
+        <table class="table table-borderless" Style="width:100%;text-align: ;">
+                <thead >
+                    <tr Style="background-color : #7fc919">
+                        <th Style="width: 35%;">Contact Us</th>
+                        <th Style="width: 30%;">Gym</th>
+                        <th Style="width: 35%;">Handle</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr Style="background-color : #7fc919" >
+                        <td><b>Contact No :</b> <br/>8390678530<br/>8674539261</td>
+                        <td><b>Address :</b><br/> 123, central perk <br/>Maharashtra</td>
+                        <td><FacebookIcon/> <InstagramIcon/> <TwitterIcon/><br/><br/><YouTubeIcon/> <EmailIcon/></td>
+                        
+                    </tr>
+                    <tr Style="background-color : #7fc919">
+                        <td><b>Email Id:</b> <br/>gym@gmail.com<br/>gymsuppo@gmail.com </td>
+                        <td><b>Maps<br/>Gallery<br/>blogs</b></td>
+                      
+                        <td></td>
+                    </tr>
+                    <tr Style="background-color : #7fc919">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                       
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
         </div>
     )
 }
