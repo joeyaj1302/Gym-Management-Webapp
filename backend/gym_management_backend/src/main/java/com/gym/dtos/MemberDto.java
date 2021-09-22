@@ -3,6 +3,7 @@ package com.gym.dtos;
 import java.util.Date;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.gym.entities.Members;
 import com.gym.entities.Plans;
@@ -17,7 +18,11 @@ public class MemberDto {
 	private int mage;
 	private char mgender;
 	private String maddress;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date mjoindate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date mduedate;
+	private int membershiptype;
 	private Trainers trainer;
 	private Plans plans;
 	public MemberDto() {
@@ -126,12 +131,42 @@ public class MemberDto {
 	public Date getMjoindate() {
 		return mjoindate;
 	}
+	
+
+	public int getMembershiptype() {
+		return membershiptype;
+	}
+
+
+	public void setMembershiptype(int membershiptype) {
+		this.membershiptype = membershiptype;
+	}
 
 
 	public void setMjoindate(Date mjoindate) {
 		this.mjoindate = mjoindate;
 	}
 
+	public Date getMduedate() {
+		return this.mduedate;
+	}
+
+	public void setMduedate() {
+		Date joindate = this.mjoindate ; 
+		int month = joindate.getMonth() + membershiptype;
+		Date duedate = joindate;
+		System.out.println("In set due date");
+		if(month>11)  {
+			int diff = month - 11;
+			int year = duedate.getYear() + 1;
+			duedate.setMonth(diff);
+			duedate.setYear(year);
+		}else {
+			duedate.setMonth(month);
+		}
+		System.out.println(duedate);
+		this.mduedate = duedate;
+	}
 
 	public Trainers getTrainer() {
 		return trainer;
@@ -165,6 +200,7 @@ public class MemberDto {
 	public static MemberDto fromEntity(Members entity) {
 		MemberDto dto = new MemberDto();
 		BeanUtils.copyProperties(entity, dto);
+		
 		System.out.println(dto.toString());
 		return dto;
 		

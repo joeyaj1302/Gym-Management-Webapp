@@ -4,6 +4,7 @@ import java.util.Date;
 import java.time.LocalDate;
 import java.time.ZoneId;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,11 +13,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "payments")
@@ -29,13 +33,21 @@ public class Payments {
 	private boolean pstatus;
 	@Column(name = "p_amount")
 	private double pamount;
+	@Temporal(TemporalType.DATE)
 	@Column(name = "p_date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date pdate;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "p_duedate")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date pduedate;
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "m_id")
 	private Members member;
-
+	@OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@JoinColumn(name = "pl_id")
+	@JsonIgnore
+	private Plans plan;
 	public Payments() {
 		this.member = new Members();
 
@@ -99,6 +111,41 @@ public class Payments {
 	public void setMember(Members member) {
 		this.member = member;
 	}
+	
+	public Plans getPlan() {
+		return plan;
+	}
+
+
+	public void setPlan(Plans plan) {
+		this.plan = plan;
+	}
+	
+
+	public Date getPduedate() {
+		return pduedate;
+	}
+
+
+	public void setPduedate() {
+		System.out.println("Setter duedate");
+		Date joindate = this.pdate ; 
+		int month = joindate.getMonth() + member.membershiptype;
+		Date duedate = (Date) joindate.clone();
+		System.out.println("month");
+		if(month>11)  {
+			int diff = month - 11;
+			int year = duedate.getYear() + 1;
+			duedate.setMonth(diff);
+			duedate.setYear(year);
+		}else {
+			duedate.setMonth(month);
+		}
+		System.out.println(duedate);
+		this.pduedate = duedate;
+		this.pduedate = pduedate;
+	}
+
 
 	@Override
 	public String toString() {

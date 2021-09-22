@@ -85,6 +85,7 @@ const Members = () => {
                         <th>Address</th>
                         <th>Payment Status</th>
                         <th>Join Date</th>
+                        <th>Due Date</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -101,6 +102,7 @@ const Members = () => {
                         <td>{member.maddress}</td>
                         <td> Paid </td>
                         <td>{member.mjoindate}</td>
+                        <td>{member.mduedate}</td>
                         <td > <Button 
                             className="shadowify"
                             onClick={()=>{

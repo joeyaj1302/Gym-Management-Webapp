@@ -58,13 +58,16 @@ public class LoginRestController {
 		System.out.println(email);
 		if (user != null && user.getUpassword().equals(password) && user.getUrole().equals("member")) {
 			Members member = user.getMember();
+			System.out.println(member.toString());
 			return Response.success(member,"member");
 		}
 		else if (user != null && user.getUpassword().equals(password) && user.getUrole().equals("trainer")) {
 			Trainers trainer = user.getTrainer();
+			System.out.println(trainer.toString());
 			return Response.success(trainer,"trainer");
 		}
 		else if (user != null && user.getUpassword().equals(password) && user.getUrole().equals("admin")) {
+			System.out.println(user.toString());
 			return Response.success(user,"admin");
 		}
 		else {
@@ -118,8 +121,8 @@ public class LoginRestController {
 	@GetMapping("/getallpayments")
 	private ResponseEntity<?> getallpayments(){
 		List<Payments> planList = paymentService.findAllPayments();
-		Stream<PaymentDto> result = planList.stream().map(payment -> PaymentDto.fromEntity(payment));
-		return Response.successList2(result);
+		//Stream<PaymentDto> result = planList.stream().map(payment -> PaymentDto.fromEntity(payment));
+		return Response.successList(planList);
 	}
 	@GetMapping("/getallenquiries")
 	private ResponseEntity<?> getallenquiries(){
@@ -131,7 +134,9 @@ public class LoginRestController {
 		int mid = Integer.parseInt(id);
 		Members member = memberService.findByMid(mid);
 		if (member != null ) {
+			System.out.println(member.toString());
 			return Response.success(member,"member");
+			
 		}
 		else {
 			return Response.error("Member not found");
@@ -164,8 +169,16 @@ public class LoginRestController {
 		member.setTrainer(trainer);
 		member.setPlan(plan);
 		memberService.save(member);
+		Payments payment = new Payments();
+		payment.setMember(member);
+		payment.setPdate(member.getMjoindate());
+		payment.setPamount(plan.getPcost());
+		payment.setPlan(plan);
+		payment.setPstatus(true);
+		paymentService.save(payment);
 		return Response.success(member, "member");
 	}
+	
 	@PostMapping("/addplan")
 	private ResponseEntity<?> addnewplan(Plans plan,@RequestParam(name = "tid") String id){
 		int tid = Integer.parseInt(id);

@@ -15,6 +15,7 @@ import com.gym.entities.Members;
 import com.gym.entities.Plans;
 import com.gym.entities.Trainers;
 import com.gym.entities.Users;
+import com.sun.xml.bind.v2.runtime.reflect.ListIterator;
 
 @Transactional
 @Service
@@ -29,17 +30,20 @@ public class MembersServiceImpl implements MembersService{
 	@Override
 	public Members findByMid(int id) {
 		Members member = memberDao.findByMid(id);
+		member.setMduedate();
 		return member;
 	}
 
 	@Override
 	public Members findByMemail(String email) {
 		Members member = memberDao.findByMemail(email);
+		member.setMduedate();
 		return member;
 	}
 
 	@Override
 	public void save(Members m) {
+		m.setMduedate();
 		memberDao.save(m);
 		
 	}
@@ -53,6 +57,7 @@ public class MembersServiceImpl implements MembersService{
 		member1.setMpassword(m.getMpassword());
 		member1.setMage(m.getMage());
 		member1.setMaddress(m.getMaddress());
+		m.setMduedate();
 		memberDao.save(member1);
 	}
 
@@ -60,6 +65,9 @@ public class MembersServiceImpl implements MembersService{
 	public List<Members> findAllMembers() {
 		ArrayList<Members> memberList = new ArrayList<Members>();
 		memberList = (ArrayList<Members>) memberDao.findAll();
+		for (Members members : memberList) {
+			members.setMduedate();
+		}
 		return memberList;
 	}
 
@@ -67,6 +75,9 @@ public class MembersServiceImpl implements MembersService{
 	public List<Members> findByTrainer(int id) {
 		Trainers trainer = trainerDao.findByTid(id);
 		List<Members> memberList = memberDao.findByTrainer(trainer);
+		for (Members members : memberList) {
+			members.setMduedate();
+		}
 		return memberList;
 	}
 
@@ -82,17 +93,29 @@ public class MembersServiceImpl implements MembersService{
 
 	@Override
 	public List<Members> findAllSortedMembers() {
-		return memberDao.findAllSortedMembers();
+		List<Members> memberList = memberDao.findAllSortedMembers();
+		for (Members members : memberList) {
+			members.setMduedate();
+		}
+		return memberList;
 	}
 
 	@Override
 	public List<Members> sortMembersByJoindate() {
-		return memberDao.sortMembersByJoindate();
+		List<Members> memberList = memberDao.sortMembersByJoindate();
+		for (Members members : memberList) {
+			members.setMduedate();
+		}
+		return memberList;
 	}
 
 	@Override
 	public List<Members> findByPlan(Plans plan) {
-		return memberDao.findByPlan(plan);
+		List<Members> memberList = memberDao.findByPlan(plan);
+		for (Members members : memberList) {
+			members.setMduedate();
+		}
+		return memberList;
 	}
 
 

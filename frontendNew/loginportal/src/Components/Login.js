@@ -14,81 +14,92 @@ import TwitterIcon from '@material-ui/icons/Twitter';
 import YouTubeIcon from '@material-ui/icons/YouTube';
 import EmailIcon from '@material-ui/icons/Email';
 
-let id
+let id;
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [resetemail, setResetEmail] = useState('');
     const [loggedIn, setLoggedIn] = useState(false);
+
     const url = "http://localhost:8080/authenticaterest";
-    const history = useHistory();
+    //const history = useHistory();
+
     const authenticate = () => {
         const data = new FormData();
         data.append("email", email);
         data.append("password", password);
         console.log("Inside authenticate");
+        alert("Authentication");
         debugger;
+        
         axios.post(url, data).then((response) => {
+            alert("inside axios.post")
             const result = response.data;
             console.log(result.role);
-            debugger;
+            alert(result.role);
             if (result.message === 'success' && result.role === 'member') {
+                id = result.data.mid;
                 console.log(result);
-
-                if (result.data != null) {
-                    id = result.data.mid;
+                alert("Inside member if ");
+                debugger;
+                if (result.data == null) {
+                    alert("Data is null");
                 }
+                // else {
+                //     while (result.data != null) {
+                //         authenticate();
+                //     }
+
+                // }
                 else {
-                    while (result.data != null) {
-                        authenticate();
-                    }
-
+                    alert("Welcome!! Member");
+                    setLoggedIn(true);
+                    //history.push("http://localhost:3000/home/?id=2");
+                    window.location.href = "http://localhost:3009/account/?id=" + id;
+                    //window.open("http://localhost:3009/account/?id=" + id)
                 }
-
-                alert("Welcome!! Member");
-                setLoggedIn(true);
-                //history.push("http://localhost:3000/home/?id=2");
-                window.location.href = "http://localhost:3009/account/?id=" + id;
+               
             }
             else if (result.message === 'success' && result.role === 'trainer') {
                 console.log(result);
-                if (result.data != null) {
-                    id = result.data.tid;
+                id = result.data.tid;
+                alert("Inside trainer if ");
+                if (result.data == null) {
+                    alert("Data is null");
                 }
                 else {
-                    while (result.data != null) {
-                        authenticate();
-                    }
-
+                    alert("Welcome!! Trainer");
+                    setLoggedIn(true);
+                    //history.push("http://localhost:3000/home/?id=2");
+                    window.location.href = "http://localhost:3007/account/?id=" + id;
+                    //window.open("http://localhost:3007/account/?id=" + id)
                 }
 
-                alert("Welcome!! Trainer");
-                setLoggedIn(true);
-                //history.push("http://localhost:3000/home/?id=2");
-                window.location.href = "http://localhost:3007/account/?id=" + id;
+                
             }
             else if (result.message === 'success' && result.role === 'admin') {
                 console.log(result);
-                if (result.data != null) {
-                    id = result.data.uid;
+                alert("Inside admin if ");
+                if (result.data == null) {
+                    alert("Data is null");
                 }
                 else {
-                    while (result.data != null) {
-                        authenticate();
-                    }
+                    alert("Welcome!! Admin!");
+                    setLoggedIn(true);
+                    //history.push("http://localhost:3000/home/?id=2");
+                    window.location.href = "http://localhost:3008/dashboard/?id=" + id;
+                    //window.open("http://localhost:3008/dashboard/?id=" + id);
 
                 }
 
-                alert("Welcome!! Admin!");
-                setLoggedIn(true);
-                //history.push("http://localhost:3000/home/?id=2");
-                window.location.href = "http://localhost:3008/dashboard/?id=" + id;
+                
             }
             else {
                 console.log(result);
                 alert("Login again!");
             }
         })
+       // alert("Outside Login")
 
     }
 
@@ -173,7 +184,7 @@ const Login = () => {
                     </div>
                 </div>
             </div>
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">

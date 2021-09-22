@@ -35,6 +35,7 @@ public class PaymentServiceImpl implements PaymentService{
 		payment.setPamount(p.getPamount());
 		payment.setPdate(p.getPdate());
 		payment.setPstatus(p.isPstatus());
+		payment.setPduedate();
 		paymentDao.save(payment);
 		
 	}
@@ -42,6 +43,7 @@ public class PaymentServiceImpl implements PaymentService{
 	@Override
 	public Payments findByPid(int id) {
 		Payments payment = paymentDao.findByPid(id);
+		payment.setPduedate();
 		return payment;
 	}
 
@@ -62,14 +64,20 @@ public class PaymentServiceImpl implements PaymentService{
 	@Override
 	public List<Payments> findAllPayments() {
 		List<Payments> paymentList =paymentDao.findAll();
+		for (Payments payments : paymentList) {
+			payments.setPduedate();
+		}
 		return paymentList;
 	}
 
 	@Override
 	public List<Payments> findByMember(int id) {
 		Members member = memberService.findByMid(id);
-		List<Payments> planList = paymentDao.findByMember(member);
-		return planList;
+		List<Payments> paymentList = paymentDao.findByMember(member);
+		for (Payments payments : paymentList) {
+			payments.setPduedate();
+		}
+		return paymentList;
 	}
 
 

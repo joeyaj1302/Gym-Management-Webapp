@@ -26,6 +26,11 @@ function App() {
   tid = id;
   console.log("Inside app.js");
   console.log(tid); 
+  
+  const goLogin = () => {
+    window.location.href = 'http://localhost:3006';
+  }
+
   //window.localStorage.setItem('id',mid);
   let url = "http://localhost:8080/getbytid/?id="+tid;
   const setUser = () => {
@@ -71,7 +76,7 @@ function App() {
     window.sessionStorage.setItem('isLoggedin',false);
   }
 
-
+  if (sessionStorage.getItem('isLoggedin')=='true') {
     return (
     
       <Router>
@@ -87,7 +92,15 @@ function App() {
       </Router>
     
     );
-
+    }
+    else {
+      return(
+        <div>
+          <h1>Login First</h1>
+          <button onClick={goLogin}>Login</button>
+        </div>
+      )
+    }
 }
 
 export default App;

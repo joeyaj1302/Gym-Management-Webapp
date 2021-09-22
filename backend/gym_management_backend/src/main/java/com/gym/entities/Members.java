@@ -2,6 +2,7 @@ package com.gym.entities;
 
 import java.util.Date;
 
+import javax.annotation.PostConstruct;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +16,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -45,11 +48,15 @@ public class Members {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "m_joindate")
 	private Date mjoindate;
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@Column(name = "m_duedate")
+	private Date mduedate;
 	@Column(name = "m_image")
 	private String mimage;
 	@Column(name = "m_membershiptype")
-	@JsonIgnore
-	private int membershiptype;
+	@JsonIgnore 
+	int membershiptype;
 	@OneToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	@JoinColumn(name = "u_id")
 	@JsonIgnore
@@ -60,9 +67,6 @@ public class Members {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "pl_id")
 	private Plans plan;
-	
-	
-	
 	public Members() {	
 		this.trainer = new Trainers();
 		this.user = new Users();
@@ -140,6 +144,7 @@ public class Members {
 	}
 
 	public String getMaddress() {
+		
 		return maddress;
 	}
 
@@ -154,6 +159,29 @@ public class Members {
 	public void setMjoindate(Date mjoindate) {
 		this.mjoindate = mjoindate;
 	}
+	
+	public Date getMduedate() {
+		return this.mduedate;
+	}
+	//@PostConstruct
+	public void setMduedate() {
+		System.out.println("Setter duedate");
+		Date joindate = this.mjoindate ; 
+		int month = joindate.getMonth() + membershiptype;
+		Date duedate = (Date) joindate.clone();
+		System.out.println("month");
+		if(month>11)  {
+			int diff = month - 11;
+			int year = duedate.getYear() + 1;
+			duedate.setMonth(diff);
+			duedate.setYear(year);
+		}else {
+			duedate.setMonth(month);
+		}
+		System.out.println(duedate);
+		this.mduedate = duedate;
+	}
+
 
 	public Users getUser() {
 		return user;
@@ -194,12 +222,14 @@ public class Members {
 	public void setMembershiptype(int membershiptype) {
 		this.membershiptype = membershiptype;
 	}
+	
+
 
 	@Override
 	public String toString() {
 		return "Members [mid=" + mid + ", mfname=" + mfname + ", mlname=" + mlname + ", memail=" + memail
 				+ ", mpassword=" + mpassword + ", mage=" + mage + ", mgender=" + mgender + ", maddress=" + maddress
-				+ ", mjoindate=" + mjoindate + "]";
+				+ ", mjoindate=" + mjoindate +   ", mduedate = " + mduedate + "]";
 	}
 	
 	

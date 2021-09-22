@@ -75,11 +75,12 @@ const Register3 = () => {
             console.log("In axios.post");
             console.log(result);
             if (result.message === 'success') {
-                alert(result.log);
+                alert("Payment successful!!");
                 mid = result.data.mid;
                 goGet();
-                // const goLogin = () => history.push('/home')
-                // goLogin();
+
+                const goLogin = () => history.push('/login')
+                goLogin();
                 
             }
         })
@@ -103,9 +104,40 @@ const Register3 = () => {
   return (
     <div className="container" >
       <h2>This is Part 3</h2>
+      <Card className="form form-group transparent" Style="background-color:transparent">
+      <div className="content-bottom">
+				
+
+      <div className="field-group" Style = {"width:500px"}>
+						<span aria-hidden="true"></span>
+						<div className="wthree-field">
+							<input type="text" name="cardno" placeholder="Card Number" required />
+						</div>
+					</div>
+        <div className="field-group" Style = {"width:500px"}>
+						<span aria-hidden="true"></span>
+						<div className="wthree-field">
+							<input type="text" name="name" placeholder="Name on Card" required />
+						</div>
+					</div>
+        <div className="field-group"  Style = {"width:250px"}>
+						<span aria-hidden="true"></span>
+						<div className="wthree-field" >
+							<input type="text" name="exp" placeholder="Expiry Date(MM/YY)" required /> 
+						</div>
+					</div>
+          <div className="field-group" Style = {"width:250px"}>
+						<span aria-hidden="true"></span>
+						<div className="wthree-field">
+							<input type="text" name="exp" placeholder="CVV" required />
+						</div>
+					</div>
+
+
       <button onClick={GoBack} className="btn btn-primary">Prev</button>
       <button onClick={RegisterUser} className="btn btn-success">ConfirmPayment</button>
         
+      </div></Card>
     </div>
   );
 };

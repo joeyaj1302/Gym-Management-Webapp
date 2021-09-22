@@ -118,7 +118,7 @@ public class PaymentDto {
 	public static PaymentDto fromEntity(Payments entity) {
 		PaymentDto dto = new PaymentDto();
 		BeanUtils.copyProperties(entity, dto);
-		int d = entity.getMember().getMembershiptype() - 2;
+		int d = entity.getMember().getMembershiptype();
 		System.out.println("membership type is :" +d);
 		Date e = entity.getMember().getMjoindate();
 		e.setMonth(d);
