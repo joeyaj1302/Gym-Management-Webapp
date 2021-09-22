@@ -20,7 +20,7 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [resetemail, setResetEmail] = useState('');
     const [loggedIn, setLoggedIn] = useState(false);
-
+    let history = useHistory();
     const url = "http://localhost:8080/authenticaterest";
     //const history = useHistory();
 
@@ -29,79 +29,13 @@ const Login = () => {
         data.append("email", email);
         data.append("password", password);
         console.log("Inside authenticate");
-        alert("Authentication");
-        debugger;
-        
         axios.post(url, data).then((response) => {
-            alert("inside axios.post")
-            const result = response.data;
-            console.log(result.role);
-            alert(result.role);
-            if (result.message === 'success' && result.role === 'member') {
-                id = result.data.mid;
-                console.log(result);
-                alert("Inside member if ");
-                debugger;
-                if (result.data == null) {
-                    alert("Data is null");
-                }
-                // else {
-                //     while (result.data != null) {
-                //         authenticate();
-                //     }
-
-                // }
-                else {
-                    alert("Welcome!! Member");
-                    setLoggedIn(true);
-                    //history.push("http://localhost:3000/home/?id=2");
-                    window.location.href = "http://localhost:3009/account/?id=" + id;
-                    //window.open("http://localhost:3009/account/?id=" + id)
-                }
-               
-            }
-            else if (result.message === 'success' && result.role === 'trainer') {
-                console.log(result);
-                id = result.data.tid;
-                alert("Inside trainer if ");
-                if (result.data == null) {
-                    alert("Data is null");
-                }
-                else {
-                    alert("Welcome!! Trainer");
-                    setLoggedIn(true);
-                    //history.push("http://localhost:3000/home/?id=2");
-                    window.location.href = "http://localhost:3007/account/?id=" + id;
-                    //window.open("http://localhost:3007/account/?id=" + id)
-                }
-
-                
-            }
-            else if (result.message === 'success' && result.role === 'admin') {
-                console.log(result);
-                alert("Inside admin if ");
-                if (result.data == null) {
-                    alert("Data is null");
-                }
-                else {
-                    alert("Welcome!! Admin!");
-                    setLoggedIn(true);
-                    //history.push("http://localhost:3000/home/?id=2");
-                    window.location.href = "http://localhost:3008/dashboard/?id=" + id;
-                    //window.open("http://localhost:3008/dashboard/?id=" + id);
-
-                }
-
-                
-            }
-            else {
-                console.log(result);
-                alert("Login again!");
-            }
+            alert(response.data.message);
+            window.location.href = response.data.url;
+           //<Redirect to = {response.data.url}/>
+           //history.push(response.data.url);
         })
-       // alert("Outside Login")
-
-    }
+        }
 
     const reseturl = "http://localhost:8080/forgot_password";
     const Reset = () => {
@@ -145,12 +79,12 @@ const Login = () => {
                             </div>
                         </div>
                         <div className="card-body">
-                            <form>
+                            
                                 <div className="input-group form-group">
                                     <div className="input-group-prepend">
                                         <span className="input-group-text"><PersonIcon></PersonIcon></span>
                                     </div>
-                                    <input type="text" className="form-control" placeholder="username"
+                                    <input type="text" className="form-control" placeholder="username" required
                                         onChange={(e) => {
                                             setEmail(e.target.value);
                                         }} type='text' className="form-control" />
@@ -160,7 +94,7 @@ const Login = () => {
                                     <div className="input-group-prepend">
                                         <span className="input-group-text"><VpnKeyIcon></VpnKeyIcon></span>
                                     </div>
-                                    <input type="password" className="form-control" placeholder="password"
+                                    <input type="password" className="form-control" placeholder="password" required
                                         onChange={(e) => {
                                             setPassword(e.target.value);
                                         }} type='password' className="form-control" />
@@ -171,7 +105,7 @@ const Login = () => {
                                 <div className="form-group">
                                     <button onClick={authenticate} className="btn float-right login_btn" Style={"background-color: #7fc919"}>Login</button>
                                 </div>
-                            </form>
+                            
                         </div>
                         <div className="card-footer">
                             <div className="d-flex justify-content-center links">

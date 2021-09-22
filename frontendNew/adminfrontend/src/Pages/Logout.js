@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import axios from 'axios';
 
 const Logout = () => {
     const history = useHistory();
@@ -11,6 +12,9 @@ const Logout = () => {
 
     const DoLogout = () => {
         console.log("In DoLogout")
+        let id = sessionStorage.getItem('uid');
+        const url = "http://localhost:8080/logoutadmin?id="+id;
+        axios.get(url).then((response)=>{});
         sessionStorage.clear();
         window.location.href = "http://localhost:3006";
     }

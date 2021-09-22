@@ -32,6 +32,8 @@ public class Users {
 	private Members member;
 	@OneToOne(mappedBy = "user" , fetch = FetchType.LAZY)
 	private Trainers trainer;
+	@Column(name = "isLoggedIn")
+	private boolean status;
 	
 	public Users() {
 	}
@@ -102,6 +104,16 @@ public class Users {
 
 	public void setResetToken(String resetToken) {
 		this.resetToken = resetToken;
+	}
+	
+	
+	public boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		System.out.println("Status setter called");
+		this.status = status;
 	}
 
 	@Override

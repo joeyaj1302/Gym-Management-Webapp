@@ -11,6 +11,14 @@ import org.springframework.http.ResponseEntity;
 import com.gym.dtos.PaymentDto;
 
 public class Response {
+	public static ResponseEntity<?> success(Object data, String url, String message) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("message", message);
+		map.put("url", url);
+		if(data != null)
+			map.put("data", data);
+		return ResponseEntity.ok(map);
+	}
 	public static ResponseEntity<?> success(Object data, String role) {
 		Map<String, Object> map = new HashMap<>();
 		map.put("message", "success");
@@ -32,7 +40,7 @@ public class Response {
 	
 	public static ResponseEntity<?> error(Object err) {
 		Map<String, Object> map = new HashMap<>();
-		map.put("message", "error");
+		map.put("message", "Invalid Login credentials. Please Login again!");
 		if(err != null)
 			map.put("error", err);
 		return ResponseEntity.ok(map);

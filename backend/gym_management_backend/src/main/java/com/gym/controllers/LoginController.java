@@ -5,9 +5,11 @@ import java.io.UnsupportedEncodingException;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -47,20 +49,26 @@ public class LoginController {
 	}
 	
 	@RequestMapping("/authenticate")
-	private String authenticate(@RequestParam(name = "email") String email,@RequestParam(name = "password") String password, Model model) {
+	private String authenticate(@RequestParam(name = "email") String email,
+			@RequestParam(name = "password") String password, Model model,HttpServletResponse response) {
+		HttpHeaders headers = new HttpHeaders();
+	      
 		Users user = userService.findByUemail(email);
 		if (user != null && user.getUpassword().equals(password) ) {
 			if(user.getUrole().equals("member")) {
-				
+				int id = user.getMember().getMid();
+				headers.add("Location", "localhost:3009/MainPage/account/?id="+id);
 				model.addAttribute("member", user.getMember());
 				return "members";
 			}
 			else if (user.getUrole().equals("trainer")) {
+				headers.add("Location", "localhost:3007/account");
 				model.addAttribute("user", user);
 				return "trainers";
 			}
 			else {
 				model.addAttribute("user", user);
+				headers.add("Location", "localhost:3008/dashboard");
 				return "admin";
 			}
 		}

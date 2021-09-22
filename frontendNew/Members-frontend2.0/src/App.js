@@ -44,7 +44,6 @@ function App() {
           setFname(m.mfname);
           setLname(m.mlname);
           setEmail(m.memail);
-          setPassword(m.mpassword);
           setAge(m.mage);
           setAddress(m.maddress);
           setJoindate(m.mjoindate);

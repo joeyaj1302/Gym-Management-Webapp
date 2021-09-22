@@ -52,6 +52,7 @@ public class LoginRestController {
 	private  PaymentService paymentService;
 	@Autowired
 	private EnquiryService enquiryService;
+	
 	@PostMapping("/authenticaterest")
 	private ResponseEntity<?> authenticate(@RequestParam(name = "email") String email,@RequestParam(name = "password") String password) {
 		Users user = userService.findByUemail(email);
@@ -59,21 +60,63 @@ public class LoginRestController {
 		if (user != null && user.getUpassword().equals(password) && user.getUrole().equals("member")) {
 			Members member = user.getMember();
 			System.out.println(member.toString());
-			return Response.success(member,"member");
+			int id = member.getMid();
+			String url = "http://localhost:3009/account/?id=" + id;
+			System.out.println(url);
+			user.setStatus(true);
+			userService.save(user);
+			return Response.success(member,url,"Welcome member!!");
 		}
 		else if (user != null && user.getUpassword().equals(password) && user.getUrole().equals("trainer")) {
 			Trainers trainer = user.getTrainer();
+			int id = trainer.gettid();
 			System.out.println(trainer.toString());
-			return Response.success(trainer,"trainer");
+			String url = "http://localhost:3007/account/" + id;
+			user.setStatus(true);
+			userService.save(user);
+			return Response.success(trainer,url,"Welcome trainer!!");
 		}
 		else if (user != null && user.getUpassword().equals(password) && user.getUrole().equals("admin")) {
 			System.out.println(user.toString());
-			return Response.success(user,"admin");
+			int id = user.getUid();
+			String url = "http://localhost:3008/dashboard/?id=" + id;
+			user.setStatus(true);
+			userService.save(user);
+			return Response.success(user,url,"Welcome admin!!");
 		}
 		else {
 			return Response.error("Invalid Login Credentials");
 		}
 	}
+	
+	@GetMapping("/logoutadmin")
+	private ResponseEntity<?> logoutadmin(@RequestParam(name="id") String id) {
+		int uid = Integer.parseInt(id);
+		Users user = userService.findByUid(uid);
+		user.setStatus(false);
+		userService.save(user);
+		return null;
+	}
+	@GetMapping("/logoutmember")
+	private ResponseEntity<?> logoutmember(@RequestParam(name="id") String id) {
+		int mid = Integer.parseInt(id);
+		Members member = memberService.findByMid(mid);
+		Users user = member.getUser();
+		user.setStatus(false);
+		userService.save(user);
+		return null;
+	}
+	
+	@GetMapping("/logouttrainer")
+	private ResponseEntity<?> logouttrainer(@RequestParam(name="id") String id) {
+		int tid = Integer.parseInt(id);
+		Trainers trainer = trainerService.findByTid(tid);
+		Users user = trainer.getUser();
+		user.setStatus(false);
+		userService.save(user);
+		return null;
+	}
+	
 	@GetMapping("/getallmembers")
 	private ResponseEntity<?> getallmembers() {
 		ArrayList<Members> memberList = new ArrayList<Members>();
