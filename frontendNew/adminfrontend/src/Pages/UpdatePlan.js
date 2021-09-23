@@ -1,4 +1,4 @@
-import React from "react";
+
 import {
   CalendarToday,
   LocationSearching,
@@ -11,10 +11,10 @@ import "./user.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import { BrowserRouter, Link, Route, Switch } from "react-router-dom";
-import { Redirect } from "react-router";
+import { Link} from "react-router-dom";
+
 import { useLocation } from "react-router";
-import { Modal, Button, Card } from "react-bootstrap";
+import {  Button} from "react-bootstrap";
 import "../css/loginCSS.css";
 
 const UpdateMember = (props) => {
@@ -61,6 +61,7 @@ const UpdateMember = (props) => {
     axios.put(updateurl, data).then((response) => {
       const result = response.data;
       if (result.message === "success") {
+        
         goGet();
         // window.location.href = "http://localhost:3008/members";
       }
@@ -93,7 +94,7 @@ const UpdateMember = (props) => {
             <img src={imgurl + image} alt="" className="userShowImg" />
             <div className="userShowTopTitle">
               <span className="userShowUsername">{pname} </span>
-              <span className="userShowUserTitle">Software Engineer</span>
+              <span className="userShowUserTitle">Plan name</span>
             </div>
           </div>
           <div className="userShowBottom">

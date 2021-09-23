@@ -26,8 +26,6 @@ public class PlansServiceImpl implements PlansService{
 	@Override
 	public void update(Plans p, int id) {
 		Plans plan1 = planDao.findByPid(id);
-		plan1.setPid(p.getPid());
-		
 		plan1.setPname(p.getPname());
 		plan1.setPdesc(p.getPdesc());
 		plan1.setPdesc(p.getPdesc());

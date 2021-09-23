@@ -1,4 +1,4 @@
-import React from 'react';
+
 import {
     CalendarToday,
     LocationSearching,
@@ -11,11 +11,11 @@ import {
   import { useState, useEffect  } from 'react';
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
-import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import { Redirect } from "react-router";
 import { useLocation } from 'react-router';
 import '../css/loginCSS.css';
-import { Modal, Button,  Card } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 const UpdateTrainer = (props) =>{
     const [fname, setFname] = useState("");

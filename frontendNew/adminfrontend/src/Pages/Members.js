@@ -1,11 +1,10 @@
-import React from 'react';
+
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Modal, Button,  Card } from "react-bootstrap";
-import InsertPhotoIcon from '@material-ui/icons/InsertPhoto';
+import { Button,  Card } from "react-bootstrap";
 import DeleteRoundedIcon from '@material-ui/icons/DeleteRounded';
 import SettingsIcon from '@material-ui/icons/Settings';
-import { BrowserRouter, Link, Route, Switch, Redirect } from "react-router-dom";
+import {  Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import '../css/loginCSS.css';
 

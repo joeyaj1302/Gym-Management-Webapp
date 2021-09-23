@@ -1,4 +1,4 @@
-import React from 'react';
+
 import {
     CalendarToday,
     LocationSearching,
@@ -11,10 +11,9 @@ import {
   import { useState, useEffect  } from 'react';
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
-import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
-import { Redirect } from "react-router";
+import {  Link } from 'react-router-dom';
 import { useLocation } from 'react-router';
-import { Modal, Button,  Card } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import '../css/loginCSS.css';
 
 const UpdateMember = (props) =>{
@@ -43,7 +42,7 @@ const UpdateMember = (props) =>{
             console.log(result);
             if(result.message === 'success') {
                 setFname(result.data.mfname);
-                setLname(result.data.mname);
+                setLname(result.data.mlname);
                 setEmail(result.data.memail);
                 setAge(result.data.mage);
                 setPassword(result.data.mpassword);
@@ -69,10 +68,11 @@ const UpdateMember = (props) =>{
         data.append("mgender",gender);
         data.append("mjoindate",joindate);
         const updateurl = "http://localhost:8080/updatebymid/?id=" + mid;
-        alert(updateurl);
+        
         axios.put(updateurl,data).then((response) => {
             const result = response.data;
             if(result.message === 'success') {
+              alert("Member updated successfully");
                 goGet();
                 // window.location.href = "http://localhost:3008/members";
             }

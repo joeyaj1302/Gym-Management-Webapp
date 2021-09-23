@@ -1,4 +1,3 @@
-import React from 'react';
 import FeaturedInfo from './../Components/FeaturedInfo';
 import Chart from './../Components/chart/Chart';
 import { userData } from './../dummyData';

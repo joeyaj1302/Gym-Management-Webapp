@@ -1,7 +1,5 @@
-import logo from './logo.svg';
 import './App.css';
 
-import Account from './Pages/Account';
 import Update from './Pages/Update';
 import Members from './Pages/Members';
 import Trainers from './Pages/Trainers';
@@ -11,7 +9,6 @@ import Logout from './Pages/Logout'
 import UpdateTrainer from './Pages/UpdateTrainer';
 import Navbar from './Components/Navbar';
 import { BrowserRouter , Switch, Route } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 import Equipments from './Pages/Equipments';
 import Payments from './Pages/Payment';
 import UpdateMember from './Pages/UpdateMember';
@@ -39,7 +36,6 @@ function App() {
       <Navbar id={uid} />
       <Switch>
         <Route path='/dashboard' component={Dashboard} />
-        <Route path='/account/:uid' component={Account} />
         <Route path='/update/:uid' component={Update} />
         <Route path='/members' component={Members} />
         <Route path='/trainers' component={Trainers} />

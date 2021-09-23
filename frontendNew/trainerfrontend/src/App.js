@@ -82,6 +82,7 @@ function App() {
       <Router>
         <Navbar id={tid} />
         <Switch>
+        <Route path='/account' component={Account} />
           <Route path='/account/:mid' component={Account} />
           <Route path='/update/:mid' component={Update} />
           <Route path='/logout' component={Logout} />

@@ -75,7 +75,7 @@ const Payments = () => {
                 <td> <img src = {"http://localhost:4001/"+ payment.member.mimage} className="thumbnail" />  </td>
                 <td>{payment.member.mfname}  {payment.member.mlname}</td>
                 <td>{payment.member.plan.pname}</td>
-                <td>{payment.duedate}</td>
+                <td>{payment.pduedate}</td>
                 <td>{payment.pdate}</td>
                 <td>{payment.pamount}</td>
                 <td>{payment.pstatus.toString()}</td>

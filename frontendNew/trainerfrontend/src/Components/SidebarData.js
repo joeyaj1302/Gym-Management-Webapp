@@ -27,12 +27,12 @@ export const SidebarDate = [
         icon : <IoIcons.IoMdPeople/>,
         cName : 'nav-text'
     },
-    {
-        title : "Salary Details",
-        icon : <PaymentIcon/>,
-        path : "/payment",
-        cName : 'nav-text'
-    },
+    // {
+    //     title : "Salary Details",
+    //     icon : <PaymentIcon/>,
+    //     path : "/payment",
+    //     cName : 'nav-text'
+    // },
     {
         title : "Logout",
         icon : <ExitToAppIcon/>,

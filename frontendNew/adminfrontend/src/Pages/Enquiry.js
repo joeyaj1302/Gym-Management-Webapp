@@ -1,7 +1,7 @@
-import React from 'react';
+
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Modal, Button,  Card } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import '../css/loginCSS.css';
 import '../css/registerform.css';
 
@@ -26,8 +26,10 @@ const Enquiry = () => {
         })
     }
 
-    const doAlert = () => {
-        alert('Please enter a reply !');
+    const doAlert = (enquiry) => {
+        alert("Lol");
+        alert(enquiry.eemail);
+        window.location.href = "https://mail.google.com/mail/u/1/?ogbl#inbox?compose=new";
       }
 
     useEffect(()=>{
@@ -62,7 +64,9 @@ const Enquiry = () => {
                         <td>{enquiry.ephone}</td>
                         <td>{enquiry.message}</td>
                         <td> 
-                            <Button onClick = {doAlert} classname = "shadowify" Style = "background-color : black; color:white">Reply</Button> </td>
+                            <Button classname = "shadowify" Style = "background-color : black; color:white">
+                            <a href={"mailto:"+enquiry.eemail+"?subject= Reply to your Enquiry about our gym! :- "+enquiry.message}>Reply</a>  
+                            </Button> </td>
                         </tr>
                         )
                     })}
