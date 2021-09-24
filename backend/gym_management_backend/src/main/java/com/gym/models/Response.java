@@ -45,6 +45,12 @@ public class Response {
 			map.put("error", err);
 		return ResponseEntity.ok(map);
 	}
+	public static ResponseEntity<?> errorAuth(String message) {
+		Map<String, Object> map = new HashMap<>();
+		if(message != null)
+			map.put("error", message);
+		return ResponseEntity.ok(map);
+	}
 	
 	public static ResponseEntity<?> status(HttpStatus status) {
 		return ResponseEntity.status(status).build();

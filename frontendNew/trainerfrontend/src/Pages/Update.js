@@ -2,19 +2,14 @@ import React from 'react';
 import {
     CalendarToday,
     LocationSearching,
-    MailOutline,
-    Pertidentity,
     PhoneAndroid,
     Publish,
   } from "@material-ui/icons";
   import "./user.css";
   import { useState, useEffect  } from 'react';
 import axios from 'axios';
-import { useHistory } from "react-router-dom";
-import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
-import { Redirect } from "react-router";
-import { useLocation } from 'react-router';
-import { Modal, Button,  Card } from "react-bootstrap";
+import {  Link } from 'react-router-dom';
+import { Button } from "react-bootstrap";
 
 const Update = () =>{
     const [fname, setFname] = useState("");

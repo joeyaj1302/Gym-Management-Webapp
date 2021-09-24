@@ -1,12 +1,8 @@
 import React from 'react';
 
 import {
-    CalendarToday,
     LocationSearching,
-    MailOutline,
-    Pertidentity,
     PhoneAndroid,
-    Publish,
   } from "@material-ui/icons";
   import "./user.css";
 

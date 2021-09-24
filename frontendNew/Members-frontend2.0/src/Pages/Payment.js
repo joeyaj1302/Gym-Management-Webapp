@@ -8,7 +8,7 @@ import FitnessCenterIcon from "@material-ui/icons/FitnessCenter";
 import DescriptionIcon from "@material-ui/icons/Description";
 import MonetizationOnIcon from "@material-ui/icons/MonetizationOn";
 import HourglassEmptyIcon from "@material-ui/icons/HourglassEmpty";
-import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
+import {  Link } from 'react-router-dom';
 const Payments = () => {
   const [pid, setPid] = useState(0);
   const [pstatus, setPstatus] = useState("");

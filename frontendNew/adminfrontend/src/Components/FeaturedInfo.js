@@ -15,9 +15,11 @@ const FeaturedInfo = () =>{
   const[revenue,setRevenue] = useState(0);
   const[newjoinings,setNewJoinings] = useState(0);
   const[profit,setProfit] = useState(0);
+  const[active,setActive] = useState(0);
   const newjoinurl = "http://127.0.0.1:4001/utilityqueries/newjoinings";
   const revenueurl = "http://127.0.0.1:4001/utilityqueries/revenue";
   const costurl = "http://127.0.0.1:4001/utilityqueries/costs";
+  const activeurl = "http://127.0.0.1:4001/utilityqueries/activemembers";
   const getValues = () => {
     axios.get(revenueurl).then((response) =>{
       const result = response.data;
@@ -33,6 +35,11 @@ const FeaturedInfo = () =>{
       const result = response.data;
       console.log(result);
       setNewJoinings(result.data[0].count);
+    })
+    axios.get(activeurl).then((response) =>{
+      const result = response.data;
+      console.log(result);
+      setActive(result.data[0].count);
     })
     setProfit(cost-revenue);
     console.log(revenue,cost,newjoinings);
@@ -64,14 +71,11 @@ const FeaturedInfo = () =>{
         <span className="featuredSub">Compared to last month</span>
       </div>
       <div className="featuredItem">
-        <span className="featuredTitle">Profit</span>
+        <span className="featuredTitle">Active Users</span>
         <div className="featuredMoneyContainer">
-          <span className="featuredMoney">₹{profit}</span>
-          <span className="featuredMoneyRate">
-            +2.4 <ArrowUpward className="featuredIcon"/>
-          </span>
+          <span className="featuredMoney">{active}</span>
         </div>
-        <span className="featuredSub">Compared to last month</span>
+        <span className="featuredSub">Currently Logged In</span>
       </div>
       <div className="featuredItem">
         <span className="featuredTitle">New Joinings</span>
@@ -81,7 +85,7 @@ const FeaturedInfo = () =>{
             +5.5 <ArrowUpward className="featuredIcon"/>
           </span>
         </div>
-        <span className="featuredSub">New Users compared to last month</span>
+        <span className="featuredSub">New Users this month</span>
       </div>
     </div>
   );

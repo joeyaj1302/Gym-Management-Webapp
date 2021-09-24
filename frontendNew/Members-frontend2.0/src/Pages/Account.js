@@ -2,10 +2,7 @@ import React from "react";
 import {
   CalendarToday,
   LocationSearching,
-  MailOutline,
-  PermIdentity,
   PhoneAndroid,
-  Publish,
 } from "@material-ui/icons";
 import "./user.css";
 import { useState, useEffect } from "react";

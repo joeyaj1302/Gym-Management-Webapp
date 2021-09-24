@@ -54,4 +54,20 @@ router.get('/gethealthdata/:id', (request, response) =>{
     })
 })
 
+router.get('/activemembers/', (request, response) =>{
+    const query = `select count(isLoggedIn) as count from users where isLoggedIn = true;`
+    console.log(query);
+    db.query(query, (err,data) => {
+        response.send(utils.CreateResult(err, data));
+    })
+})
+router.get('/unpaid/', (request, response) =>{
+    const query = `select m_id,m_fname,m_lname , m_duedate from members where m_id NOT IN (select m_id from payments);`
+    console.log(query);
+    db.query(query, (err,data) => {
+        response.send(utils.CreateResult(err, data));
+    })
+})
+//select count(isLoggedIn) from users where isLoggedIn = true;
+//select m_id,m_fname,m_duedate from members where m_id NOT IN (select m_id from payments);
 module.exports = router;

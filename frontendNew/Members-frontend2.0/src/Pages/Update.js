@@ -2,8 +2,6 @@ import React from 'react';
 import {
     CalendarToday,
     LocationSearching,
-    MailOutline,
-    PermIdentity,
     PhoneAndroid,
     Publish,
 } from "@material-ui/icons";
@@ -11,10 +9,9 @@ import "./user.css";
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
-import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
-import { Redirect } from "react-router";
+import {  Link } from 'react-router-dom';
 import { useLocation } from 'react-router';
-import { Modal, Button, Card } from "react-bootstrap";
+import { Button} from "react-bootstrap";
 
 
 const Update = () => {

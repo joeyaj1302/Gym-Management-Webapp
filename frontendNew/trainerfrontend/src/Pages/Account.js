@@ -1,16 +1,11 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
-import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import axios from 'axios';
-import { useState, useEffect,useContext } from 'react';
-import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import {
-    CalendarToday,
     LocationSearching,
-    MailOutline,
-    Pertidentity,
     PhoneAndroid,
-    Publish,
   } from "@material-ui/icons";
   import "./user.css";
 
