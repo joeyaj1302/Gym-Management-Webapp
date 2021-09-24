@@ -62,7 +62,7 @@ router.get('/activemembers/', (request, response) =>{
     })
 })
 router.get('/unpaid/', (request, response) =>{
-    const query = `select m_id,m_fname,m_lname , m_duedate from members where m_id NOT IN (select m_id from payments);`
+    const query = `select m_id,m_fname,m_lname ,m_email, m_duedate from members where m_id NOT IN (select m_id from payments);`
     console.log(query);
     db.query(query, (err,data) => {
         response.send(utils.CreateResult(err, data));

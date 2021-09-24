@@ -3,19 +3,22 @@ import Chart from "./../Components/chart/Chart";
 import { userData } from "./../dummyData";
 import { useState, useEffect } from "react";
 import axios from "axios";
+
 const Dashboard = () => {
+const [members, setMembers] = useState([]);
   const [mid, setMid] = useState(0);
   const [mfname, setMfname] = useState("");
   const [mlname, setMLname] = useState("");
   const [memail, setMemail] = useState("");
   const [mduedate, setMduedate] = useState(new Date());
-  const [members, setMembers] = useState([]);
+ 
   const unpaidurl = "http://127.0.0.1:4001/utilityqueries/unpaid";
   const getValues = () => {
     axios.get(unpaidurl).then((response) => {
       const result = response.data;
-      console.log(result);
-      setMembers(result);
+      //console.log(result);
+      setMembers(result.data);
+      console.log(result.data);
     });
   };
   useEffect(() => {
@@ -32,10 +35,10 @@ const Dashboard = () => {
         dataKey="Active User"
       />
       <br></br>
-      {/* <div className="container">
+      <div className="container">
         <h2>Payment Pending members List:</h2>
         <br />
-        <table className="table table-striped table-hover" Style="width:550px">
+        <table className="table table-striped table-hover" Style="width:850px">
           <thead Style="background-color:black ; color : white">
             <tr>
               <th>MemberId</th>
@@ -52,13 +55,14 @@ const Dashboard = () => {
                   <td>{member.m_id}</td>
                   <td>{member.m_fname}</td>
                   <td>{member.m_lname}</td>
+                  <td>{member.m_email}</td>
                   <td>{member.m_duedate}</td>
                 </tr>
               );
             })}
           </tbody>
         </table>
-      </div> */}
+      </div>
     </div>
   );
 };
