@@ -1,6 +1,8 @@
 package com.gym.controllers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -53,6 +55,7 @@ public class LoginRestController {
 	@Autowired
 	private EnquiryService enquiryService;
 	private Users masteruser = new Users();
+	private HashSet<Integer> UserList = new HashSet<Integer>();
 
 	@PostMapping("/authenticaterest")
 	private ResponseEntity<?> authenticate(@RequestParam(name = "email") String email,
@@ -68,6 +71,7 @@ public class LoginRestController {
 			user.setStatus(true);
 			userService.save(user);
 			this.masteruser = user;
+			this.UserList.add(user.getUid());
 			return Response.success(member, url, "Welcome member!!");
 		} else if (user != null && user.getUpassword().equals(password) && user.getUrole().equals("trainer")) {
 			Trainers trainer = user.getTrainer();
@@ -77,6 +81,7 @@ public class LoginRestController {
 			user.setStatus(true);
 			userService.save(user);
 			this.masteruser = user;
+			this.UserList.add(user.getUid());
 			return Response.success(trainer, url, "Welcome trainer!!");
 		} else if (user != null && user.getUpassword().equals(password) && user.getUrole().equals("admin")) {
 			System.out.println(user.toString());
@@ -85,6 +90,7 @@ public class LoginRestController {
 			user.setStatus(true);
 			userService.save(user);
 			this.masteruser = user;
+			this.UserList.add(user.getUid());
 			return Response.success(user, url, "Welcome admin!!");
 		} else {
 			return Response.error("Invalid Login Credentials");
@@ -98,6 +104,7 @@ public class LoginRestController {
 		user.setStatus(false);
 		userService.save(user);
 		this.masteruser = user;
+		this.UserList.remove(user.getUid());
 		return null;
 	}
 
@@ -109,6 +116,7 @@ public class LoginRestController {
 		user.setStatus(false);
 		userService.save(user);
 		this.masteruser = user;
+		this.UserList.remove(user.getUid());
 		return null;
 	}
 
@@ -120,6 +128,7 @@ public class LoginRestController {
 		user.setStatus(false);
 		userService.save(user);
 		this.masteruser = user;
+		this.UserList.remove(user.getUid());
 		return null;
 	}
 
@@ -156,14 +165,14 @@ public class LoginRestController {
 
 	@GetMapping("/getallplans")
 	private ResponseEntity<?> getallPlans() {
-		
-			List<Plans> planList = new ArrayList<Plans>();
-			planList = planService.findAllPlans();
-			if (planList != null) {
-				return Response.successList(planList);
-			} else {
-				return Response.error("Empty List");
-			}
+
+		List<Plans> planList = new ArrayList<Plans>();
+		planList = planService.findAllPlans();
+		if (planList != null) {
+			return Response.successList(planList);
+		} else {
+			return Response.error("Empty List");
+		}
 	}
 
 	@GetMapping("/getallequipments")
@@ -204,19 +213,20 @@ public class LoginRestController {
 
 	@GetMapping("/getbymid")
 	private ResponseEntity<?> getBymid(@RequestParam(name = "id") String id) {
-		if (this.masteruser.getStatus()) {
-			int mid = Integer.parseInt(id);
-			Members member = memberService.findByMid(mid);
-			if (member != null) {
-				System.out.println(member.toString());
-				return Response.success(member, "member");
+		int mid = Integer.parseInt(id);
+		Members member = memberService.findByMid(mid);
+		System.out.println(this.UserList.toString());
+		Users user = member.getUser();
+		if (this.UserList.contains(user.getUid())) {
+			// Members member = memberService.findByMid(mid);
 
-			} else {
-				return Response.error("Member not found");
-			}
+			System.out.println(member.toString());
+			return Response.success(member, "member");
+
 		} else {
 			return Response.errorAuth("Login First to access the services!");
 		}
+
 	}
 
 	@GetMapping("/getbypid")
