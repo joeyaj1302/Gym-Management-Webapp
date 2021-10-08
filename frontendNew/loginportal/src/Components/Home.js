@@ -45,7 +45,7 @@ const Home = () => {
                             <div class="section-heading">
                                 <h2> <em>Choose The Plan thats best for You</em></h2>
                                 <img src="images/line-dec.png" alt="waves"/>
-                                <p>Training Studio is free CSS template for gyms and fitness centers. You are allowed to use this layout for your business website.</p>
+                                
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -122,7 +122,7 @@ const Home = () => {
             <div class="section-heading">
             <h2> <em>Locate US </em></h2>
             </div>
-            <iframe width="600" height="450" style={{ border: 0 }} loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJH_BFA327wjsRR2-gR8YgjG4&key=AIzaSyC_MXOOC_-_6Ke8T7TblsGjgmdt8jXXY0w"></iframe>
+            <iframe width="600" height="450" style={{ border: 0 }} loading="lazy" allowfullscreen src="GoogleApiKey"></iframe>
         <div>
         <br></br>
         <table class="table table-borderless" Style="width:100%;text-align: ;">
